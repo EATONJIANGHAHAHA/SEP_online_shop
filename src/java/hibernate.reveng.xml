@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sep"/>
+  <table-filter match-name="order_detail_tbl"/>
+  <table-filter match-name="admin_tbl"/>
+  <table-filter match-name="user_tbl"/>
+  <table-filter match-name="customer_tbl"/>
+  <table-filter match-name="order_tbl"/>
+  <table-filter match-name="item_tbl"/>
+  <table-filter match-name="shipping_tbl"/>
+</hibernate-reverse-engineering>

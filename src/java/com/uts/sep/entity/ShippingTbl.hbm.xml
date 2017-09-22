@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23-Aug-2017 14:07:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="sep" name="com.uts.sep.entity.ShippingTbl" optimistic-lock="version" table="shipping_tbl">
+    <id name="shippingId" type="int">
+      <column name="shipping_id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="shippingType" type="string">
+      <column length="50" name="shipping_type" not-null="true"/>
+    </property>
+    <property name="shippingRegion" type="string">
+      <column length="50" name="shipping_Region" not-null="true"/>
+    </property>
+    <property name="shippingAddress" type="string">
+      <column length="50" name="shipping_address" not-null="true"/>
+    </property>
+    <property name="shippingStatus" type="int">
+      <column name="shipping_status" not-null="true"/>
+    </property>
+    <property name="shippingCost" type="double">
+      <column name="shipping_cost" not-null="true" precision="10"/>
+    </property>
+    <property name="deliveryDate" type="date">
+      <column length="10" name="delivery_date" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="orderTbls" table="order_tbl">
+      <key>
+        <column name="shipping_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.uts.sep.entity.OrderTbl"/>
+    </set>
+  </class>
+</hibernate-mapping>

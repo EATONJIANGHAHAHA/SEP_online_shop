@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: lzy -->
+ 
+<struts>
+        
+    <package name = "default" extends="struts-default" namespace="/">
+        <action name="login" class="com.uts.sep.action.LoginAction" method="execute">
+            <result name="success">/success.jsp</result>
+            <result name="error">/fail.jsp </result>
+        </action>
+        <action name="register" class="com.uts.sep.action.RegisterAction" method="execute">
+            <result name="success">/index.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+<!--        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute"/>-->
+    </package>
+</struts>

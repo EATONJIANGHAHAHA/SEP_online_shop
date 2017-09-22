@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23-Aug-2017 14:07:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="sep" name="com.uts.sep.entity.OrderTbl" optimistic-lock="version" table="order_tbl">
+    <id name="orderId" type="java.lang.Integer">
+      <column name="order_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.uts.sep.entity.CustomerTbl" fetch="select" name="customerTblByCustomerName">
+      <column name="customer_name" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.uts.sep.entity.CustomerTbl" fetch="select" name="customerTblByCustomerId">
+      <column name="customer_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.uts.sep.entity.ShippingTbl" fetch="select" name="shippingTbl">
+      <column name="shipping_id" not-null="true"/>
+    </many-to-one>
+    <property name="orderStatus" type="int">
+      <column name="order_status" not-null="true"/>
+    </property>
+    <property name="dateCreated" type="timestamp">
+      <column length="19" name="date_created" not-null="true"/>
+    </property>
+    <property name="payment" type="double">
+      <column name="payment" not-null="true" precision="10" scale="0"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="orderDetailTbls" table="order_detail_tbl">
+      <key>
+        <column name="order_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.uts.sep.entity.OrderDetailTbl"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="customerTbls" table="customer_tbl">
+      <key>
+        <column name="order_id"/>
+      </key>
+      <one-to-many class="com.uts.sep.entity.CustomerTbl"/>
+    </set>
+  </class>
+</hibernate-mapping>
