@@ -14,6 +14,11 @@ import java.util.List;
  * @author yichen jiang
  */
 public class ItemDAO extends BaseDAO<ItemTbl> {
+    
+    public static final String CATEGORY_BOOK = "book";
+    public static final String CATEGORY_COMPUTER = "computer";
+    public static final String CATEGORY_PHONE = "phone";
+    public static final String CATEGORY_GAME_CONSOLES = "game consoles";
 
     public void updateItemName(Integer itemId, String itemName) {
         ItemTbl usingItem = findById(itemId);
@@ -66,7 +71,7 @@ public class ItemDAO extends BaseDAO<ItemTbl> {
     /**
      * This method will update the category of an item.
      * Please do notice that I statically put four existing category string
-     * inside ItemTbl, use that as for now, and please DO NOT use any other
+     * inside this class, use those as for now. Please DO NOT use any other
      * Strings. 
      * @param itemId 
      * @param category 

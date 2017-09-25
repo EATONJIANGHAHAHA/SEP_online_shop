@@ -9,11 +9,6 @@ import java.util.Set;
  */
 public class ItemTbl implements java.io.Serializable {
     
-    public static final String CATEGORY_BOOK = "book";
-    public static final String CATEGORY_COMPUTER = "computer";
-    public static final String CATEGORY_PHONE = "phone";
-    public static final String CATEGORY_GAME_CONSOLES = "game consoles";
-    
     private int itemId;
     private String itemName;
     private String itemDescription;
