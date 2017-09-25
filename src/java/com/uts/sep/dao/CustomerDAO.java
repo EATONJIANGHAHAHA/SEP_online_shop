@@ -13,5 +13,4 @@ import com.uts.sep.entity.CustomerTbl;
  */
 public class CustomerDAO extends BaseDAO<CustomerTbl>{
     
-    
 }

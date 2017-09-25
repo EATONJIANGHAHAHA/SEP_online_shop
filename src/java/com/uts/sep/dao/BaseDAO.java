@@ -98,7 +98,7 @@ public abstract class BaseDAO<T> {
     }
 
     /**
-     * this method is to insert new instance to the database.
+     * this method is to new instance to the database.
      * @param model
      * @return 
      */
