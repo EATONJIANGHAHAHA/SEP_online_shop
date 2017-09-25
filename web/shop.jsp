@@ -1,3 +1,7 @@
+<%@page import="com.uts.sep.dao.BaseDAO"%>
+<%@page import="com.uts.sep.dao.ItemDAO"%>
+<%@page import="com.uts.sep.entity.ItemTbl"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,7 +34,8 @@
         <![endif]-->
     </head>
     <body>
-
+        <%! ItemDAO itemDAO = new ItemDAO(); %>
+        <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -41,13 +46,12 @@
                                 <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                                <% if (session.getAttribute("user_name") == null) { %>
+                                    <% if (session.getAttribute("user_name") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else { %>
                                 <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
                                         <% out.print(session.getAttribute("user_name")); %></a></li>
-                                        <% }%>
-<!--                                <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>-->
+                                        <% } %>
                             </ul>
                         </div>
                     </div>
@@ -206,9 +210,5 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </body>
 </html>
