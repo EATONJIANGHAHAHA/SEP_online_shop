@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 
@@ -13,14 +13,26 @@ public class UserTbl  implements java.io.Serializable {
      private String userName;
      private String userPassword;
      private int loginStatus;
+     private SellerTbl sellerTbl;
+     private AdminTbl adminTbl;
+     private CustomerTbl customerTbl;
 
     public UserTbl() {
     }
 
+	
     public UserTbl(String userName, String userPassword, int loginStatus) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.loginStatus = loginStatus;
+    }
+    public UserTbl(String userName, String userPassword, int loginStatus, SellerTbl sellerTbl, AdminTbl adminTbl, CustomerTbl customerTbl) {
        this.userName = userName;
        this.userPassword = userPassword;
        this.loginStatus = loginStatus;
+       this.sellerTbl = sellerTbl;
+       this.adminTbl = adminTbl;
+       this.customerTbl = customerTbl;
     }
    
     public Integer getUserId() {
@@ -50,6 +62,27 @@ public class UserTbl  implements java.io.Serializable {
     
     public void setLoginStatus(int loginStatus) {
         this.loginStatus = loginStatus;
+    }
+    public SellerTbl getSellerTbl() {
+        return this.sellerTbl;
+    }
+    
+    public void setSellerTbl(SellerTbl sellerTbl) {
+        this.sellerTbl = sellerTbl;
+    }
+    public AdminTbl getAdminTbl() {
+        return this.adminTbl;
+    }
+    
+    public void setAdminTbl(AdminTbl adminTbl) {
+        this.adminTbl = adminTbl;
+    }
+    public CustomerTbl getCustomerTbl() {
+        return this.customerTbl;
+    }
+    
+    public void setCustomerTbl(CustomerTbl customerTbl) {
+        this.customerTbl = customerTbl;
     }
 
 

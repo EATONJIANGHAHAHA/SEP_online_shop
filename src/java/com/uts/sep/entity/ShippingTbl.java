@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class ShippingTbl  implements java.io.Serializable {
      private int shippingStatus;
      private double shippingCost;
      private Date deliveryDate;
-     private Set<OrderTbl> orderTbls = new HashSet<OrderTbl>(0);
+     private Set orderTbls = new HashSet(0);
 
     public ShippingTbl() {
     }
@@ -34,7 +34,7 @@ public class ShippingTbl  implements java.io.Serializable {
         this.shippingCost = shippingCost;
         this.deliveryDate = deliveryDate;
     }
-    public ShippingTbl(int shippingId, String shippingType, String shippingRegion, String shippingAddress, int shippingStatus, double shippingCost, Date deliveryDate, Set<OrderTbl> orderTbls) {
+    public ShippingTbl(int shippingId, String shippingType, String shippingRegion, String shippingAddress, int shippingStatus, double shippingCost, Date deliveryDate, Set orderTbls) {
        this.shippingId = shippingId;
        this.shippingType = shippingType;
        this.shippingRegion = shippingRegion;
@@ -94,11 +94,11 @@ public class ShippingTbl  implements java.io.Serializable {
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
-    public Set<OrderTbl> getOrderTbls() {
+    public Set getOrderTbls() {
         return this.orderTbls;
     }
     
-    public void setOrderTbls(Set<OrderTbl> orderTbls) {
+    public void setOrderTbls(Set orderTbls) {
         this.orderTbls = orderTbls;
     }
 

@@ -6,13 +6,7 @@
 package com.uts.sep.dao;
 
 import com.uts.sep.entity.AdminTbl;
-import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -20,11 +14,9 @@ import org.hibernate.cfg.Configuration;
  */
 public class AdminDAO extends BaseDAO<AdminTbl>{
     
-    private static SessionFactory factory = null;
-    
-    public void updataAdminName(Integer adminid, String name){
-        AdminTbl usingAdminTbl = super.findById(adminid);
-        usingAdminTbl.setAdminName(name);
-        super.update(usingAdminTbl);
+    public void updataName(Integer adminid, String name){
+        AdminTbl usingAdmin = findById(adminid);
+        usingAdmin.getUserTbl().setUserName(name);
+        super.update(usingAdmin);
     }
 }

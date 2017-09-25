@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class ShoppingCartTbl  implements java.io.Serializable {
 
      private int shoppingCartId;
      private CustomerTbl customerTbl;
-     private Set<ItemTbl> itemTbls = new HashSet<ItemTbl>(0);
+     private Set itemTbls = new HashSet(0);
 
     public ShoppingCartTbl() {
     }
@@ -23,7 +23,7 @@ public class ShoppingCartTbl  implements java.io.Serializable {
         this.shoppingCartId = shoppingCartId;
         this.customerTbl = customerTbl;
     }
-    public ShoppingCartTbl(int shoppingCartId, CustomerTbl customerTbl, Set<ItemTbl> itemTbls) {
+    public ShoppingCartTbl(int shoppingCartId, CustomerTbl customerTbl, Set itemTbls) {
        this.shoppingCartId = shoppingCartId;
        this.customerTbl = customerTbl;
        this.itemTbls = itemTbls;
@@ -43,11 +43,11 @@ public class ShoppingCartTbl  implements java.io.Serializable {
     public void setCustomerTbl(CustomerTbl customerTbl) {
         this.customerTbl = customerTbl;
     }
-    public Set<ItemTbl> getItemTbls() {
+    public Set getItemTbls() {
         return this.itemTbls;
     }
     
-    public void setItemTbls(Set<ItemTbl> itemTbls) {
+    public void setItemTbls(Set itemTbls) {
         this.itemTbls = itemTbls;
     }
 

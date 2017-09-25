@@ -5,7 +5,9 @@
  */
 package com.uts.sep.dao;
 
+import com.uts.sep.entity.CustomerTbl;
 import com.uts.sep.entity.ItemTbl;
+import com.uts.sep.entity.UserTbl;
 import java.util.*;
 
 /**
@@ -15,10 +17,9 @@ import java.util.*;
 public class testDAO {
 
     public static void main(String[] args) {
-        ItemDAO dao = new ItemDAO();
-        dao.updatePrice(1, 230.25);
-        ItemTbl usingItem = dao.findById(1);
-        System.out.print(usingItem.getPrice());
+        //CustomerDAO dao = new CustomerDAO();
+        //CustomerTbl customer = dao.findById(1);
+        //System.out.println(customer.getCustomerName());
     }
 
 }

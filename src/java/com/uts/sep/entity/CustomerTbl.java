@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,31 +12,29 @@ import java.util.Set;
 public class CustomerTbl  implements java.io.Serializable {
 
 
-     private int customerId;
+     private int userId;
      private OrderTbl orderTbl;
-     private String customerName;
+     private UserTbl userTbl;
      private String customerAddress;
      private String email;
      private int creditCardno;
      private Date dob;
-     private Set<ShoppingCartTbl> shoppingCartTbls = new HashSet<ShoppingCartTbl>(0);
+     private Set shoppingCartTbls = new HashSet(0);
 
     public CustomerTbl() {
     }
 
 	
-    public CustomerTbl(int customerId, String customerName, String customerAddress, String email, int creditCardno, Date dob) {
-        this.customerId = customerId;
-        this.customerName = customerName;
+    public CustomerTbl(UserTbl userTbl, String customerAddress, String email, int creditCardno, Date dob) {
+        this.userTbl = userTbl;
         this.customerAddress = customerAddress;
         this.email = email;
         this.creditCardno = creditCardno;
         this.dob = dob;
     }
-    public CustomerTbl(int customerId, OrderTbl orderTbl, String customerName, String customerAddress, String email, int creditCardno, Date dob, Set<ShoppingCartTbl> shoppingCartTbls) {
-       this.customerId = customerId;
+    public CustomerTbl(OrderTbl orderTbl, UserTbl userTbl, String customerAddress, String email, int creditCardno, Date dob, Set shoppingCartTbls) {
        this.orderTbl = orderTbl;
-       this.customerName = customerName;
+       this.userTbl = userTbl;
        this.customerAddress = customerAddress;
        this.email = email;
        this.creditCardno = creditCardno;
@@ -44,12 +42,12 @@ public class CustomerTbl  implements java.io.Serializable {
        this.shoppingCartTbls = shoppingCartTbls;
     }
    
-    public int getCustomerId() {
-        return this.customerId;
+    public int getUserId() {
+        return this.userId;
     }
     
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     public OrderTbl getOrderTbl() {
         return this.orderTbl;
@@ -58,12 +56,12 @@ public class CustomerTbl  implements java.io.Serializable {
     public void setOrderTbl(OrderTbl orderTbl) {
         this.orderTbl = orderTbl;
     }
-    public String getCustomerName() {
-        return this.customerName;
+    public UserTbl getUserTbl() {
+        return this.userTbl;
     }
     
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setUserTbl(UserTbl userTbl) {
+        this.userTbl = userTbl;
     }
     public String getCustomerAddress() {
         return this.customerAddress;
@@ -93,11 +91,11 @@ public class CustomerTbl  implements java.io.Serializable {
     public void setDob(Date dob) {
         this.dob = dob;
     }
-    public Set<ShoppingCartTbl> getShoppingCartTbls() {
+    public Set getShoppingCartTbls() {
         return this.shoppingCartTbls;
     }
     
-    public void setShoppingCartTbls(Set<ShoppingCartTbl> shoppingCartTbls) {
+    public void setShoppingCartTbls(Set shoppingCartTbls) {
         this.shoppingCartTbls = shoppingCartTbls;
     }
 

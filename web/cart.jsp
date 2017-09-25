@@ -47,7 +47,7 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
-                                <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
+                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user_name") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
@@ -117,10 +117,10 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.jsp">Home</a></li>
                             <li><a href="shop.jsp">Shop page</a></li>
                             <li><a href="single-product.html">Single product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="cart.jsp">Cart</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="#">Category</a></li>
                             <li><a href="#">Others</a></li>

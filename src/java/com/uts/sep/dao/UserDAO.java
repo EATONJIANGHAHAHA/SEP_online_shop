@@ -5,6 +5,7 @@
  */
 package com.uts.sep.dao;
 
+import com.uts.sep.entity.CustomerTbl;
 import com.uts.sep.entity.UserTbl;
 import org.hibernate.Session;
 import java.util.*;
@@ -19,17 +20,16 @@ import org.hibernate.service.ServiceRegistry;
  */
 public class UserDAO extends BaseDAO<UserTbl>{
 
-    
     public void updateLoginStatus(Integer userId, int status){
-        UserTbl usingUser = super.findById(userId);
+        UserTbl usingUser = findById(userId);
         usingUser.setLoginStatus(status);
-        super.update(usingUser);
+        update(usingUser);
     }
     
     public void updatePassword(Integer userId, String password){
-        UserTbl usingUser = super.findById(userId);
+        UserTbl usingUser = (UserTbl) findById(userId);
         usingUser.setUserPassword(password);
-        super.update(usingUser);
+        update(usingUser);
     }
     
 }

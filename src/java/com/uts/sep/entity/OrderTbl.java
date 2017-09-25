@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,8 +18,8 @@ public class OrderTbl  implements java.io.Serializable {
      private Date dateCreated;
      private int customerId;
      private Double payment;
-     private Set<OrderDetailTbl> orderDetailTbls = new HashSet<OrderDetailTbl>(0);
-     private Set<CustomerTbl> customerTbls = new HashSet<CustomerTbl>(0);
+     private Set orderDetailTbls = new HashSet(0);
+     private Set customerTbls = new HashSet(0);
 
     public OrderTbl() {
     }
@@ -30,7 +30,7 @@ public class OrderTbl  implements java.io.Serializable {
         this.dateCreated = dateCreated;
         this.customerId = customerId;
     }
-    public OrderTbl(ShippingTbl shippingTbl, Integer orderStatus, Date dateCreated, int customerId, Double payment, Set<OrderDetailTbl> orderDetailTbls, Set<CustomerTbl> customerTbls) {
+    public OrderTbl(ShippingTbl shippingTbl, Integer orderStatus, Date dateCreated, int customerId, Double payment, Set orderDetailTbls, Set customerTbls) {
        this.shippingTbl = shippingTbl;
        this.orderStatus = orderStatus;
        this.dateCreated = dateCreated;
@@ -82,18 +82,18 @@ public class OrderTbl  implements java.io.Serializable {
     public void setPayment(Double payment) {
         this.payment = payment;
     }
-    public Set<OrderDetailTbl> getOrderDetailTbls() {
+    public Set getOrderDetailTbls() {
         return this.orderDetailTbls;
     }
     
-    public void setOrderDetailTbls(Set<OrderDetailTbl> orderDetailTbls) {
+    public void setOrderDetailTbls(Set orderDetailTbls) {
         this.orderDetailTbls = orderDetailTbls;
     }
-    public Set<CustomerTbl> getCustomerTbls() {
+    public Set getCustomerTbls() {
         return this.customerTbls;
     }
     
-    public void setCustomerTbls(Set<CustomerTbl> customerTbls) {
+    public void setCustomerTbls(Set customerTbls) {
         this.customerTbls = customerTbls;
     }
 

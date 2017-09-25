@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 5:06:28 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,29 +9,38 @@ package com.uts.sep.entity;
 public class AdminTbl  implements java.io.Serializable {
 
 
-     private Integer adminId;
-     private String adminName;
+     private Integer userId;
+     private UserTbl userTbl;
+     private int authorityLevel;
 
     public AdminTbl() {
     }
 
-    public AdminTbl(String adminName) {
-       this.adminName = adminName;
+    public AdminTbl(UserTbl userTbl, int authorityLevel) {
+       this.userTbl = userTbl;
+       this.authorityLevel = authorityLevel;
     }
    
-    public Integer getAdminId() {
-        return this.adminId;
+    public Integer getUserId() {
+        return this.userId;
     }
     
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-    public String getAdminName() {
-        return this.adminName;
+    public UserTbl getUserTbl() {
+        return this.userTbl;
     }
     
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUserTbl(UserTbl userTbl) {
+        this.userTbl = userTbl;
+    }
+    public int getAuthorityLevel() {
+        return this.authorityLevel;
+    }
+    
+    public void setAuthorityLevel(int authorityLevel) {
+        this.authorityLevel = authorityLevel;
     }
 
 

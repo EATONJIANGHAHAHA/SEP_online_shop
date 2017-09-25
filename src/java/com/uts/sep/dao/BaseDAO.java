@@ -17,7 +17,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  *
- * @author tomat
+ * @author eaton
  */
 public abstract class BaseDAO<T> {
     
@@ -25,7 +25,10 @@ public abstract class BaseDAO<T> {
     public static final String CUSTOMER_TBL = "CustomerTbl";
     public static final String ITEM_TBL = "ItemTbl";
     public static final String ORDER_TBL = "OrderTbl";
+    public static final String ORDER_DETAIL_TBL = "OrderDetailTbl";
+    public static final String SELLER_TBL = "SellerTbl";
     public static final String SHIPPING_TBL = "ShippingTbl";
+    public static final String SHIPPING_CART_TBL = "ShippingCartTbl";
     public static final String USER_TBL = "UserTbl";
 
     private Class<T> ClassType;

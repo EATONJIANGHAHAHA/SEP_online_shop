@@ -5,12 +5,12 @@
  */
 package com.uts.sep.dao;
 
-import com.uts.sep.entity.CustomerTbl;
+import com.uts.sep.entity.SellerTbl;
 
 /**
  *
  * @author eaton
  */
-public class CustomerDAO extends UserDAO{
+public class SellerDAO extends BaseDAO<SellerTbl>{
     
 }
