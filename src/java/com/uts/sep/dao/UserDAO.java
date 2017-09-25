@@ -32,4 +32,10 @@ public class UserDAO extends BaseDAO<UserTbl>{
         update(usingUser);
     }
     
+    public void updateUserName(Integer userId, String userName){
+        UserTbl usingUser = findById(userId);
+        usingUser.setUserName(userName);
+        update(usingUser);
+    }
+    
 }

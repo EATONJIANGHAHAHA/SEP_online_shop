@@ -17,6 +17,12 @@ public class AdminDAO extends BaseDAO<AdminTbl>{
     public void updataName(Integer adminid, String name){
         AdminTbl usingAdmin = findById(adminid);
         usingAdmin.getUserTbl().setUserName(name);
-        super.update(usingAdmin);
+        update(usingAdmin);
+    }
+    
+    public void updateAuthorityLevel(Integer userId, int authorityLevel){
+        AdminTbl usingAdmin = findById(userId);
+        usingAdmin.setAuthorityLevel(authorityLevel);
+        update(usingAdmin);
     }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 25/09/2017 13:25:17
+ Date: 25/09/2017 20:16:41
 */
 
 SET NAMES utf8mb4;
@@ -22,9 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_tbl`;
 CREATE TABLE `admin_tbl`  (
-  `admin_id` int(10) NOT NULL AUTO_INCREMENT,
-  `admin_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`admin_id`) USING BTREE
+  `user_id` int(10) NOT NULL AUTO_INCREMENT,
+  `authority_level` int(5) NOT NULL,
+  PRIMARY KEY (`user_id`) USING BTREE,
+  CONSTRAINT `admin_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -32,16 +33,16 @@ CREATE TABLE `admin_tbl`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_tbl`;
 CREATE TABLE `customer_tbl`  (
-  `customer_id` int(20) NOT NULL,
-  `customer_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `user_id` int(10) NOT NULL,
   `customer_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `credit_cardno` int(20) NOT NULL,
   `order_id` int(20) NULL DEFAULT NULL,
   `dob` date NOT NULL,
-  PRIMARY KEY (`customer_id`) USING BTREE,
+  PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `customer_order`(`order_id`) USING BTREE,
-  CONSTRAINT `customer_order` FOREIGN KEY (`order_id`) REFERENCES `order_tbl` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `customer_order` FOREIGN KEY (`order_id`) REFERENCES `order_tbl` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customer_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -55,6 +56,8 @@ CREATE TABLE `item_tbl`  (
   `stock` int(255) NOT NULL,
   `item_status` int(1) NOT NULL,
   `price` double(10, 2) NOT NULL,
+  `item_pic_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`item_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -72,7 +75,7 @@ CREATE TABLE `order_detail_tbl`  (
   PRIMARY KEY (`order_id`, `item_id`) USING BTREE,
   INDEX `item_id`(`item_id`) USING BTREE,
   INDEX `order_id`(`order_id`) USING BTREE,
-  CONSTRAINT `order_detail_item` FOREIGN KEY (`item_id`) REFERENCES `shopping_cart_item_tbl` (`item_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `order_detail_item` FOREIGN KEY (`item_id`) REFERENCES `item_tbl` (`item_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `order_detail_order` FOREIGN KEY (`order_id`) REFERENCES `order_tbl` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -91,6 +94,17 @@ CREATE TABLE `order_tbl`  (
   INDEX `order_shipping`(`shipping_id`) USING BTREE,
   CONSTRAINT `order_shipping` FOREIGN KEY (`shipping_id`) REFERENCES `shipping_tbl` (`shipping_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 12345679 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for seller_tbl
+-- ----------------------------
+DROP TABLE IF EXISTS `seller_tbl`;
+CREATE TABLE `seller_tbl`  (
+  `user_id` int(10) NOT NULL,
+  `seller_credit` int(255) NOT NULL,
+  PRIMARY KEY (`user_id`) USING BTREE,
+  CONSTRAINT `seller_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for shipping_tbl
@@ -131,7 +145,7 @@ CREATE TABLE `shopping_cart_tbl`  (
   PRIMARY KEY (`shopping_cart_id`) USING BTREE,
   INDEX `shopping_cart_tbl`(`customer_id`) USING BTREE,
   INDEX `shopping_cart_id`(`shopping_cart_id`) USING BTREE,
-  CONSTRAINT `shopping_cart_tbl` FOREIGN KEY (`customer_id`) REFERENCES `customer_tbl` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `shopping_cart_tbl` FOREIGN KEY (`customer_id`) REFERENCES `customer_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
