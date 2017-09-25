@@ -17,7 +17,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  *
- * @author tomat
+ * @author eaton
  */
 public class ShippingDAO extends BaseDAO<ShippingTbl>{
     

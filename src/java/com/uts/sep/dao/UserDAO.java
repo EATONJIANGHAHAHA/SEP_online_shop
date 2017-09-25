@@ -15,7 +15,7 @@ import org.hibernate.service.ServiceRegistry;
 
 /**
  *
- * @author lzy
+ * @author eaton
  */
 public class UserDAO extends BaseDAO<UserTbl>{
 

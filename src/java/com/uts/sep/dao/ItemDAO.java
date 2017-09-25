@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * This class will help updating database and getting data from the database
  * for ItemTbl type.
- * @author yichen jiang
+ * @author eaton
  */
 public class ItemDAO extends BaseDAO<ItemTbl> {
     
