@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.UserTbl" table="user_tbl" catalog="sep" optimistic-lock="version">
         <id name="userId" type="java.lang.Integer">
@@ -17,8 +17,5 @@
         <property name="loginStatus" type="int">
             <column name="login_status" not-null="true" />
         </property>
-        <one-to-one name="sellerTbl" class="com.uts.sep.entity.SellerTbl"></one-to-one>
-        <one-to-one name="adminTbl" class="com.uts.sep.entity.AdminTbl"></one-to-one>
-        <one-to-one name="customerTbl" class="com.uts.sep.entity.CustomerTbl"></one-to-one>
     </class>
 </hibernate-mapping>

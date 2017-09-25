@@ -11,7 +11,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.UserDAO;
-import com.uts.sep.model.User;
 import com.uts.sep.entity.UserTbl;
 import java.util.List;
 import java.util.Map;

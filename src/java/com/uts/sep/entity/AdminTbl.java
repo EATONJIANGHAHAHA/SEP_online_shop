@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,14 +10,12 @@ public class AdminTbl  implements java.io.Serializable {
 
 
      private Integer userId;
-     private UserTbl userTbl;
      private int authorityLevel;
 
     public AdminTbl() {
     }
 
-    public AdminTbl(UserTbl userTbl, int authorityLevel) {
-       this.userTbl = userTbl;
+    public AdminTbl(int authorityLevel) {
        this.authorityLevel = authorityLevel;
     }
    
@@ -27,13 +25,6 @@ public class AdminTbl  implements java.io.Serializable {
     
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-    public UserTbl getUserTbl() {
-        return this.userTbl;
-    }
-    
-    public void setUserTbl(UserTbl userTbl) {
-        this.userTbl = userTbl;
     }
     public int getAuthorityLevel() {
         return this.authorityLevel;

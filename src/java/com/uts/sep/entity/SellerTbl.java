@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,14 +10,13 @@ public class SellerTbl  implements java.io.Serializable {
 
 
      private int userId;
-     private UserTbl userTbl;
      private int sellerCredit;
 
     public SellerTbl() {
     }
 
-    public SellerTbl(UserTbl userTbl, int sellerCredit) {
-       this.userTbl = userTbl;
+    public SellerTbl(int userId, int sellerCredit) {
+       this.userId = userId;
        this.sellerCredit = sellerCredit;
     }
    
@@ -27,13 +26,6 @@ public class SellerTbl  implements java.io.Serializable {
     
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-    public UserTbl getUserTbl() {
-        return this.userTbl;
-    }
-    
-    public void setUserTbl(UserTbl userTbl) {
-        this.userTbl = userTbl;
     }
     public int getSellerCredit() {
         return this.sellerCredit;

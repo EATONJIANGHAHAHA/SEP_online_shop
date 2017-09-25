@@ -1,19 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.CustomerTbl" table="customer_tbl" catalog="sep" optimistic-lock="version">
         <id name="userId" type="int">
             <column name="user_id" />
-            <generator class="foreign">
-                <param name="property">userTbl</param>
-            </generator>
+            <generator class="assigned" />
         </id>
         <many-to-one name="orderTbl" class="com.uts.sep.entity.OrderTbl" fetch="select">
             <column name="order_id" />
         </many-to-one>
-        <one-to-one name="userTbl" class="com.uts.sep.entity.UserTbl" constrained="true"></one-to-one>
         <property name="customerAddress" type="string">
             <column name="customer_address" not-null="true" />
         </property>

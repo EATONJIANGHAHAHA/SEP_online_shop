@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 25/09/2017 20:16:41
+ Date: 25/09/2017 22:56:48
 */
 
 SET NAMES utf8mb4;
@@ -24,9 +24,8 @@ DROP TABLE IF EXISTS `admin_tbl`;
 CREATE TABLE `admin_tbl`  (
   `user_id` int(10) NOT NULL AUTO_INCREMENT,
   `authority_level` int(5) NOT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE,
-  CONSTRAINT `admin_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for customer_tbl
@@ -41,8 +40,7 @@ CREATE TABLE `customer_tbl`  (
   `dob` date NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `customer_order`(`order_id`) USING BTREE,
-  CONSTRAINT `customer_order` FOREIGN KEY (`order_id`) REFERENCES `order_tbl` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customer_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `customer_order` FOREIGN KEY (`order_id`) REFERENCES `order_tbl` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -102,8 +100,7 @@ DROP TABLE IF EXISTS `seller_tbl`;
 CREATE TABLE `seller_tbl`  (
   `user_id` int(10) NOT NULL,
   `seller_credit` int(255) NOT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE,
-  CONSTRAINT `seller_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

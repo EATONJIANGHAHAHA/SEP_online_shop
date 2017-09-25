@@ -14,11 +14,11 @@ import org.hibernate.SessionFactory;
  */
 public class AdminDAO extends BaseDAO<AdminTbl>{
     
-    public void updataName(Integer adminid, String name){
-        AdminTbl usingAdmin = findById(adminid);
-        usingAdmin.getUserTbl().setUserName(name);
-        update(usingAdmin);
-    }
+//    public void updataName(Integer adminid, String name){
+//        AdminTbl usingAdmin = findById(adminid);
+//        usingAdmin.setUserName(name);
+//        update(usingAdmin);
+//    }
     
     public void updateAuthorityLevel(Integer userId, int authorityLevel){
         AdminTbl usingAdmin = findById(userId);

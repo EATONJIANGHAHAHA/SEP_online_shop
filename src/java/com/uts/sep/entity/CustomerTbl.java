@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 7:42:08 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,7 +14,6 @@ public class CustomerTbl  implements java.io.Serializable {
 
      private int userId;
      private OrderTbl orderTbl;
-     private UserTbl userTbl;
      private String customerAddress;
      private String email;
      private int creditCardno;
@@ -25,16 +24,16 @@ public class CustomerTbl  implements java.io.Serializable {
     }
 
 	
-    public CustomerTbl(UserTbl userTbl, String customerAddress, String email, int creditCardno, Date dob) {
-        this.userTbl = userTbl;
+    public CustomerTbl(int userId, String customerAddress, String email, int creditCardno, Date dob) {
+        this.userId = userId;
         this.customerAddress = customerAddress;
         this.email = email;
         this.creditCardno = creditCardno;
         this.dob = dob;
     }
-    public CustomerTbl(OrderTbl orderTbl, UserTbl userTbl, String customerAddress, String email, int creditCardno, Date dob, Set shoppingCartTbls) {
+    public CustomerTbl(int userId, OrderTbl orderTbl, String customerAddress, String email, int creditCardno, Date dob, Set shoppingCartTbls) {
+       this.userId = userId;
        this.orderTbl = orderTbl;
-       this.userTbl = userTbl;
        this.customerAddress = customerAddress;
        this.email = email;
        this.creditCardno = creditCardno;
@@ -55,13 +54,6 @@ public class CustomerTbl  implements java.io.Serializable {
     
     public void setOrderTbl(OrderTbl orderTbl) {
         this.orderTbl = orderTbl;
-    }
-    public UserTbl getUserTbl() {
-        return this.userTbl;
-    }
-    
-    public void setUserTbl(UserTbl userTbl) {
-        this.userTbl = userTbl;
     }
     public String getCustomerAddress() {
         return this.customerAddress;
