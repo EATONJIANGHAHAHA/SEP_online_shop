@@ -9,8 +9,9 @@ import com.uts.sep.entity.ItemTbl;
 import java.util.List;
 
 /**
- *
- * @author lzy
+ * This class will help updating database and getting data from the database
+ * for ItemTbl type.
+ * @author yichen jiang
  */
 public class ItemDAO extends BaseDAO<ItemTbl> {
 
@@ -62,6 +63,14 @@ public class ItemDAO extends BaseDAO<ItemTbl> {
         else return false;
     }
     
+    /**
+     * This method will update the category of an item.
+     * Please do notice that I statically put four existing category string
+     * inside ItemTbl, use that as for now, and please DO NOT use any other
+     * Strings. 
+     * @param itemId 
+     * @param category 
+     */
     public void updateCategory(Integer itemId, String category){
         ItemTbl usingItem = findById(itemId);
         usingItem.setCategory(category);
