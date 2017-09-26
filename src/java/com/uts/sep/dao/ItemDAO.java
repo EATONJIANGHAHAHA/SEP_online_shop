@@ -7,6 +7,7 @@ package com.uts.sep.dao;
 
 import static com.uts.sep.dao.BaseDAO.ITEM_TBL;
 import com.uts.sep.entity.ItemTbl;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,8 +19,11 @@ import java.util.List;
  */
 public class ItemDAO extends BaseDAO<ItemTbl> {
     
-    private List<ItemTbl> items = getAll(ITEM_TBL);
-    private List<ItemTbl> tempList = null;
+    private List<ItemTbl> items;
+    
+    public ItemDAO(){
+        items = getAll(ITEM_TBL);
+    }
 
     interface Updater {
 
@@ -37,16 +41,19 @@ public class ItemDAO extends BaseDAO<ItemTbl> {
     }
 
     public List<ItemTbl> getItemsFiltedByCategory(String Category) {
-        tempList = null;
+        List<ItemTbl> tempList = new ArrayList<ItemTbl>();
         for (ItemTbl item : items) 
             if (item.getCategory().equals(Category)) tempList.add(item);
         return tempList;
     }
     
     public List<ItemTbl> getItemsFiltedByName(String Name){
-        tempList = null;
-        for (ItemTbl item : items)
-            if(item.getItemName().equals(Name)) tempList.add(item);
+        List<ItemTbl> tempList = new ArrayList<ItemTbl>();
+        for (ItemTbl item : items) {
+            if(item.getItemName().equals(Name)) {
+                tempList.add(item);
+            }
+        }
         return tempList;
     }
     
@@ -60,7 +67,7 @@ public class ItemDAO extends BaseDAO<ItemTbl> {
      * @return 
      */
     public List<ItemTbl> getItemsFiltedByPrice(double[] price){
-        tempList = null;
+        List<ItemTbl> tempList = new ArrayList<ItemTbl>();
         for(ItemTbl item : items)
             if(item.getPrice() >= price[0] 
                     && item.getPrice() <= price[1]) tempList.add(item);

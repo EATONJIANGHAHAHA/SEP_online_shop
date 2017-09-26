@@ -17,9 +17,15 @@ import java.util.*;
 public class testDAO {
 
     public static void main(String[] args) {
-        //CustomerDAO dao = new CustomerDAO();
-        //CustomerTbl customer = dao.findById(1);
-        //System.out.println(customer.getCustomerName());
+
+        ItemDAO dao = new ItemDAO();
+        ArrayList<ItemTbl> list = (ArrayList<ItemTbl>) dao.getItemsFiltedByName("iphone 7");
+        System.out.print(list.get(0).getItemName());
+
+//        List<ItemTbl> list = dao.getAll(BaseDAO.ITEM_TBL);
+//        for(ItemTbl item : list){
+//            System.out.print(item.getItemName());
+//        }
     }
 
 }
