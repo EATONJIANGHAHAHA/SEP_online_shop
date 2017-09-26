@@ -17,11 +17,7 @@ import java.util.List;
  * @author eaton
  */
 public class ItemDAO extends BaseDAO<ItemTbl> {
-
-    public static final String CATEGORY_BOOK = "book";
-    public static final String CATEGORY_COMPUTER = "computer";
-    public static final String CATEGORY_PHONE = "phone";
-    public static final String CATEGORY_GAME_CONSOLES = "game consoles";
+    
     private List<ItemTbl> items = getAll(ITEM_TBL);
     private List<ItemTbl> tempList = null;
 
