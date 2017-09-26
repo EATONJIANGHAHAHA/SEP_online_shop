@@ -106,7 +106,7 @@ public class ItemDAO extends BaseDAO<ItemTbl> {
     
     /**
      * This method will update the category of an item. Please do notice that I
-     * statically put four existing category string inside this class, use those
+     * statically put four existing category string inside ItemTbl class, use those
      * as for now. Please DO NOT use any other Strings.
      *
      * @param itemId
