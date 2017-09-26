@@ -36,6 +36,10 @@
     <body>
         <%! ItemDAO itemDAO = new ItemDAO(); %>
         <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
+        <% itemDAO.updateCategory(1, ItemDAO.CATEGORY_BOOK); 
+        // to search item by certain property, we need the those strings i put in ItemDAO.
+        // 
+        %>
         <div class="header-area">
             <div class="container">
                 <div class="row">
