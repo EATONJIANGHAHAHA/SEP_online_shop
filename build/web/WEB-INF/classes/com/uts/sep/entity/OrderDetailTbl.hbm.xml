@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.uts.sep.entity.OrderDetailTbl" table="order_detail_tbl" catalog="sep" optimistic-lock="version">
+        <composite-id name="id" class="com.uts.sep.entity.OrderDetailTblId">
+            <key-property name="orderId" type="int">
+                <column name="order_id" />
+            </key-property>
+            <key-property name="itemId" type="int">
+                <column name="item_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="itemTbl" class="com.uts.sep.entity.ItemTbl" update="false" insert="false" fetch="select">
+            <column name="item_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="orderTbl" class="com.uts.sep.entity.OrderTbl" update="false" insert="false" fetch="select">
+            <column name="order_id" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="orderDetailName" type="string">
+            <column name="order_detail_name" length="50" not-null="true" />
+        </property>
+        <property name="unitCost" type="double">
+            <column name="unitCost" precision="10" not-null="true" />
+        </property>
+        <property name="subtotal" type="double">
+            <column name="subtotal" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
