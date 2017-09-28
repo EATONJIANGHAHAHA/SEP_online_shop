@@ -45,10 +45,10 @@
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
+                                <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user_name") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else { 
@@ -99,7 +99,7 @@
 
                     <div class="col-sm-6">
                         <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                            <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
                     </div>
                 </div>
@@ -119,14 +119,14 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.jsp">Home</a></li>
                             <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="single-product.html">Single product</a></li>
+                            <li><a href="single-product.jsp">Single product</a></li>
                             <li><a href="cart.jsp">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="#">Category</a></li>
-                            <li><a href="#">Others</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="checkout.jsp">Checkout</a></li>
+                            <li><a href="category.jsp">Category</a></li>
+                            <li><a href="others.jsp">Others</a></li>
+                            <li><a href="contact.jsp">Contact</a></li>
                         </ul>
                     </div>  
                 </div>

@@ -20,11 +20,14 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author lzy
  */
 public class LoginAction extends ActionSupport implements SessionAware {
+    
+    public final static String USER_NOT_EXIST_ERROR = "user not exist error";
 
     private String username = "";
     private String password = "";
     private Map session;
     private UserTbl user;
+    private String errorName;
 
     @Override
     public void setSession(Map session) {

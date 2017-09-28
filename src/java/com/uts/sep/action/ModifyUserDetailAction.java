@@ -22,14 +22,21 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
     public static final String MODIFY_USER_DETAIL_TABLE = "modify user detail table";
     public static final String PASSWORD_NOT_MATCH_ERROR = "password not match";
     public static final String NOT_LOGIN_IN_ERROR = "user not login in";
-    public static final String SUCCESS = "success";
-    public static final String ERROR_NAME = "error name";
     
     private Map session;
     private UserTbl user;
     private String checkPassword;
     private String newPassword;
     private String newName;
+    private String errorName;
+
+    public String getErrorName() {
+        return errorName;
+    }
+
+    public void setErrorName(String errorName) {
+        this.errorName = errorName;
+    }
 
     public String getCheckPassword() {
         return checkPassword;
@@ -70,7 +77,7 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
 
     @Override
     public void validate() {
-        
+        super.validate();
     }
 
     @Override
@@ -79,7 +86,7 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
         List<UserTbl> list = dao.getAll(BaseDAO.USER_TBL);
         UserTbl usingUser = (UserTbl) session.get("user");
         if(null == usingUser){
-            this.session.put(ERROR_NAME, NOT_LOGIN_IN_ERROR);
+            errorName = NOT_LOGIN_IN_ERROR;
             return ERROR;
         } else if (dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
             dao.updateUserName(usingUser.getUserId(), newName);
@@ -87,7 +94,7 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
             this.session.put(MODIFY_USER_DETAIL_TABLE, SUCCESS);
             return SUCCESS;
         } else if(!dao.isPasswordCorrect(user.getUserId(), checkPassword)){
-            this.session.put(MODIFY_USER_DETAIL_TABLE, PASSWORD_NOT_MATCH_ERROR);
+            errorName = PASSWORD_NOT_MATCH_ERROR;
             return ERROR;
         } 
         else return ERROR;
