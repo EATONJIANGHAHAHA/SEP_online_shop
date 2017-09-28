@@ -94,8 +94,8 @@
                 </div>
             </div>
         </div> <!-- End site branding area -->
-        
-         <div class="mainmenu-area">
+
+        <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
                     <div class="navbar-header">
@@ -126,7 +126,6 @@
             <center><h1>Login In</h1></center>
             <br><br>
             <form action="login" method="post">
-                
                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
                     <tr>
                         <th align="right">User Name: </th>
@@ -137,15 +136,13 @@
                         <th align="right">Password: </th>
                         <td><input type="password"  name="password" placeholder="Password"></td>
                     </tr>
-
                     <tr>
                         <th></th>
                         <td colspan="2" align="right"><input type="submit" label="Login In" class="btn btn-primary"></td>
                     </tr> 
                 </table>
             </form>
-            
-            </div>
+        </div>
 
         <div class="promo-area">
             <div class="zigzag-bottom"></div>

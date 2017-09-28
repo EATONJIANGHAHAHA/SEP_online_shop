@@ -7,16 +7,12 @@ package com.uts.sep.action;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.UserDAO;
 import com.uts.sep.entity.UserTbl;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
@@ -28,6 +24,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private String username = "";
     private String password = "";
     private Map session;
+    private UserTbl user;
 
     @Override
     public void setSession(Map session) {
@@ -63,11 +60,12 @@ public class LoginAction extends ActionSupport implements SessionAware {
         for (UserTbl user : list) {
             if (user.getUserName().equals(username)) {
                 usingUser = user;
+                this.user = user;
+                this.session.put("user", this.user);
                 break;
             }
 
         }
-                
         if (usingUser == null) {
             return ERROR;
         } else if (usingUser.getUserName().equals(username) && usingUser.getUserPassword().equals(password)){

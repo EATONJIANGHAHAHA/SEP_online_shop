@@ -4,6 +4,7 @@
     Author     : lzy
 --%>
 
+<%@page import="com.uts.sep.action.ModifyUserDetailAction"%>
 <%@page import="com.uts.sep.action.RegisterAction"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -94,8 +95,8 @@
                 </div>
             </div>
         </div> <!-- End site branding area -->
-        
-         <div class="mainmenu-area">
+
+        <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
                     <div class="navbar-header">
@@ -123,19 +124,21 @@
         </div> <!-- End mainmenu area -->
         <div>
             <br><br>
-            <% if (session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.USER_ALREADY_EXIST_ERROR)){ %>
+            <% if (session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.USER_ALREADY_EXIST_ERROR)) { %>
             <center><h1>Registration Failed, User Already Exist.</h1></center>
-            <% } else if(session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.FORM_NOT_COMPLETE_ERROR)) { %>
+                <% } else if (session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.FORM_NOT_COMPLETE_ERROR)) { %>
             <center><h1>Registration Failed, Please Complete Mandatory Fileds.</h1></center>
-            <% } else if(session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.PASSWORD_NOT_REPEATED_ERROR)) { %>
+                <% } else if (session.getAttribute(RegisterAction.ERROR_NAME).equals(RegisterAction.PASSWORD_NOT_REPEATED_ERROR)) { %>
             <center><h1>Registration Failed, Please Check Password.</h1></center>
-            <% } else { %>
+                <% } else if (session.getAttribute(ModifyUserDetailAction.ERROR_NAME).equals(ModifyUserDetailAction.NOT_LOGIN_IN_ERROR)) { %>
+            <center><h1>Failed, Please Login first.</h1></center>
+                <% } else { %>
             <center><h1>Login Failed</h1></center>
-            <% } %>
+                <% }%>
             <center><p>The page will be re-directed in 5 seconds. Please wait a moment...</p></center>
             <br><br>
 
-            </div>
+        </div>
 
         <div class="promo-area">
             <div class="zigzag-bottom"></div>

@@ -19,23 +19,45 @@ import org.hibernate.service.ServiceRegistry;
  * @author eaton
  */
 public class UserDAO extends BaseDAO<UserTbl>{
+    
+    interface Updater {
+        
+        void onUpdate(UserTbl user);
+    }
+    
+    private class updateHelper {
+        
+        private void beginUpdate(Integer userId, Updater updater){
+            
+            UserTbl usingUser = findById(userId);
+            updater.onUpdate(usingUser);
+            update(usingUser);
+        }
+    }
 
     public void updateLoginStatus(Integer userId, int status){
-        UserTbl usingUser = findById(userId);
-        usingUser.setLoginStatus(status);
-        update(usingUser);
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+            user.setLoginStatus(status);
+        });
     }
     
     public void updatePassword(Integer userId, String password){
-        UserTbl usingUser = (UserTbl) findById(userId);
-        usingUser.setUserPassword(password);
-        update(usingUser);
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+            user.setUserPassword(password);
+        });
     }
     
     public void updateUserName(Integer userId, String userName){
-        UserTbl usingUser = findById(userId);
-        usingUser.setUserName(userName);
-        update(usingUser);
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+            user.setUserName(userName);
+        });
     }
     
+    public boolean isPasswordCorrect(Integer userId, String checkpassword){
+        UserTbl user = findById(userId);
+        if(user.getUserPassword().equals(checkpassword)){
+            return true;
+        }
+        else return false;
+    }
 }

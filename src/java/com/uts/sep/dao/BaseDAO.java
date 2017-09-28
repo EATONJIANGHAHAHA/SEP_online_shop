@@ -5,7 +5,6 @@
  */
 package com.uts.sep.dao;
 
-import com.uts.sep.entity.UserTbl;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -32,9 +31,7 @@ public abstract class BaseDAO<T> {
     public static final String USER_TBL = "UserTbl";
 
     private Class<T> ClassType;
-
-    private static SessionFactory factory = null;
-
+    
     /**
      * the constructor will check for related class
      */
@@ -50,9 +47,9 @@ public abstract class BaseDAO<T> {
      * @return 
      */
     public List<T> getAll(String tableNameStr) {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;//operation
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();//
+        Session session = factory.openSession();//
+        Transaction tx = null;//
         List<T> list = null;
         try {
             tx = session.beginTransaction();// open connection
@@ -79,7 +76,7 @@ public abstract class BaseDAO<T> {
     @SuppressWarnings("deprecation")
     public boolean update(T model) {
         if (model != null) {
-            factory = new Configuration().configure().buildSessionFactory();
+            SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
             try {
@@ -107,7 +104,7 @@ public abstract class BaseDAO<T> {
      */
     public boolean insertNew(T model) {
        if (model != null){
-            factory = new Configuration().configure().buildSessionFactory();
+            SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
             try {
@@ -137,7 +134,7 @@ public abstract class BaseDAO<T> {
     public T findById(Integer id) {
         Object object = new Object();
         if (id != null) {
-            factory = new Configuration().configure().buildSessionFactory();
+            SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
             try {
@@ -159,7 +156,7 @@ public abstract class BaseDAO<T> {
 
     public boolean delete(T model) {
         if (model != null) {
-            factory = new Configuration().configure().buildSessionFactory();
+            SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
             try {

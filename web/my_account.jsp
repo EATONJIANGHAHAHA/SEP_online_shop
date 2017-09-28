@@ -51,9 +51,7 @@
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user_name") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
-                                    <% } else { 
-                                               
-                                    %>
+                                    <% } else { %>
                                 <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
                                         <% out.print(session.getAttribute("user_name")); %></a></li>
                                         <% }%>
@@ -119,7 +117,7 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.jsp">Home</a></li>
                             <li><a href="shop.jsp">Shop page</a></li>
                             <li><a href="single-product.html">Single product</a></li>
                             <li><a href="cart.jsp">Cart</a></li>
@@ -134,10 +132,29 @@
         </div> <!-- End mainmenu area -->
 
         <div>
-            <img src="img/slide-1.jpg" style="width:100% ; height:80%;" >
+            <form action="modify_user" method="post">
+                <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
+                    <center><h3 class="page-header">Update Details</h3></center>
+                    <tr>
+                        <th align="right">Old Password: </th>
+                        <td><input type="password" name="checkPassword" placeholder="Old password"/></td>
+                    </tr>
+                    <tr>
+                        <th align="right">New name: </th>
+                        <td><input type="text" name="newName" placeholder="New name"/><td>
+                    </tr>
+                    <tr>
+                        <th align="right">New Password: </th>
+                        <td><input type="text" name="newPassword" placeholder="New password"/><td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-primary"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
-
-
 
         <div class="promo-area">
             <div class="zigzag-bottom"></div>
