@@ -18,8 +18,8 @@ public class testSearch {
     public static void main(String[] args) {
         ItemDAO itemDAO = new ItemDAO();
         //itemDAO.addItem("test");
-        ItemTbl item = new ItemTbl(10, "name of the pro", "wtf",10, 2, 2.22);
-        itemDAO.insertNew(item);
+        //ItemTbl item = new ItemTbl(10, "name of the pro", "wtf",10, 2, 2.22);
+        //itemDAO.insertNew(item);
         List<ItemTbl> list = itemDAO.getAll(ItemDAO.ITEM_TBL);
         for (ItemTbl oneitem : list) {
             System.out.print(oneitem);

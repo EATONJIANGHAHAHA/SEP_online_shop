@@ -30,8 +30,8 @@ public class ItemTbl implements Serializable {
         this.price = price;
     }*/
 
-    public ItemTbl(int itemId, String itemName, String itemDescription, int stock, int itemStatus, double price/*, Set orderDetailTbls*/) {
-        this.itemId = itemId;
+    public ItemTbl(/*int itemId,*/ String itemName, String itemDescription, int stock, int itemStatus, double price/*, Set orderDetailTbls*/) {
+        //this.itemId = itemId;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.stock = stock;

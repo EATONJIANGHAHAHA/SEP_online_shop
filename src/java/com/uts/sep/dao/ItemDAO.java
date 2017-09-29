@@ -49,7 +49,7 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         return list;
     }
     
-    public void addItem(String _itemname) 
+    public void addItem(String _itemname, String _itemdescription, double _itemprice) 
     {
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
@@ -70,8 +70,9 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         
         try {
             tx = session.beginTransaction();// open connection
-            ItemTbl newitem = new ItemTbl(5,"fire", "fire sale", 1, 2, 3);
-            session.save(newitem);
+            //ItemTbl newitem = new ItemTbl(5,"fire", "fire sale", 1, 2, 3);
+            ItemTbl newitem = new ItemTbl(_itemname, _itemdescription,1, 1, 10);
+            this.insertNew(newitem);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {

@@ -143,6 +143,8 @@
                             <th align="right">Add: </th>
                             <!-- itemname is a variable used by AddAction specified by struts.xml -->
                             <td><input type="text" name="itemname" placeholder="Item name"></td>
+                            <td><input type="text" name="itemdescription" placeholder="Item description"></td>
+                            <!--<td><input type="text" name="itemprice" placeholder="Item price"></td> -->
                             <td colspan="2" align="right"><input type="submit" label="AddItem" class="btn btn-primary"></td>
                         </tr>
 
@@ -151,7 +153,7 @@
             </div>
         </div>
         <!-- end of add item form -->
-    
+        <br><br><br><br>
         <!-- Beginning of search results area of the web page -->
         <div>
         <center>

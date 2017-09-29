@@ -34,6 +34,8 @@ public class SearchAction extends ActionSupport implements SessionAware {
     
     //variables used for session variables used in addItem.jsp
     private String itemname = "";
+    private String itemdescription = "";
+    private double itemprice = 0;
     
     //session variable used to communicate with the view
     private Map session;
@@ -61,6 +63,22 @@ public class SearchAction extends ActionSupport implements SessionAware {
         this.itemname = itemname;
     }
     
+    public String getItemDescription() {
+        return itemdescription; 
+    }
+    
+    public void setItemDescription(String itemdescription) {
+        this.itemdescription = itemdescription;
+    }
+    
+    public double getItemPrice() {
+        return itemprice; 
+    }
+    
+    public void setItemPrice(double itemprice) {
+        this.itemprice = itemprice;
+    }
+    
     /*
     public List<ItemTbl> getItems(){
         return itemlist; 
@@ -78,12 +96,13 @@ public class SearchAction extends ActionSupport implements SessionAware {
         this.session.put("itemlist", itemlist);
         
         return SUCCESS;
+
     }
     
     public String addItem() throws Exception {
         
         ItemDAO itemDao = new ItemDAO();
-        itemDao.addItem(itemname);
+        itemDao.addItem(itemname, itemdescription, itemprice);
         itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
         
         this.session.put("itemlist", itemlist);
