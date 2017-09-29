@@ -1,8 +1,8 @@
 package com.uts.sep.entity;
 // Generated 23-Aug-2017 14:07:11 by Hibernate Tools 4.3.1
 
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
+//import java.util.Set;
 import java.io.Serializable;
 
 /**
@@ -16,27 +16,27 @@ public class ItemTbl implements Serializable {
     private int stock;
     private int itemStatus;
     private double price;
-    private Set orderDetailTbls = new HashSet(0);
+    //private Set orderDetailTbls = new HashSet(0);
 
     public ItemTbl() {
     }
 
-    public ItemTbl(int itemId, String itemName, int stock, int itemStatus, double price) {
+    /*public ItemTbl(int itemId, String itemName, int stock, int itemStatus, double price) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.stock = stock;
         this.itemStatus = itemStatus;
         this.price = price;
-    }
+    }*/
 
-    public ItemTbl(int itemId, String itemName, String itemDescription, int stock, int itemStatus, double price, Set orderDetailTbls) {
+    public ItemTbl(int itemId, String itemName, String itemDescription, int stock, int itemStatus, double price/*, Set orderDetailTbls*/) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.stock = stock;
         this.itemStatus = itemStatus;
         this.price = price;
-        this.orderDetailTbls = orderDetailTbls;
+        //this.orderDetailTbls = orderDetailTbls;
     }
 
     public int getItemId() {
@@ -87,11 +87,11 @@ public class ItemTbl implements Serializable {
         this.price = price;
     }
 
-    public Set getOrderDetailTbls() {
-        return this.orderDetailTbls;
-    }
+    //public Set getOrderDetailTbls() {
+        //return this.orderDetailTbls;
+    //}
 
-    public void setOrderDetailTbls(Set orderDetailTbls) {
-        this.orderDetailTbls = orderDetailTbls;
-    }
+    //public void setOrderDetailTbls(Set orderDetailTbls) {
+        //this.orderDetailTbls = orderDetailTbls;
+    //}
 }

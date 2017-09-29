@@ -125,7 +125,8 @@
                             <li><a href="cart.jsp">Cart</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="#">Others</a></li>
+                            <li><a href="search.jsp">Search</a></li>
+                            <li><a href="addItem.jsp">Add item</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>  

@@ -18,8 +18,8 @@ public class Item extends BaseDAO{
     int stock;
     int status;
     double price;
-    String picturePath;
-    String size;
+    //String picturePath;
+    //String size;
 
     public int getItemID() {
         return itemID;
@@ -68,7 +68,7 @@ public class Item extends BaseDAO{
     public void setPrice(double price) {
         this.price = price;
     }
-
+/*
     public String getPicturePath() {
         return picturePath;
     }
@@ -83,17 +83,17 @@ public class Item extends BaseDAO{
 
     public void setSize(String size) {
         this.size = size;
-    }
+    }*/
 
-    public Item(int itemID, String itemName, String itemDescription, int stock, int status, double price, String picturePath, String size) {
+    public Item(int itemID, String itemName, String itemDescription, int stock, int status, double price/*, String picturePath, String size*/) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.stock = stock;
         this.status = status;
         this.price = price;
-        this.picturePath = picturePath;
-        this.size = size;
+        //this.picturePath = picturePath;
+        //this.size = size;
     }
 
     public Item() {

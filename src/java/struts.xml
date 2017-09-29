@@ -16,6 +16,16 @@
             <result name="success">/index.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
+        <!-- search -->
+        <action name="search" class="com.uts.sep.action.SearchAction" method="searchItems">
+            <result name="success">/search.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <!-- add item -->
+        <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
+            <result name="success">/addItem.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
 <!--        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute"/>-->
     </package>
 </struts>

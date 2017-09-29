@@ -47,7 +47,7 @@
                             </ul>
                         </div>
                     </div>
-
+                             
                     <div class="col-md-4">
                         <div class="header-right">
                             <ul class="list-unstyled list-inline">
@@ -83,8 +83,26 @@
                     <div class="col-sm-6">
                         <div class="logo">
                             <h1><a href="index.html">sep<span>BAY</span></a></h1>
+                        </div>                       
+                    </div>
+                    
+                    <!-- search bar form, moved to search.jsp
+                    <div class="col-md-1">
+                        <div class="user-menu">
+                            <form action="search" method="post">
+                
+                                <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
+                                    <tr>
+                                        <th align="right">Search: </th>
+                                        <td><input type="text" name="keyword" placeholder="Keywords"></td>
+                                        <td colspan="2" align="right"><input type="submit" label="Search" class="btn btn-primary"></td>
+                                    </tr>
+                                    
+                                </table>
+                            </form>
                         </div>
                     </div>
+                    -->
 
                     <div class="col-sm-6">
                         <div class="shopping-item">
