@@ -39,6 +39,7 @@
         <![endif]-->
     </head>
     <body>
+
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -128,10 +129,15 @@
                             <li><a href="search.jsp">Search</a></li>
                             <li><a href="addItem.jsp">Add item</a></li>
                             <li><a href="#">Contact</a></li>
-                        </ul>
+                            </ul>
+                        </div>
+                    </div>
+                        </div>
+
+                        
                     </div>  
-                </div>
-            </div>
+                
+            
         </div> <!-- End mainmenu area -->
 
         <div>

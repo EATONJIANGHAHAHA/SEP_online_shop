@@ -9,6 +9,8 @@ import com.opensymphony.xwork2.Action;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import static com.uts.sep.action.ModifyUserDetailAction.ERROR;
+import static com.uts.sep.action.ModifyUserDetailAction.NOT_LOGIN_IN_ERROR;
 import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.UserDAO;
 import com.uts.sep.entity.UserTbl;
@@ -22,16 +24,24 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class RegisterAction extends ActionSupport implements SessionAware {
     
-    public static final String ERROR_NAME = "error_name";
-    public static final String USER_NAME = "user_name";
     public static final String FORM_NOT_COMPLETE_ERROR = "form not complete";
     public static final String USER_ALREADY_EXIST_ERROR = "user already exist";
     public static final String PASSWORD_NOT_REPEATED_ERROR = "passwords are not correct";
+    public static final String ERROR = "error";
 
     private String username = "";
     private String password = "";
     private String repeatedPassword = "";
     private Map session;
+    private String errorName;
+
+    public String getErrorName() {
+        return errorName;
+    }
+
+    public void setErrorName(String errorName) {
+        this.errorName = errorName;
+    }
 
     @Override
     public void setSession(Map session) {
@@ -68,24 +78,26 @@ public class RegisterAction extends ActionSupport implements SessionAware {
         UserDAO userDao = new UserDAO();
         List<UserTbl> list = userDao.getAll(BaseDAO.USER_TBL);
         UserTbl usingUser = null;
+        boolean isUserExist = false;
         
         if(username.equals("") || password.equals("")){
-            this.session.put(ERROR_NAME, FORM_NOT_COMPLETE_ERROR);
+            this.session.put(ERROR,FORM_NOT_COMPLETE_ERROR);
             return ERROR;
         }
         for (UserTbl user: list){
             if(user.getUserName().equals(username)){
-                this.session.put(ERROR_NAME, USER_ALREADY_EXIST_ERROR);
+                this.session.put(ERROR,USER_ALREADY_EXIST_ERROR);
+                isUserExist = true;
                 return ERROR;
             }
         }
-        if (1==1) {
-            this.session.put(USER_NAME, username);
+        if (!isUserExist) {
             UserTbl user = new UserTbl(username, password, 1);
+            this.session.put("user", user);
             userDao.insertNew(user);
             return SUCCESS;
         } else if(!password.equals(repeatedPassword)){
-            this.session.put(ERROR_NAME, PASSWORD_NOT_REPEATED_ERROR);
+            this.session.put(ERROR,PASSWORD_NOT_REPEATED_ERROR);
             return ERROR;
         }
         else return ERROR;

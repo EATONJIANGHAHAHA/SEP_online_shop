@@ -5,6 +5,7 @@
  */
 package com.uts.sep.dao;
 
+import com.uts.sep.entity.CustomerTbl;
 import com.uts.sep.entity.UserTbl;
 import org.hibernate.Session;
 import java.util.*;
@@ -15,134 +16,61 @@ import org.hibernate.service.ServiceRegistry;
 
 /**
  *
- * @author lzy
+ * @author eaton
  */
 public class UserDAO extends BaseDAO<UserTbl>{
-
-    private static SessionFactory factory = null;
-//    private static ServiceRegistry serviceRegistry = null;
-//    private static Configuration configuration = null;
-
-    /**
-     * this method is to get all users
-     *
-     * @return
-     */
-    public List<UserTbl> getAllUsers() {
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;//operation
-        List<UserTbl> list = null;
-        try {
-            tx = session.beginTransaction();// open connection
-            Query query = session.createQuery("from UserTbl");//using the name from java
-            list = query.list();
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
+    
+    public static final short LOGING_IN = 1;
+    public static final short LOGED_OUT = 0;
+    
+    interface Updater {
+        
+        void onUpdate(UserTbl user);
+    }
+    
+    private class updateHelper {
+        
+        private void beginUpdate(Integer userId, Updater updater){
+            
+            UserTbl usingUser = findById(userId);
+            updater.onUpdate(usingUser);
+            update(usingUser);
         }
-        return list;
     }
 
-//    public UserTbl getUser(Integer userID) {
-//        ArrayList<UserTbl> users = getAllUsers();
-//        for (UserTbl user:users){
-//            if(Objects.equals(userID, user.getUserId())){
-//                return user;
-//            }
-//        }
-//        return null;
-//    }
-
-    /**
-     *
-     * @param userId
-     * @param status
-     */
-    public void updateLoginStatus(Integer userId, int status) {
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            UserTbl user = (UserTbl) session.get(UserTbl.class, userId);
+    public void updateLoginStatus(Integer userId, int status){
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
             user.setLoginStatus(status);
-            session.update(user);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        });
     }
-
-    //method to upadte password
-    public void updatePassword(Integer userId, String pwd) {
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            UserTbl user = (UserTbl) session.get(UserTbl.class, userId);
-            user.setUserPassword(pwd);
-            session.update(user);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+    
+    public void updatePassword(Integer userId, String password){
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+            user.setUserPassword(password);
+        });
     }
-
-    //method to add users
-    public void insertUser(String name, String pwd) {
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            UserTbl user = new UserTbl(name, pwd, 0);
-            session.save(user);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
+    
+    public void updateUserName(Integer userId, String userName){
+        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+            user.setUserName(userName);
+        });
     }
-
-    //method to delete users
-    public void deleteUser(Integer userId) {
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            UserTbl user = (UserTbl) session.get(UserTbl.class, userId);
-            session.delete(user);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
+    
+    public boolean isPasswordCorrect(Integer userId, String checkpassword){
+        UserTbl user = findById(userId);
+        if(user.getUserPassword().equals(checkpassword)){
+            return true;
         }
+        else return false;
+    }
+    
+    public UserTbl findByLoginStatus(int loginStatus){
+        List<UserTbl> lists = getAll(USER_TBL);
+        for(UserTbl user: lists){
+            if(user.getLoginStatus() == loginStatus){
+                return user;
+            }
+        }
+        return null;
     }
 }

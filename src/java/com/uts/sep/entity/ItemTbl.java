@@ -1,3 +1,4 @@
+
 package com.uts.sep.entity;
 // Generated 23-Aug-2017 14:07:11 by Hibernate Tools 4.3.1
 

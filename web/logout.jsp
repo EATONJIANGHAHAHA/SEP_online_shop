@@ -4,6 +4,8 @@
     Author     : lzy
 --%>
 
+<%@page import="com.uts.sep.dao.UserDAO"%>
+<%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page import="com.uts.sep.action.RegisterAction"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -95,8 +97,8 @@
                 </div>
             </div>
         </div> <!-- End site branding area -->
-        
-         <div class="mainmenu-area">
+
+        <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
                     <div class="navbar-header">
@@ -125,11 +127,19 @@
         <div>
             <br><br>
             <center><h1>Logout. Thanks for using SEP-bay</h1></center>
-            <% session.removeAttribute("user_name"); %>
+                <%
+                    UserDAO userDAO = new UserDAO();
+                    UserTbl user = userDAO.findByLoginStatus(UserDAO.LOGING_IN);
+                    if (null == user) { %>
+            <center><p>No User is login in.</p></center>
+                <%  } else {
+                        session.removeAttribute("user");
+                        user.setLoginStatus(UserDAO.LOGED_OUT);
+                    }   %>
             <center><p>The page will be re-directed in 5 seconds. Please wait a moment...</p></center>
             <br><br>
 
-            </div>
+        </div>
 
         <div class="promo-area">
             <div class="zigzag-bottom"></div>
