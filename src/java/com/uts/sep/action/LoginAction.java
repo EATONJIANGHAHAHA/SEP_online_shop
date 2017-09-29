@@ -22,6 +22,7 @@ import org.apache.struts2.interceptor.SessionAware;
 public class LoginAction extends ActionSupport implements SessionAware {
     
     public final static String USER_NOT_EXIST_ERROR = "user not exist error";
+    public final static String ERROR = "error";
 
     private String username = "";
     private String password = "";
@@ -53,7 +54,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
 
-        this.session.put("user_name", username);
+        //this.session.put("user_name", username);
 
         UserDAO userDao = new UserDAO();
         List<UserTbl> list = userDao.getAll(BaseDAO.USER_TBL);
@@ -70,10 +71,12 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
         }
         if (usingUser == null) {
+            this.session.put(ERROR, USER_NOT_EXIST_ERROR);
             return ERROR;
         } else if (usingUser.getUserName().equals(username) && usingUser.getUserPassword().equals(password)){
             System.out.println(usingUser.getUserName());
             System.out.println(usingUser.getUserPassword());
+            user.setLoginStatus(1);
             return SUCCESS;
         } else {
             return ERROR;

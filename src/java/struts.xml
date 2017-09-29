@@ -6,7 +6,6 @@
 <!-- Author: lzy -->
  
 <struts>
-        
     <package name = "default" extends="struts-default" namespace="/">
         <action name="login" class="com.uts.sep.action.LoginAction" method="execute">
             <result name="success">/success.jsp</result>

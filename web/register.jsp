@@ -145,7 +145,7 @@
                 <label class="col-sm-2 control-label">Repeated Password:</label>
 
                 <div class="col-sm-10">
-                    <input style="width:50%" type="password"  class="form-control" placeholder="Repeated Password...">
+                    <input style="width:50%" type="password" name="repeatedPassword" class="form-control" placeholder="Repeated Password...">
                 </div>    
             </div>
             <div class="form-group">

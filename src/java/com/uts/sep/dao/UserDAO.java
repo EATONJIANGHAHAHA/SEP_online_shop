@@ -20,6 +20,9 @@ import org.hibernate.service.ServiceRegistry;
  */
 public class UserDAO extends BaseDAO<UserTbl>{
     
+    public static final short LOGING_IN = 1;
+    public static final short LOGED_OUT = 0;
+    
     interface Updater {
         
         void onUpdate(UserTbl user);
@@ -59,5 +62,15 @@ public class UserDAO extends BaseDAO<UserTbl>{
             return true;
         }
         else return false;
+    }
+    
+    public UserTbl findByLoginStatus(int loginStatus){
+        List<UserTbl> lists = getAll(USER_TBL);
+        for(UserTbl user: lists){
+            if(user.getLoginStatus() == loginStatus){
+                return user;
+            }
+        }
+        return null;
     }
 }

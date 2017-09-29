@@ -39,6 +39,7 @@
         <![endif]-->
     </head>
     <body>
+        
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -49,14 +50,11 @@
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
-                                    <% if (session.getAttribute("user_name") == null) { %>
+                                    <% if (session.getAttribute("user") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
-                                    <% } else { 
-                                               
-                                    %>
-                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
-                                        <% out.print(session.getAttribute("user_name")); %></a></li>
-                                        <% }%>
+                                    <% } else { %>
+                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout </a></li>
+                                    <% } %>
                             </ul>
                         </div>
                     </div>

@@ -22,7 +22,9 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
     public static final String MODIFY_USER_DETAIL_TABLE = "modify user detail table";
     public static final String PASSWORD_NOT_MATCH_ERROR = "password not match";
     public static final String NOT_LOGIN_IN_ERROR = "user not login in";
-    
+    public static final String UNKNOWN_ERROR = "unknown error";
+    public static final String ERROR = "error";
+
     private Map session;
     private UserTbl user;
     private String checkPassword;
@@ -81,22 +83,23 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
     }
 
     @Override
-    public String execute() {
+    public String execute() throws Exception {
         UserDAO dao = new UserDAO();
-        List<UserTbl> list = dao.getAll(BaseDAO.USER_TBL);
-        UserTbl usingUser = (UserTbl) session.get("user");
-        if(null == usingUser){
-            errorName = NOT_LOGIN_IN_ERROR;
+        UserTbl usingUser = dao.findByLoginStatus(1);
+        if (null == usingUser) {
+            this.session.put(ERROR, NOT_LOGIN_IN_ERROR);
             return ERROR;
         } else if (dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
             dao.updateUserName(usingUser.getUserId(), newName);
             dao.updatePassword(usingUser.getUserId(), newPassword);
             this.session.put(MODIFY_USER_DETAIL_TABLE, SUCCESS);
             return SUCCESS;
-        } else if(!dao.isPasswordCorrect(user.getUserId(), checkPassword)){
-            errorName = PASSWORD_NOT_MATCH_ERROR;
+        } else if (!dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
+            this.session.put(ERROR, PASSWORD_NOT_MATCH_ERROR);
             return ERROR;
-        } 
-        else return ERROR;
+        } else {
+            this.session.put(ERROR, UNKNOWN_ERROR);
+            return ERROR;
+        }
     }
 }

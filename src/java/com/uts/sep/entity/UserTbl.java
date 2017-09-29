@@ -44,10 +44,19 @@ public class UserTbl  implements java.io.Serializable {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+    
+    /**
+     * 0 for logged out, 1 for login in. 
+     * @return 
+     */
     public int getLoginStatus() {
         return this.loginStatus;
     }
     
+    /**
+     * 0 for logged out, 1 for login in. 
+     * @param loginStatus 
+     */
     public void setLoginStatus(int loginStatus) {
         this.loginStatus = loginStatus;
     }
