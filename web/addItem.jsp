@@ -144,7 +144,7 @@
                             <!-- itemname is a variable used by AddAction specified by struts.xml -->
                             <td><input type="text" name="itemname" placeholder="Item name"></td>
                             <td><input type="text" name="itemdescription" placeholder="Item description"></td>
-                            <!--<td><input type="text" name="itemprice" placeholder="Item price"></td> -->
+                            <td><input type="text" name="itemprice" placeholder="Item price"></td> 
                             <td colspan="2" align="right"><input type="submit" label="AddItem" class="btn btn-primary"></td>
                         </tr>
 
@@ -157,6 +157,7 @@
         <!-- Beginning of search results area of the web page -->
         <div>
         <center>
+            <% if (session.getAttribute("itemlist") != null) { %>
         <h1>List of all items</h1>
              <table>
                  <!-- Row to format the column headings -->
@@ -180,7 +181,9 @@
                   </tr>
                   </s:iterator>	
                   <!-- End of loop -->
+                  <% session.setAttribute("itemlist", null); %>
              </table>
+             <%}%>
         </center>
         </div>
         <!-- End of the search results area of the web page -->

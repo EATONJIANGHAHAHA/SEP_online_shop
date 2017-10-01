@@ -55,27 +55,28 @@ public class SearchAction extends ActionSupport implements SessionAware {
     }
     
     //itemname functions needed to link to veiw itemname
-    public String getItemName() {
+    //function names must be the same as the variable name. consistant on all files.
+    public String getItemname() {
         return itemname; 
     }
     
-    public void setItemName(String itemname) {
+    public void setItemname(String itemname) {
         this.itemname = itemname;
     }
     
-    public String getItemDescription() {
+    public String getItemdescription() {
         return itemdescription; 
     }
     
-    public void setItemDescription(String itemdescription) {
+    public void setItemdescription(String itemdescription) {
         this.itemdescription = itemdescription;
     }
     
-    public double getItemPrice() {
+    public double getItemprice() {
         return itemprice; 
     }
     
-    public void setItemPrice(double itemprice) {
+    public void setItemprice(double itemprice) {
         this.itemprice = itemprice;
     }
     

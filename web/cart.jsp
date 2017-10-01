@@ -37,6 +37,14 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <%
+            //javascript for the cart page
+            //move this to a new file later
+            
+            if (session.getAttribute("user")==null){ %>
+                <meta http-equiv="refresh" content="0; URL=index.jsp">
+         <%   }
+         %>
     </head>
     <body>
         <%! UserTbl user; %>
@@ -106,7 +114,7 @@
                 </div>
             </div>
         </div> <!-- End site branding area -->
-
+        
         <div class="mainmenu-area">
             <div class="container">
                 <div class="row">

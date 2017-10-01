@@ -151,10 +151,11 @@
             </div>
         </div>
         <!-- end of search bar form -->
-    
+        <br><br><br><br>
         <!-- Beginning of search results area of the web page -->
         <div>
         <center>
+            <% if (session.getAttribute("itemlist") != null) { %>
         <h1>Search results</h1>
              <table>
                  <!-- Row to format the column headings -->
@@ -168,7 +169,8 @@
                   <!-- Begin printing all the search results -->
                   <!-- iterator loops through each item in the itemlist -->
                   <!-- itemlist is obtained from ItemDAO class and accessed through the struts session object -->
-                  <s:iterator value="#session.itemlist">
+                  <s:set name="itemlist" value="#session.itemlist"/>
+                  <s:iterator value="itemlist">
                   <tr>
                       <td><s:property value="itemName"/></td>
                       <td>$<s:property value="price"/></td>
@@ -178,7 +180,9 @@
                   </tr>
                   </s:iterator>	
                   <!-- End of loop -->
+                  <% session.setAttribute("itemlist", null); %>
              </table>
+             <%}%>
         </center>
         </div>
         <!-- End of the search results area of the web page -->

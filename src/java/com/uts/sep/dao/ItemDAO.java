@@ -49,29 +49,15 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         return list;
     }
     
-    public void addItem(String _itemname, String _itemdescription, double _itemprice) 
+    public void addItem(String itemname, String itemdescription, double itemprice) 
     {
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;//operation
-        
-        
-        
-        /*newitem.setItemID(5);
-        newitem.setItemName("fire");
-        newitem.setItemDescription("test item");
-        newitem.setStock(1);
-        newitem.setPrice(100);
-        newitem.setStatus(1);*/
-        
-        
-        
-        //String hql = "from ItemTbl I where I.itemDescription like :search";
-        
+ 
         try {
             tx = session.beginTransaction();// open connection
-            //ItemTbl newitem = new ItemTbl(5,"fire", "fire sale", 1, 2, 3);
-            ItemTbl newitem = new ItemTbl(_itemname, _itemdescription,1, 1, 10);
+            ItemTbl newitem = new ItemTbl(itemname, itemdescription,1, 1, itemprice);
             this.insertNew(newitem);
             tx.commit();
         } catch (HibernateException e) {
