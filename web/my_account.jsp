@@ -39,7 +39,7 @@
         <![endif]-->
     </head>
     <body>
-        <%! UserTbl user; %>
+        <% UserTbl user; %>
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -144,7 +144,7 @@
                     </tr>
                     <tr>
                         <th align="right">New name: </th>
-                        <td><s:property value="#user.userName"/></td>
+                        <td><s:property value="#session.user.userName"/></td>
                     </tr>
                     <tr>
                         <th align="right">New Password: </th>

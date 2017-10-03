@@ -35,7 +35,7 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         try {
             tx = session.beginTransaction();// open connection
             Query query = session.createQuery(hql);//using the name from java
-            query.setParameter("search", "%"+itemName+"%");
+            query.setParameter("search", "%"+ itemName + "%");
             list = query.list();
             tx.commit();
         } catch (HibernateException e) {
@@ -54,19 +54,6 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;//operation
-        
-        
-        
-        /*newitem.setItemID(5);
-        newitem.setItemName("fire");
-        newitem.setItemDescription("test item");
-        newitem.setStock(1);
-        newitem.setPrice(100);
-        newitem.setStatus(1);*/
-        
-        
-        
-        //String hql = "from ItemTbl I where I.itemDescription like :search";
         
         try {
             tx = session.beginTransaction();// open connection

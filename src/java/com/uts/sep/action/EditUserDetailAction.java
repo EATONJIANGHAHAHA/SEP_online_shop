@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author eaton
  */
-public class ModifyUserDetailAction extends ActionSupport implements SessionAware {
+public class EditUserDetailAction extends ActionSupport implements SessionAware {
 
     public static final String MODIFY_USER_DETAIL_TABLE = "modify user detail table";
     public static final String PASSWORD_NOT_MATCH_ERROR = "password not match";

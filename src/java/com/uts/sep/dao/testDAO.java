@@ -9,6 +9,7 @@ import com.uts.sep.entity.CustomerTbl;
 import com.uts.sep.entity.ItemTbl;
 import com.uts.sep.entity.UserTbl;
 import java.util.*;
+import javax.print.DocFlavor;
 
 /**
  *
@@ -17,9 +18,14 @@ import java.util.*;
 public class testDAO {
 
     public static void main(String[] args) {
-        //CustomerDAO dao = new CustomerDAO();
-        //CustomerTbl customer = dao.findById(1);
-        //System.out.println(customer.getCustomerName());
+        ItemDAO itemDAO = new ItemDAO();
+        ItemTbl item = new ItemTbl(5,"fire", "fire sale", 1, 2, 3);
+        itemDAO.insertNew(item);
+        
+        List<ItemTbl> items = itemDAO.getAll(ItemDAO.ITEM_TBL);
+        for (ItemTbl oneItem: items){
+            System.out.print(oneItem);
+        }
     }
 
 }

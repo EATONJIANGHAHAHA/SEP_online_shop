@@ -125,7 +125,7 @@
         </div> <!-- End mainmenu area -->
         <div>
             <br><br>
-            <center><h1>Welcome, <s:property value="#session.user_name"/> ! </h1> </center>
+            <center><h1>Welcome, <s:property name="userName" value="#session.user.userName"/> ! </h1> </center>
             <center><p>The page will be re-directed in 5 seconds. Please wait a moment...</p></center>
             <br><br>
 

@@ -39,25 +39,23 @@
         <![endif]-->
     </head>
     <body>
-
+        <% UserTbl user = (UserTbl) session.getAttribute("user"); %>
         <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                                    <% if (session.getAttribute("user_name") == null) { %>
+                                    <% if (session.getAttribute("user") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
-                                    <% } else { 
-                                               
-                                    %>
+                                    <% } else { %>
                                 <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
-                                        <% out.print(session.getAttribute("user_name")); %></a></li>
-                                        <% }%>
+                                    <% out.print(user.getUserName()); %></a></li>
+                                    <% } %>
                             </ul>
                         </div>
                     </div>

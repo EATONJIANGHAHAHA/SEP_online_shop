@@ -87,12 +87,4 @@ public class ItemTbl implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    //public Set getOrderDetailTbls() {
-        //return this.orderDetailTbls;
-    //}
-
-    //public void setOrderDetailTbls(Set orderDetailTbls) {
-        //this.orderDetailTbls = orderDetailTbls;
-    //}
 }
