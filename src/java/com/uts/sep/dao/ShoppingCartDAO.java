@@ -13,4 +13,6 @@ import com.uts.sep.entity.ShoppingCartTbl;
  */
 public class ShoppingCartDAO extends BaseDAO<ShoppingCartTbl>{
     
+    ShoppingCartTbl shoppingCart = new ShoppingCartTbl();
+    
 }

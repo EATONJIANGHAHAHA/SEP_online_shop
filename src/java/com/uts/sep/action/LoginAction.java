@@ -28,7 +28,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private String password = "";
     private Map session;
     private UserTbl user;
-    private String errorName;
 
     @Override
     public void setSession(Map session) {
@@ -60,7 +59,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
         List<UserTbl> list = userDao.getAll(BaseDAO.USER_TBL);
         UserTbl usingUser = null;
         
-        
         for (UserTbl user : list) {
             if (user.getUserName().equals(username)) {
                 usingUser = user;
@@ -68,13 +66,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 this.session.put("user", this.user);
                 break;
             }
-
         }
         if (usingUser == null) {
             this.session.put(ERROR, USER_NOT_EXIST_ERROR);
             return ERROR;
         } else if (usingUser.getUserName().equals(username) && usingUser.getUserPassword().equals(password)){
             user.setLoginStatus(1);
+            userDao.update(user);
             return SUCCESS;
         } else {
             return ERROR;

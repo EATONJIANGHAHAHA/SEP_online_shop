@@ -75,23 +75,17 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;//operation
-        
-        
-        
         /*newitem.setItemID(5);
         newitem.setItemName("fire");
         newitem.setItemDescription("test item");
         newitem.setStock(1);
         newitem.setPrice(100);
         newitem.setStatus(1);*/
-        
-        
-        
         //String hql = "from ItemTbl I where I.itemDescription like :search";
         
         try {
             tx = session.beginTransaction();// open connection
-            ItemTbl newitem = new ItemTbl(5,"fire", "fire sale", 1, 2, 3,null);
+            ItemTbl newitem = new ItemTbl(_itemname, 20, 1, 50, 0);
             session.save(newitem);
             tx.commit();
         } catch (HibernateException e) {
@@ -104,47 +98,15 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         }
         
     }
-    //private static SessionFactory factory;
     
-    //method to get all the items
-//    public List<ItemTbl> getAllItems() {
-//        factory = new Configuration().configure().buildSessionFactory();
-//        Session session = factory.openSession();
-//        Transaction tx = null;
-//        List<ItemTbl> list = null;
-//        try {
-//            tx = session.beginTransaction();
-//            list = session.createQuery("FROM ItemTbl").list();
-//            tx.commit();
-//        } catch (HibernateException e) {
-//            if (tx != null) {
-//                tx.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//        return list;
-//    }
-//
-//    //method to upadte stock
-//    public void updateStock(Integer itemId, int stock) {
-//        factory = new Configuration().configure().buildSessionFactory();
-//        Session session = factory.openSession();
-//        Transaction tx = null;
-//        try {
-//            tx = session.beginTransaction();
-//            ItemTbl item = (ItemTbl) session.get(ItemTbl.class, itemId);
-//            item.setStock(stock);
-//            session.update(item);
-//            tx.commit();
-//        } catch (HibernateException e) {
-//            if (tx != null) {
-//                tx.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//    }
+    public List<ItemTbl> getAllAddedItems(){
+        List<ItemTbl> items = getAll(ITEM_TBL);
+        List<ItemTbl> newList = new ArrayList<>();
+        for(ItemTbl item: items){
+            if(item.getIsAdded()==1){
+                newList.add(item);
+            }
+        }
+        return newList;
+    }
 }

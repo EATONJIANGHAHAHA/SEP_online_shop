@@ -92,7 +92,7 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             }
         }
         if (!isUserExist) {
-            UserTbl user = new UserTbl(username, password, 1);
+            UserTbl user = new UserTbl(username, password,1 ,2);
             this.session.put("user", user);
             userDao.insertNew(user);
             return SUCCESS;

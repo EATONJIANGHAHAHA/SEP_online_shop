@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>  
+<%@page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>  
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page import="com.uts.sep.dao.BaseDAO"%>
 <%@page import="com.uts.sep.dao.ItemDAO"%>
@@ -16,7 +16,6 @@
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-
         <!-- Bootstrap -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
@@ -27,6 +26,9 @@
         <link rel="stylesheet" href="css/owl.carousel.css">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="css/responsive.css">
+
+        <!--jquery-->
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,24 +41,31 @@
         <%! ItemDAO itemDAO = new ItemDAO(); %>
         <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
         <%! UserTbl user;%>
-
+        <%! ItemTbl item;%>
+        <%! int looper = 0;%>
         <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
+                                <%
+                                    if(session.getAttribute("user") != null) {
+                                %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
+                                <%
+                                    }
+                                %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
+                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else {
-                                        user = (UserTbl) session.getAttribute("user");
                                     %>
-                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
-                                        <% out.print(user.getUserName()); %></a></li>
+                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout
+                                        <%  UserTbl user = (UserTbl) session.getAttribute("user");
+                                            out.print(user.getUserName()); %></a></li>
                                         <% } %>
                             </ul>
                         </div>
@@ -98,11 +107,11 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+<!--                    <div class="col-sm-6">
                         <div class="shopping-item">
                             <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -120,13 +129,32 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="index.jsp">Home</a></li>
-                            <li class="active"><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="single-product.html">Single product</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li><a href="shop.jsp">Shop page</a></li>
+                            <li><a href="details.jsp">Single product</a></li>
+                                <%
+                                    if (null != session.getAttribute("user")) {
+                                %>
                             <li><a href="cart.jsp">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
+                                <%
+                                    }
+                                %> 
+                            <li><a href="#">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="#">Others</a></li>
+                            <li><a href="search.jsp">Search</a></li>
+
+                            <%
+                                if (null == session.getAttribute("user")) {
+
+                                } else if (null != session.getAttribute("user")) {
+                                    user = (UserTbl) session.getAttribute("user");
+                                    if (user.getUserType() == 1) {
+                            %>
+                            <li><a href="addItem.jsp">Add item</a></li>
+                                <%
+                                        }
+                                    }
+                                %>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>  
@@ -153,47 +181,75 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6">                     
                         <div class="single-shop-product">
+                            <script>
+                                var itemSize = new Array(<%=itemList.size()%>);
+
+                            </script>
                             <%
-                                for (ItemTbl i : itemList) {
+                                for (int i = 0; i < itemList.size(); i++) {
+                                    int id = itemList.get(i).getItemId();
                             %>
                             <div class="product-upper"> 
-                                <img src="<%=i.getImage()%>" alt="">
+                                <img src="<%=itemList.get(i).getItemPicUrl()%>" alt="">
                             </div>
-                            <h2><a href=""><%=i.getItemName()%></a></h2>
+                            <h2><a href=""><%=itemList.get(i).getItemName()%></a></h2>
                             <div class="product-carousel-price">
-                                <ins>$<%=i.getPrice()%></ins> <del>$299.00</del>
+                                <ins>$<%=itemList.get(i).getPrice()%></ins> <del>$299.00</del>
                             </div> 
                             <div class="product-option-shop">
+                                <script>
+                                    var itemNumber = <%=i%>;
+                                </script>
                                 <%
                                     if (null != user) {
                                 %>
                                 <a class="add_to_cart_button" 
-                                   action="add_item" 
-                                   onclick="allowAlertFunction()" 
+                                   onclick="addToCartFunction(itemNumber)"
                                    data-quantity="1" 
-                                   data-product_sku="" 
+                                   data-product_sku=""
                                    data-product_id="70" 
                                    rel="nofollow" >Add to cart</a>
                                 <%
-                                    } else if (null == user) {
                                     }
                                 %>
-
+                                <a href="details.jsp">Show Detail</a>
                             </div>
+                            <script lang="javascript">
+                                function addToCartFunction(itemNumber) {
+                                    alert("Product is added to cart");
+                                    document.submitForm.msg.value = thatItemNumber;
+                                    document.submitForm.submimt();
+                                <%
+                                    String txtMsg = request.getParameter("msg");
+                                    if (txtMsg != null) {
+                                        int itemNumber = Integer.valueOf(txtMsg);
+                                        ItemTbl item = itemList.get(itemNumber);
+                                        item.setIsAdded(ItemTbl.IS_ADDED);
+                                        itemDAO.update(item);
+                                    }
+                                %>
+                                }
+                            </script>
                             <%
                                 }
                             %>
-                            <script>
-                                function notAllowAlertFunction() {
-                                    alert("Please login first.");
-                                }
-                                function allowAlertFunction() {
-                                    alert("Product is added to cart.");
-                                }
-                            </script>
+                            <form name="submitForm">
+                                <input type="hidden" name="msg">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <script type="text/javascript">
+//                $(document).ready(function(){
+//                    var onchangeValue = document.getElementById("addToCartBtn");
+//                    alert(onchangeValue);
+//                })
+//                $(function(){
+//                    $("#addToCartBtn").click(function(){
+//                        var 
+//                    })
+//                })
+            </script>
     </body>
 </html>

@@ -1,19 +1,16 @@
-<%-- 
-    Document   : index
-    Created on : 29-Aug-2017, 15:00:13
-    Author     : lzy
---%>
-
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>  
 <%@page import="com.uts.sep.entity.UserTbl"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+<%@page import="com.uts.sep.dao.BaseDAO"%>
+<%@page import="com.uts.sep.dao.ItemDAO"%>
+<%@page import="com.uts.sep.entity.ItemTbl"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SEP</title>
+        <title>sepBay</title>
 
         <!-- Google Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -39,6 +36,10 @@
         <![endif]-->
     </head>
     <body>
+        <%! ItemDAO itemDAO = new ItemDAO(); %>
+        <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
+        <%! UserTbl user;%>
+
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -105,7 +106,7 @@
 
 <!--                    <div class="col-sm-6">
                         <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                            <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
                     </div>-->
                 </div>
@@ -153,92 +154,75 @@
                                 %>
                             <li><a href="#">Contact</a></li>
                         </ul>
-                    </div> 
+                    </div>  
                 </div>
             </div>
         </div> <!-- End mainmenu area -->
-    
-        <!-- beginning of search bar form -->
-        <div class="col-md-1">
-            <div class="user-menu">
-                <form action="search" method="post">
 
-                    <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
-                        <tr>
-                            <th align="right">Search: </th>
-                            <!-- keyword is a variable used by SearchAction specified by struts.xml -->
-                            <td><input type="text" name="keyword" placeholder="Keywords"></td>
-                            <td colspan="2" align="right"><input type="submit" label="Search" class="btn btn-primary"></td>
-                        </tr>
-
-                    </table>
-                </form>
-            </div>
-        </div>
-        <!-- end of search bar form -->
-    
-        <!-- Beginning of search results area of the web page -->
-        <div>
-        <center>
-        <h1>Search results</h1>
-             <table>
-                 <!-- Row to format the column headings -->
-                  <tr>
-                      <td>Name of the product</td>
-                      <td>Price of the product</td>
-                      <td># In Stock</td>
-                      <td>Product description</td>
-                      <td>Link to the product</td>
-                  </tr>
-                  <!-- Begin printing all the search results -->
-                  <!-- iterator loops through each item in the itemlist -->
-                  <!-- itemlist is obtained from ItemDAO class and accessed through the struts session object -->
-                  <s:iterator value="#session.itemlist">
-                  <tr>
-                      <td><s:property value="itemName"/></td>
-                      <td>$<s:property value="price"/></td>
-                      <td><s:property value="stock"/></td>
-                      <td><s:property value="itemDescription"/></td>
-                      <td><a href="#">Link</a></td>
-                  </tr>
-                  </s:iterator>	
-                  <!-- End of loop -->
-             </table>
-        </center>
-        </div>
-        <!-- End of the search results area of the web page -->
-
-
-        <div class="promo-area">
-            <div class="zigzag-bottom"></div>
+        <div class="product-big-title-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-refresh"></i>
-                            <p>30 Days return</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-truck"></i>
-                            <p>Free shipping</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-lock"></i>
-                            <p>Secure payments</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-gift"></i>
-                            <p>New products</p>
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Item Details</h2>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> <!-- End promo area -->
+        </div>
+
+
+        <div class="single-product-area">
+            <div class="zigzag-bottom"></div>
+            <div class="container">
+                <table>
+                    <tr>
+                        <td width="70%" align="left">
+          <%   
+             ItemDAO itemDao = new ItemDAO();  
+             List<ItemTbl> list = itemDao.getAllItems();
+             ItemTbl i = new ItemTbl();
+                int id = 2;
+             for(ItemTbl item : list){
+                 if(item.getItemId()==id)
+                      i=item;
+             }
+
+          %>        <table>
+                    <tr>  
+                        <% 
+                        //<%=i.getImage() %>
+                        <td rowspan="4"><img src="" width="400" height="400"/></td>  
+                    </tr>  
+                    <tr>  
+                        <td><h1><B><%=i.getItemName()%></B></h1></td>   
+                    </tr>  
+
+                    <tr>  
+                        <td><h2>Price:$<%=i.getPrice()%></h2><br>
+                            <h2>Stock: <%=i.getStock()%></h2>
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Buy" class="btn btn-primary" style="width:150px;height:50px"><td>
+                            <td><input onclick="myAlert()" type="submit" value="Add to cart" style="width:150px;height:50px" class="btn btn-primary"></td>
+                    </tr>
+                    </table>
+                    </td>
+                    
+                    <td width="70%" align="top">
+                        <h2>Item Description</h2>
+                        <p style="font-size:16px;"><%=i.getItemDescription()%></p>
+                    </td>
+                    
+                    </tr>
+                </table>
+            </div>
+        </div>
+                    <script>
+                        function myAlert(){
+                            alert("Product is added to cart.");
+                        }
+                    </script>
     </body>
 </html>

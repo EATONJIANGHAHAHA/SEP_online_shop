@@ -12,6 +12,7 @@
     <mapping resource="com/uts/sep/entity/OrderDetailTbl.hbm.xml"/>
     <mapping resource="com/uts/sep/entity/SellerTbl.hbm.xml"/>
     <mapping resource="com/uts/sep/entity/UserTbl.hbm.xml"/>
+    <mapping resource="com/uts/sep/entity/ShoppingCartItemTbl.hbm.xml"/>
     <mapping resource="com/uts/sep/entity/ShoppingCartTbl.hbm.xml"/>
     <mapping resource="com/uts/sep/entity/CustomerTbl.hbm.xml"/>
     <mapping resource="com/uts/sep/entity/ItemTbl.hbm.xml"/>

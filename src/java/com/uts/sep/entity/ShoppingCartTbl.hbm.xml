@@ -1,23 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 3, 2017 10:49:10 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.ShoppingCartTbl" table="shopping_cart_tbl" catalog="sep" optimistic-lock="version">
         <id name="shoppingCartId" type="int">
             <column name="shopping_cart_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="customerTbl" class="com.uts.sep.entity.CustomerTbl" fetch="select">
-            <column name="customer_id" not-null="true" />
+        <many-to-one name="userTbl" class="com.uts.sep.entity.UserTbl" fetch="select">
+            <column name="user_id" not-null="true" />
         </many-to-one>
-        <set name="itemTbls" table="shopping_cart_item_tbl" inverse="true" lazy="true" fetch="select">
+        <set name="shoppingCartItemTbls" table="shopping_cart_item_tbl" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="shopping_cart_id" not-null="true" />
             </key>
-            <many-to-many entity-name="com.uts.sep.entity.ItemTbl">
-                <column name="item_id" not-null="true" />
-            </many-to-many>
+            <one-to-many class="com.uts.sep.entity.ShoppingCartItemTbl" />
         </set>
     </class>
 </hibernate-mapping>

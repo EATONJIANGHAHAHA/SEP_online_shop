@@ -4,6 +4,12 @@
     Author     : lzy
 --%>
 
+<%@page import="com.uts.sep.dao.ItemDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.uts.sep.entity.ShoppingCartTbl"%>
+<%@page import="com.uts.sep.action.AddToCartAction"%>
+<%@page import="com.uts.sep.dao.ShoppingCartDAO"%>
+<%@page import="com.uts.sep.entity.ItemTbl"%>
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -40,23 +46,35 @@
     </head>
     <body>
         <%! UserTbl user; %>
+        <%! ItemTbl item;%>
+        <%! List<ItemTbl> items;%>
+        <%
+            ItemDAO itemDao = new ItemDAO();
+            items = itemDao.getAllAddedItems();
+        %>
         <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
+                                <%
+                                    if(session.getAttribute("user") != null) {
+                                %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
+                                <%
+                                    }
+                                %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
+                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else {
-                                            user = (UserTbl) session.getAttribute("user");
                                     %>
-                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
-                                        <% out.print(user.getUserName()); %></a></li>
+                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout
+                                        <%  UserTbl user = (UserTbl) session.getAttribute("user");
+                                            out.print(user.getUserName()); %></a></li>
                                         <% } %>
                             </ul>
                         </div>
@@ -98,14 +116,15 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+<!--                    <div class="col-sm-6">
                         <div class="shopping-item">
                             <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
+
 
         <div class="mainmenu-area">
             <div class="container">
@@ -120,51 +139,95 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.jsp">Home</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
                             <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="single-product.html">Single product</a></li>
+                            <li><a href="details.jsp">Single product</a></li>
+                                <%
+                                    if (null != session.getAttribute("user")) {
+                                %>
                             <li><a href="cart.jsp">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
+                                <%
+                                    }
+                                %> 
+                            <li><a href="#">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="#">Others</a></li>
+                            <li><a href="search.jsp">Search</a></li>
+
+                            <%
+                                if (null == session.getAttribute("user")) {
+
+                                } else if (null != session.getAttribute("user")) {
+                                    UserTbl user = (UserTbl) session.getAttribute("user");
+                                    if (user.getUserType() == 1) {
+                            %>
+                            <li><a href="addItem.jsp">Add item</a></li>
+                                <%
+                                        }
+                                    }
+                                %>
                             <li><a href="#">Contact</a></li>
                         </ul>
-                    </div>  
+                    </div> 
                 </div>
             </div>
         </div> <!-- End mainmenu area -->
 
-
-        <div class="promo-area">
+        <div class="single-product-area">
             <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-refresh"></i>
-                            <p>30 Days return</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-truck"></i>
-                            <p>Free shipping</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-lock"></i>
-                            <p>Secure payments</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-gift"></i>
-                            <p>New products</p>
+                    <div class="col-md-3 col-sm-6">                     
+                        <div class="single-shop-product">
+                            <%
+                                if (null != items) {
+                                    for (ItemTbl item : items) {
+                            %>
+                            <div class="product-upper"> 
+                                <img src="<%=item.getItemPicUrl()%>" alt="">
+                            </div>
+                            <h2><a href=""><%=item.getItemName()%></a></h2>
+                            <div class="product-carousel-price">
+                                <ins>$<%=item.getPrice()%></ins> <del>$299.00</del>
+                            </div> 
+                            <%
+                                    }
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> <!-- End promo area -->
+
+            <div class="promo-area">
+                <div class="zigzag-bottom"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-promo">
+                                <i class="fa fa-refresh"></i>
+                                <p>30 Days return</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-promo">
+                                <i class="fa fa-truck"></i>
+                                <p>Free shipping</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-promo">
+                                <i class="fa fa-lock"></i>
+                                <p>Secure payments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="single-promo">
+                                <i class="fa fa-gift"></i>
+                                <p>New products</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End promo area -->
     </body>
 </html>

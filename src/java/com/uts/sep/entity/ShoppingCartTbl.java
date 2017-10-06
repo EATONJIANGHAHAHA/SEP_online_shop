@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
+// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,21 +12,21 @@ public class ShoppingCartTbl  implements java.io.Serializable {
 
 
      private int shoppingCartId;
-     private CustomerTbl customerTbl;
-     private Set itemTbls = new HashSet(0);
+     private UserTbl userTbl;
+     private Set shoppingCartItemTbls = new HashSet(0);
 
     public ShoppingCartTbl() {
     }
 
 	
-    public ShoppingCartTbl(int shoppingCartId, CustomerTbl customerTbl) {
+    public ShoppingCartTbl(int shoppingCartId, UserTbl userTbl) {
         this.shoppingCartId = shoppingCartId;
-        this.customerTbl = customerTbl;
+        this.userTbl = userTbl;
     }
-    public ShoppingCartTbl(int shoppingCartId, CustomerTbl customerTbl, Set itemTbls) {
+    public ShoppingCartTbl(int shoppingCartId, UserTbl userTbl, Set shoppingCartItemTbls) {
        this.shoppingCartId = shoppingCartId;
-       this.customerTbl = customerTbl;
-       this.itemTbls = itemTbls;
+       this.userTbl = userTbl;
+       this.shoppingCartItemTbls = shoppingCartItemTbls;
     }
    
     public int getShoppingCartId() {
@@ -36,21 +36,20 @@ public class ShoppingCartTbl  implements java.io.Serializable {
     public void setShoppingCartId(int shoppingCartId) {
         this.shoppingCartId = shoppingCartId;
     }
-    public CustomerTbl getCustomerTbl() {
-        return this.customerTbl;
+    public UserTbl getUserTbl() {
+        return this.userTbl;
     }
     
-    public void setCustomerTbl(CustomerTbl customerTbl) {
-        this.customerTbl = customerTbl;
+    public void setUserTbl(UserTbl userTbl) {
+        this.userTbl = userTbl;
     }
-    public Set getItemTbls() {
-        return this.itemTbls;
-    }
-    
-    public void setItemTbls(Set itemTbls) {
-        this.itemTbls = itemTbls;
+    public Set getShoppingCartItemTbls() {
+        return this.shoppingCartItemTbls;
     }
     
+    public void setShoppingCartItemTbls(Set shoppingCartItemTbls) {
+        this.shoppingCartItemTbls = shoppingCartItemTbls;
+    }
 }
 
 

@@ -4,6 +4,7 @@
     Author     : lzy
 --%>
 
+<%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -44,9 +45,9 @@
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
+                                <!--<li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>-->
+<!--                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
+                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>-->
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                             </ul>
                         </div>
@@ -90,11 +91,11 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+<!--                    <div class="col-sm-6">
                         <div class="shopping-item">
                             <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -112,16 +113,35 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.jsp">Home</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
                             <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="single-product.html">Single product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="details.jsp">Single product</a></li>
+                                <%
+                                    if (null != session.getAttribute("user")) {
+                                %>
+                            <li><a href="cart.jsp">Cart</a></li>
+                                <%
+                                    }
+                                %> 
+                            <li><a href="#">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="#">Others</a></li>
+                            <li><a href="search.jsp">Search</a></li>
+
+                            <%
+                                if (null == session.getAttribute("user")) {
+
+                                } else if (null != session.getAttribute("user")) {
+                                    UserTbl user = (UserTbl) session.getAttribute("user");
+                                    if (user.getUserType() == 1) {
+                            %>
+                            <li><a href="addItem.jsp">Add item</a></li>
+                                <%
+                                        }
+                                    }
+                                %>
                             <li><a href="#">Contact</a></li>
                         </ul>
-                    </div>  
+                    </div> 
                 </div>
             </div>
         </div> <!-- End mainmenu area -->

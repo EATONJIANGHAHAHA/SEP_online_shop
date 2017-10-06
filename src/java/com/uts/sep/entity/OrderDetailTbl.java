@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
+// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,7 +10,6 @@ public class OrderDetailTbl  implements java.io.Serializable {
 
 
      private OrderDetailTblId id;
-     private ItemTbl itemTbl;
      private OrderTbl orderTbl;
      private int quantity;
      private String orderDetailName;
@@ -20,9 +19,8 @@ public class OrderDetailTbl  implements java.io.Serializable {
     public OrderDetailTbl() {
     }
 
-    public OrderDetailTbl(OrderDetailTblId id, ItemTbl itemTbl, OrderTbl orderTbl, int quantity, String orderDetailName, double unitCost, double subtotal) {
+    public OrderDetailTbl(OrderDetailTblId id, OrderTbl orderTbl, int quantity, String orderDetailName, double unitCost, double subtotal) {
        this.id = id;
-       this.itemTbl = itemTbl;
        this.orderTbl = orderTbl;
        this.quantity = quantity;
        this.orderDetailName = orderDetailName;
@@ -36,13 +34,6 @@ public class OrderDetailTbl  implements java.io.Serializable {
     
     public void setId(OrderDetailTblId id) {
         this.id = id;
-    }
-    public ItemTbl getItemTbl() {
-        return this.itemTbl;
-    }
-    
-    public void setItemTbl(ItemTbl itemTbl) {
-        this.itemTbl = itemTbl;
     }
     public OrderTbl getOrderTbl() {
         return this.orderTbl;

@@ -83,7 +83,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
     public String addItem() throws Exception {
         
         ItemDAO itemDao = new ItemDAO();
-        itemDao.addItem(itemname);
+        itemDao.addItem(keyword);
         itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
         
         this.session.put("itemlist", itemlist);
