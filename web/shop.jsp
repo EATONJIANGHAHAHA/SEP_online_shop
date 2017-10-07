@@ -181,9 +181,6 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6">                     
                         <div class="single-shop-product">
-                            <script>
-                                var itemSize = new Array(<%=itemList.size()%>);
-                            </script>
                             <%
                                 for (ItemTbl usingItem : itemList) {
                             %>
@@ -195,32 +192,22 @@
                                 <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
                             </div> 
                             <div class="product-option-shop">
-                                <script>
-                                    var itemNumber = <%=usingItem.getItemId()%>;
-                                </script>
                                 <%
-                                    //if (null != user) {
+                                    if (null != user) {
                                 %>
-                                <!--                                <a class="add_to_cart_button" 
-                                                                   onclick="addToCartFunction(itemNumber)"
-                                                                   data-quantity="1" 
-                                                                   data-product_sku=""
-                                                                   data-product_id="70" 
-                                                                   rel="nofollow" >Add to cart</a>-->
                                 <input type="button" 
                                        id="<%=usingItem.getItemId()%>" 
                                        onclick="addToCartFunction(this.id)"
                                        class="add_to_cart_button"
                                        value="Add To Cart">
                                 <%
-                                    //}
+                                    }
                                 %>
                                 <a href="details.jsp">Show Detail</a>
                             </div>
                             <script lang="javascript">
                                 function addToCartFunction(itemNumber) {
                                     var usingItemId = document.getElementById(itemNumber).id;
-                                    alert(usingItemId);
                                     $(document).ready(function(){
                                         $.ajax({
                                             type:"post",
@@ -232,35 +219,15 @@
                                             success:function(data){
                                                 alert(data);
                                             },
-                                            error: function(){
-                                                alert("Some thing is going wrong");
-                                            }
+                                            error: function(){}
                                         });
+                                        alert("Product is added to Cart.");
                                     });
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    document.submitForm.msg.value = itemId;
-                                    document.submitForm.submimt();
-                                <%
-                                    String txtMsg = request.getParameter("msg");
-                                    if (txtMsg != null) {
-                                        int itemNumber = Integer.valueOf(txtMsg);
-                                        item = itemList.get(itemNumber);
-                                        item.setIsAdded(ItemTbl.IS_ADDED);
-                                        itemDAO.update(item);
-                                    }
-                                %>
                                 }
                             </script>
                             <%
                                 }
                             %>
-                            <form name="submitForm">
-                                <input type="hidden" name="msg">
-                            </form>
                         </div>
                     </div>
                 </div>
