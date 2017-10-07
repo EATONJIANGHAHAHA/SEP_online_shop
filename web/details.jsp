@@ -36,10 +36,8 @@
         <![endif]-->
     </head>
     <body>
-        <%! ItemDAO itemDAO = new ItemDAO(); %>
-        <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
+        <%! ItemTbl item;%>
         <%! UserTbl user;%>
-
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -47,12 +45,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -104,11 +102,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-sm-6">
+                                            <div class="shopping-item">
+                                                <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -178,51 +176,47 @@
                 <table>
                     <tr>
                         <td width="70%" align="left">
-          <%   
-             ItemDAO itemDao = new ItemDAO();  
-             List<ItemTbl> list = itemDao.getAllItems();
-             ItemTbl i = new ItemTbl();
-                int id = 2;
-             for(ItemTbl item : list){
-                 if(item.getItemId()==id)
-                      i=item;
-             }
+                            <%
+                                if (session.getAttribute("viewing_item") != null) {
+                                    item = (ItemTbl) session.getAttribute("viewing_item");
+                                } else {
+                                    ItemDAO itemDAO = new ItemDAO();
+                                    item = itemDAO.findById(1);
+                            %>        <table>
+                                <tr>  
+                                    <%
+                                        //<%=i.getImage() %>
+                                    <td rowspan="4"><img src="" width="400" height="400"/></td>  
+                                </tr>  
+                                <tr>  
+                                    <td><h1><B><%=item.getItemName()%></B></h1></td>   
+                                </tr>  
 
-          %>        <table>
-                    <tr>  
-                        <% 
-                        //<%=i.getImage() %>
-                        <td rowspan="4"><img src="" width="400" height="400"/></td>  
-                    </tr>  
-                    <tr>  
-                        <td><h1><B><%=i.getItemName()%></B></h1></td>   
-                    </tr>  
+                                <tr>  
+                                    <td><h2>Price:$<%=item.getPrice()%></h2><br>
+                                        <h2>Stock: <%=item.getStock()%></h2>
+                                    </td>  
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" value="Buy" class="btn btn-primary" style="width:150px;height:50px"><td>
+                                    <td><input onclick="myAlert()" type="submit" value="Add to cart" style="width:150px;height:50px" class="btn btn-primary"></td>
+                                </tr>
+                            </table>
+                        </td>
 
-                    <tr>  
-                        <td><h2>Price:$<%=i.getPrice()%></h2><br>
-                            <h2>Stock: <%=i.getStock()%></h2>
-                        </td>  
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Buy" class="btn btn-primary" style="width:150px;height:50px"><td>
-                            <td><input onclick="myAlert()" type="submit" value="Add to cart" style="width:150px;height:50px" class="btn btn-primary"></td>
-                    </tr>
-                    </table>
-                    </td>
-                    
-                    <td width="70%" align="top">
-                        <h2>Item Description</h2>
-                        <p style="font-size:16px;"><%=i.getItemDescription()%></p>
-                    </td>
-                    
+                        <td width="70%" align="top">
+                            <h2>Item Description</h2>
+                            <p style="font-size:16px;"><%=item.getItemDescription()%></p>
+                        </td>
+                        <% } %>
                     </tr>
                 </table>
             </div>
         </div>
-                    <script>
-                        function myAlert(){
-                            alert("Product is added to cart.");
-                        }
-                    </script>
+        <script>
+            function myAlert() {
+                alert("Product is added to cart.");
+            }
+        </script>
     </body>
 </html>

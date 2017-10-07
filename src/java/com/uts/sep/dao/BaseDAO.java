@@ -29,6 +29,7 @@ public abstract class BaseDAO<T> {
     public static final String SHIPPING_TBL = "ShippingTbl";
     public static final String SHIPPING_CART_TBL = "ShippingCartTbl";
     public static final String USER_TBL = "UserTbl";
+    public static final String SEARCH_BY_ITEM_DESCRIPTION = "from ItemTbl I where I.itemDescription like :search";
 
     private Class<T> ClassType;
     
@@ -174,6 +175,28 @@ public abstract class BaseDAO<T> {
             return true;
         }
         return false;
+    }
+    
+    public List<T> searchModels(String hql, String name){
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        List<T> list = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            query.setParameter("search", "%"+name+"%");
+            list = query.list();
+            tx.commit();
+        } catch (HibernateException e){
+            if (tx != null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
     }
 
 }

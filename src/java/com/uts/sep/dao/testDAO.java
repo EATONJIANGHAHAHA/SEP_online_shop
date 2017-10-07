@@ -17,12 +17,7 @@ import java.util.*;
 public class testDAO {
 
     public static void main(String[] args) {
-        ItemDAO dao = new ItemDAO();
-        List<ItemTbl> list = dao.getAllItems();
-        for(ItemTbl item:list)
-            System.out.println(item);
-        //CustomerTbl customer = dao.findById(1);
-        //System.out.println(customer.getCustomerName());
+    
     }
 
 }

@@ -30,7 +30,7 @@
             <result name="success">/my_account_edit.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
-        <action name="view_detail" class="com.uts.sep.action.AddToCartAction" method="execute">
+        <action name="view_detail" class="com.uts.sep.action.ViewDetailAction" method="execute">
             <result name="success">/details.jsp</result>
         </action>
         <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">

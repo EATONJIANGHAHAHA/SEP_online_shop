@@ -73,7 +73,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
         //itemname = (String)this.session.get("keyword");
         
         ItemDAO itemDao = new ItemDAO();
-        itemlist = itemDao.searchItems(keyword);
+        itemlist = itemDao.searchModels(BaseDAO.SEARCH_BY_ITEM_DESCRIPTION,keyword);
         
         this.session.put("itemlist", itemlist);
         

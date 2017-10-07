@@ -203,12 +203,14 @@
                                 <%
                                     }
                                 %>
-                                <a href="details.jsp">Show Detail</a>
+                                <a href="details.jsp">Details</a>
                             </div>
-                            <script lang="javascript">
+                            
+                            <script>
                                 function addToCartFunction(itemNumber) {
                                     var usingItemId = document.getElementById(itemNumber).id;
-                                    $(document).ready(function(){
+                                    $(document).ready(
+                                            function(){
                                         $.ajax({
                                             type:"post",
                                             url:"add_to_cart",
@@ -216,12 +218,11 @@
                                             data:{
                                                 itemId:usingItemId
                                             },
-                                            success:function(data){
-                                                alert(data);
-                                            },
+                                            success:function(){},
                                             error: function(){}
                                         });
                                         alert("Product is added to Cart.");
+                                        
                                     });
                                 }
                             </script>
