@@ -23,7 +23,7 @@
         </action>
         <!-- add item -->
         <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute">
-            <result name="success">/shop.jsp</result>
+            <result name="success">/</result>
             <result name="error">/fail.jsp</result>
         </action>
         <action name="modify_user" class="com.uts.sep.action.StartEditUser" method="execute">

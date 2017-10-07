@@ -6,6 +6,7 @@
 package com.uts.sep.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.uts.sep.dao.ItemDAO;
 import com.uts.sep.dao.ShoppingCartDAO;
 import com.uts.sep.entity.ItemTbl;
 import com.uts.sep.entity.ShoppingCartTbl;
@@ -22,11 +23,21 @@ public class AddToCartAction extends ActionSupport implements SessionAware {
     public static final String SHOPPING_CART = "shopping cart";
     public static final String ERROR = "error";
     public static final String UNKNOWN_ERROR = "unknown error";
-    
+
     private Map session;
     private ShoppingCartTbl shoppingCart;
     private ShoppingCartDAO shoppingCartDao = new ShoppingCartDAO();
+    private ItemDAO itemDao = new ItemDAO();
     private ItemTbl item;
+    private String itemId = "";
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
     public ItemTbl getItem() {
         return item;
@@ -51,26 +62,31 @@ public class AddToCartAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws Exception {
-        if (null == item) {
+        if (itemId.equals("")) {
             this.session.put(ERROR, UNKNOWN_ERROR);
             return ERROR;
-        } else {
-            addToCart((ItemTbl)this.session.get("item_to_add"));
-            this.session.put(SHOPPING_CART, shoppingCart);
-            return SUCCESS;
+        } else if (!itemId.equals("")) {
+            item = itemDao.findById(Integer.valueOf(itemId));
+        } else if (null == item) {
+            return ERROR;
         }
+        addToCart();
+        this.session.put(SHOPPING_CART, shoppingCart);
+        return SUCCESS;
+
     }
 
-    private void addToCart(ItemTbl item) {
-        Set<ItemTbl> items = (Set<ItemTbl>) shoppingCart.getShoppingCartItemTbls();
+    private void addToCart() {
+        //Set<ItemTbl> items = (Set<ItemTbl>) shoppingCart.getShoppingCartItemTbls();
         item.setIsAdded(1);
-        items.add(item);
-        shoppingCart.setShoppingCartItemTbls(items);
+        //items.add(item);
+        //shoppingCart.setShoppingCartItemTbls(items);
         updateDatabase();
     }
-    
-    private void updateDatabase(){
-        shoppingCartDao.update(shoppingCart);
+
+    private void updateDatabase() {
+        //shoppingCartDao.update(shoppingCart);
+        itemDao.update(item);
     }
 
 }

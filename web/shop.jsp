@@ -50,12 +50,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -107,11 +107,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-sm-6">
+                                            <div class="shopping-item">
+                                                <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -183,47 +183,72 @@
                         <div class="single-shop-product">
                             <script>
                                 var itemSize = new Array(<%=itemList.size()%>);
-
                             </script>
                             <%
-                                for (int i = 0; i < itemList.size(); i++) {
-                                    int id = itemList.get(i).getItemId();
+                                for (ItemTbl usingItem : itemList) {
                             %>
                             <div class="product-upper"> 
-                                <img src="<%=itemList.get(i).getItemPicUrl()%>" alt="">
+                                <img src="<%=usingItem.getItemPicUrl()%>" alt="">
                             </div>
-                            <h2><a href=""><%=itemList.get(i).getItemName()%></a></h2>
+                            <h2><a href=""><%=usingItem.getItemName()%></a></h2>
                             <div class="product-carousel-price">
-                                <ins>$<%=itemList.get(i).getPrice()%></ins> <del>$299.00</del>
+                                <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
                             </div> 
                             <div class="product-option-shop">
                                 <script>
-                                    var itemNumber = <%=i%>;
+                                    var itemNumber = <%=usingItem.getItemId()%>;
                                 </script>
                                 <%
-                                    if (null != user) {
+                                    //if (null != user) {
                                 %>
-                                <a class="add_to_cart_button" 
-                                   onclick="addToCartFunction(itemNumber)"
-                                   data-quantity="1" 
-                                   data-product_sku=""
-                                   data-product_id="70" 
-                                   rel="nofollow" >Add to cart</a>
+                                <!--                                <a class="add_to_cart_button" 
+                                                                   onclick="addToCartFunction(itemNumber)"
+                                                                   data-quantity="1" 
+                                                                   data-product_sku=""
+                                                                   data-product_id="70" 
+                                                                   rel="nofollow" >Add to cart</a>-->
+                                <input type="button" 
+                                       id="<%=usingItem.getItemId()%>" 
+                                       onclick="addToCartFunction(this.id)"
+                                       class="add_to_cart_button"
+                                       value="Add To Cart">
                                 <%
-                                    }
+                                    //}
                                 %>
                                 <a href="details.jsp">Show Detail</a>
                             </div>
                             <script lang="javascript">
                                 function addToCartFunction(itemNumber) {
-                                    alert("Product is added to cart");
-                                    document.submitForm.msg.value = thatItemNumber;
+                                    var usingItemId = document.getElementById(itemNumber).id;
+                                    alert(usingItemId);
+                                    $(document).ready(function(){
+                                        $.ajax({
+                                            type:"post",
+                                            url:"add_to_cart",
+                                            datatype:"text",
+                                            data:{
+                                                itemId:usingItemId
+                                            },
+                                            success:function(data){
+                                                alert(data);
+                                            },
+                                            error: function(){
+                                                alert("Some thing is going wrong");
+                                            }
+                                        });
+                                    });
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    document.submitForm.msg.value = itemId;
                                     document.submitForm.submimt();
                                 <%
                                     String txtMsg = request.getParameter("msg");
                                     if (txtMsg != null) {
                                         int itemNumber = Integer.valueOf(txtMsg);
-                                        ItemTbl item = itemList.get(itemNumber);
+                                        item = itemList.get(itemNumber);
                                         item.setIsAdded(ItemTbl.IS_ADDED);
                                         itemDAO.update(item);
                                     }
@@ -240,16 +265,5 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-//                $(document).ready(function(){
-//                    var onchangeValue = document.getElementById("addToCartBtn");
-//                    alert(onchangeValue);
-//                })
-//                $(function(){
-//                    $("#addToCartBtn").click(function(){
-//                        var 
-//                    })
-//                })
-            </script>
     </body>
 </html>
