@@ -28,7 +28,7 @@ public class UserDAO extends BaseDAO<UserTbl>{
         void onUpdate(UserTbl user);
     }
     
-    private class updateHelper {
+    private class UpdateHelper {
         
         private void beginUpdate(Integer userId, Updater updater){
             
@@ -39,19 +39,22 @@ public class UserDAO extends BaseDAO<UserTbl>{
     }
 
     public void updateLoginStatus(Integer userId, int status){
-        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+        new UpdateHelper().beginUpdate(userId, (UserTbl user) -> {
             user.setLoginStatus(status);
         });
     }
     
     public void updatePassword(Integer userId, String password){
-        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
-            user.setUserPassword(password);
+        new UpdateHelper().beginUpdate(userId, new Updater() {
+            @Override
+            public void onUpdate(UserTbl user) {
+                user.setUserPassword(password);
+            }
         });
     }
     
     public void updateUserName(Integer userId, String userName){
-        new updateHelper().beginUpdate(userId, (UserTbl user) -> {
+        new UpdateHelper().beginUpdate(userId, (UserTbl user) -> {
             user.setUserName(userName);
         });
     }

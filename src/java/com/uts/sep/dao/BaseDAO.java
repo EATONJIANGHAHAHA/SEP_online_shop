@@ -19,7 +19,7 @@ import org.hibernate.cfg.Configuration;
  * @author eaton
  */
 public abstract class BaseDAO<T> {
-    
+
     public static final String ADMIN_TBL = "AdminTbl";
     public static final String CUSTOMER_TBL = "CustomerTbl";
     public static final String ITEM_TBL = "ItemTbl";
@@ -33,170 +33,79 @@ public abstract class BaseDAO<T> {
 
     private Class<T> ClassType;
     
-    /**
-     * the constructor will check for related class
-     */
-    @SuppressWarnings("unchecked")
     public BaseDAO() {
         ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         ClassType = (Class<T>) type.getActualTypeArguments()[0];
     }
 
-    /**
-     * this method will return all the required type of model
-     * @param tableNameStr
-     * @return 
-     */
-    public List<T> getAll(String tableNameStr) {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();//
-        Session session = factory.openSession();//
-        Transaction tx = null;//
-        List<T> list = null;
-        try {
-            tx = session.beginTransaction();// open connection
-            Query query = session.createQuery("from " + tableNameStr);//using the name from java
-            list = query.list();
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return list;
+    interface DatabaseConnector<T> {
+        Object onDatabaseConnect(Session session);
     }
 
-    /**
-     * this method is to update the current existing instance into the database.
-     *
-     * @param model
-     * @return
-     */
-    @SuppressWarnings("deprecation")
-    public boolean update(T model) {
-        if (model != null) {
+    private class DatabaseConnectHelper {
+
+        private Object beginDatabaseConnection(
+                DatabaseConnector<T> connector) {
             SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
+            List<T> list = null;
             try {
                 tx = session.beginTransaction();
-                session.update(model);
+                list = (List<T>) connector.onDatabaseConnect(session);
                 tx.commit();
             } catch (HibernateException e) {
                 if (tx != null) {
                     tx.rollback();
                 }
                 e.printStackTrace();
-                return false;
             } finally {
                 session.close();
             }
-            return true;
+            return list;
         }
-        return false;
-    }
-
-    /**
-     * this method is to new instance to the database.
-     * @param model
-     * @return 
-     */
-    public boolean insertNew(T model) {
-       if (model != null){
-            SessionFactory factory = new Configuration().configure().buildSessionFactory();
-            Session session = factory.openSession();
-            Transaction tx = null;
-            try {
-                tx = session.beginTransaction();
-                session.save(model);
-                tx.commit();
-            } catch (HibernateException e){
-                if (tx != null) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-                return false;
-            } finally {
-                session.close();
-            }
-            return true;
-       }
-       return true;
-    }
-
-    /**
-     * this method will return the a checked instance.
-     * @param id
-     * @return 
-     */
-    @SuppressWarnings("unchecked")
-    public T findById(Integer id) {
-        Object object = new Object();
-        if (id != null) {
-            SessionFactory factory = new Configuration().configure().buildSessionFactory();
-            Session session = factory.openSession();
-            Transaction tx = null;
-            try {
-                tx = session.beginTransaction();
-                object = (T) session.get(ClassType, id);
-                tx.commit();
-                return (T) object;
-            } catch (HibernateException e) {
-                if (tx != null) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
-        }
-        return null;
-    }
-
-    public boolean delete(T model) {
-        if (model != null) {
-            SessionFactory factory = new Configuration().configure().buildSessionFactory();
-            Session session = factory.openSession();
-            Transaction tx = null;
-            try {
-                tx = session.beginTransaction();
-                session.delete(model);
-            } catch (HibernateException e) {
-                if (tx != null) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-                return false;
-            } finally {
-                session.close();
-            }
-            return true;
-        }
-        return false;
     }
     
-    public List<T> searchModels(String hql, String name){
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        List<T> list = null;
-        try {
-            tx = session.beginTransaction();
-            Query query = session.createQuery(hql);
-            query.setParameter("search", "%"+name+"%");
-            list = query.list();
-            tx.commit();
-        } catch (HibernateException e){
-            if (tx != null){
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return list;
+    public List<T> getAll(String tableNameStr) {
+        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            Query query = session.createQuery("from " + tableNameStr);
+            List<T> list1 = query.list();
+            return list1;
+        });
     }
 
+    public void update(T model) {
+        new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            session.update(model);
+            return null;
+        });
+    }
+
+    public void insertNew(T model) {
+        new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            session.save(model);
+            return null; 
+        });
+    }
+
+    public T findById(Integer id) {
+        return (T) new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            return (T) session.get(ClassType,id);
+        });
+    }
+
+    public void delete(T model) {
+        new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            session.delete(model);
+            return null;
+        });
+    }
+
+    public List<T> searchModels(String hql, String name) {
+        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+            Query query = session.createQuery(hql);
+            query.setParameter("search", "%" + name + "%");
+            return query.list(); 
+        });
+    }
 }

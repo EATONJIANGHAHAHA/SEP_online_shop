@@ -83,14 +83,14 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
     @Override
     public String execute() throws Exception {
         UserDAO dao = new UserDAO();
-        UserTbl usingUser = dao.findByLoginStatus(1);
-        if (null == usingUser) {
+        user = dao.findByLoginStatus(1);
+        if (null == user) {
             this.session.put(ERROR, NOT_LOGIN_IN_ERROR);
             return ERROR;
         } else if (dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
-            usingUser.setUserName(newName);
-            usingUser.setUserPassword(newPassword);
-            dao.update(usingUser);
+            user.setUserName(newName);
+            user.setUserPassword(newPassword);
+            dao.update(user);
             this.session.put(MODIFY_USER_DETAIL_TABLE, SUCCESS);
             return SUCCESS;
         } else if (!dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
