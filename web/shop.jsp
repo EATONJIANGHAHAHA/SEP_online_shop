@@ -39,7 +39,6 @@
     </head>
     <body>
         <%! ItemDAO itemDAO = new ItemDAO(); %>
-        <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
         <%! UserTbl user;%>
         <%! ItemTbl item;%>
         <%! int looper = 0;%>
@@ -182,7 +181,7 @@
                     <div class="col-md-3 col-sm-6">                     
                         <div class="single-shop-product">
                             <%
-                                for (ItemTbl usingItem : itemList) {
+                                for (ItemTbl usingItem : itemDAO.getItems()) {
                             %>
                             <div class="product-upper"> 
                                 <img src="<%=usingItem.getItemPicUrl()%>" alt="">

@@ -29,6 +29,7 @@ public abstract class BaseDAO<T> {
     public static final String SHIPPING_TBL = "ShippingTbl";
     public static final String SHIPPING_CART_TBL = "ShippingCartTbl";
     public static final String USER_TBL = "UserTbl";
+    
     public static final String SEARCH_BY_ITEM_DESCRIPTION = "from ItemTbl I where I.itemDescription like :search";
 
     private Class<T> ClassType;
@@ -44,15 +45,14 @@ public abstract class BaseDAO<T> {
 
     private class DatabaseConnectHelper {
 
-        private Object beginDatabaseConnection(
-                DatabaseConnector<T> connector) {
+        private Object beginDatabaseConnection(DatabaseConnector<T> connector) {
             SessionFactory factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
             Transaction tx = null;
-            List<T> list = null;
+            Object object = null;
             try {
                 tx = session.beginTransaction();
-                list = (List<T>) connector.onDatabaseConnect(session);
+                object = connector.onDatabaseConnect(session);
                 tx.commit();
             } catch (HibernateException e) {
                 if (tx != null) {
@@ -62,15 +62,14 @@ public abstract class BaseDAO<T> {
             } finally {
                 session.close();
             }
-            return list;
+            return object;
         }
     }
     
     public List<T> getAll(String tableNameStr) {
-        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
+        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((Session session) -> {
             Query query = session.createQuery("from " + tableNameStr);
-            List<T> list1 = query.list();
-            return list1;
+            return query.list();
         });
     }
 

@@ -160,7 +160,7 @@
         </div> <!-- End mainmenu area -->
 
         <div>
-            <form action="modify_user" method="post">
+            <form method="post">
                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
                     <center><h3 class="page-header">Update Details</h3></center>
                     <!--                    <tr>
@@ -179,7 +179,7 @@
                         <th align="right">password: </th>
                         <td><s:property value="#session.user.userPassword"/></td>
                     </tr>
-                    <th><input type="submit" class="btn btn-primary"/></th>
+                    <th><a href="my_account_edit.jsp" class="add_to_cart_button"/>Edit</th>
                 </table>
             </form>
         </div>

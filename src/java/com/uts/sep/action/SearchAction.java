@@ -5,22 +5,12 @@
  */
 package com.uts.sep.action;
 
-import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.ItemDAO;
-import com.uts.sep.model.Item;
-import com.uts.sep.entity.ItemTbl;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -28,14 +18,9 @@ import java.util.List;
  */
 public class SearchAction extends ActionSupport implements SessionAware {
 
-    //variables used for session variables used in search.jsp
+    private ItemDAO itemDAO = new ItemDAO();
+    
     private String keyword = "";
-    private List<ItemTbl> itemlist = new ArrayList<ItemTbl>();
-    
-    //variables used for session variables used in addItem.jsp
-    private String itemname = "";
-    
-    //session variable used to communicate with the view
     private Map session;
 
     @Override
@@ -52,42 +37,10 @@ public class SearchAction extends ActionSupport implements SessionAware {
         this.keyword = keyword;
     }
     
-    //itemname functions needed to link to veiw itemname
-    public String getItemName() {
-        return itemname; 
-    }
-    
-    public void setItemName(String itemname) {
-        this.itemname = itemname;
-    }
-    
-    /*
-    public List<ItemTbl> getItems(){
-        return itemlist; 
-    }
-    */
-    //@Override
     public String searchItems() throws Exception {
-
-        //this.session.put("keyword", keyword);
-        //itemname = (String)this.session.get("keyword");
         
-        ItemDAO itemDao = new ItemDAO();
-        itemlist = itemDao.searchModels(BaseDAO.SEARCH_BY_ITEM_DESCRIPTION,keyword);
-        
-        this.session.put("itemlist", itemlist);
-        
-        return SUCCESS;
-    }
-    
-    public String addItem() throws Exception {
-        
-        ItemDAO itemDao = new ItemDAO();
-        itemDao.addItem(keyword);
-        itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
-        
-        this.session.put("itemlist", itemlist);
-        
+        itemDAO.setItems(itemDAO.searchModels(BaseDAO.SEARCH_BY_ITEM_DESCRIPTION,keyword));
+        this.session.put("itemlist", itemDAO.getItems());
         return SUCCESS;
     }
 }
