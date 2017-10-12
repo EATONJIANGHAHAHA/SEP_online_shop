@@ -7,7 +7,7 @@
          <div class="single-product-area">
             <div class="zigzag-bottom"></div>
             <div class="container-fluid">
-                <h1>Search Results</h1>
+                
                 <s:iterator value="#session.itemlist">
                     <div class="container" style="border:1px solid #cecece;">
                 <div class="row" >

@@ -13,14 +13,24 @@ public class UserTbl  implements java.io.Serializable {
      private String userName;
      private String userPassword;
      private int loginStatus;
+     private String email;
 
     public UserTbl() {
     }
 
-    public UserTbl(String userName, String userPassword, int loginStatus) {
+    public UserTbl(String userName, String userPassword, int loginStatus, String email) {
        this.userName = userName;
        this.userPassword = userPassword;
        this.loginStatus = loginStatus;
+       this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
    
     public Integer getUserId() {

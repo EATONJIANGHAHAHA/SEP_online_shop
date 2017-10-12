@@ -38,7 +38,7 @@
             
             if (session.getAttribute("user")==null) { 
         %>
-                <meta http-equiv="refresh" content="0; URL=index.jsp">
+                <!--<meta http-equiv="refresh" content="0; URL=index.jsp">-->
         <%      
             } else {
                 user=(UserTbl)session.getAttribute("user");
@@ -52,11 +52,13 @@
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                                <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
+                                
+                                
                                 <% if (user == null) { %>
+                                <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else { %>
+                                <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
                                 <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
                                         <% out.print(user.getUserName()); %> </a></li>
                                 <% }%>
@@ -102,7 +104,9 @@
 
                     <div class="col-sm-6">
                         <div class="shopping-item">
-                            <a href="cart.jsp">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+                            <% if (user != null){ %>
+                            <a href="cart.jsp">My Cart <i class="fa fa-shopping-cart"></i> </a>
+                            <% }%>
                         </div>
                     </div>
                 </div>
@@ -129,8 +133,9 @@
                             <!--<li><a href="checkout.html">Checkout</a></li>-->
                             <!--<li><a href="#">Category</a></li>-->
                             <!--<li><a href="#">Others</a></li>-->
+                            <% if (user != null) { %>
                             <li><a href="addItem.jsp">Add item</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <% }%>
                             <li>
                                 <form action="search" method="post"> <!-- what does method="get" do? -->
                                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">

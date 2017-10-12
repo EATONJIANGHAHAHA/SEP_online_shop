@@ -9,7 +9,7 @@
         
     <package name = "default" extends="struts-default" namespace="/">
         <action name="login" class="com.uts.sep.action.LoginAction" method="execute">
-            <result name="success">/success.jsp</result>
+            <result name="success" type="redirect">${next}</result>
             <result name="error">/fail.jsp </result>
         </action>
         <action name="register" class="com.uts.sep.action.RegisterAction" method="execute">
@@ -32,6 +32,10 @@
         </action>
         <action name="selectItem" class="com.uts.sep.action.SelectItem" method="execute">
             <result name="success">/itemPage.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="selectUser" class="com.uts.sep.action.SelectUser" method="execute">
+            <result name="success">/userPage.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
 <!--        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute"/>-->

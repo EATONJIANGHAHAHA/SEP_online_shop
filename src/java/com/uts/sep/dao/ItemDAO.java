@@ -24,6 +24,30 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
 
     private static SessionFactory factory = null;
     
+    public List<ItemTbl> getItemByOwner(String ownerId) {
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;//operation
+        
+        List<ItemTbl> list = null;
+        String hql = "from ItemTbl I where I.ownerId = " + ownerId;
+        //String hql = "from ItemTbl";
+        try {
+            tx = session.beginTransaction();// open connection
+            Query query = session.createQuery(hql);//using the name from java
+            list = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+    
     public List<ItemTbl> getItemByID(String itemId) {
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
@@ -55,7 +79,7 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         Transaction tx = null;//operation
         
         List<ItemTbl> list = null;
-        String hql = "from ItemTbl I where I.itemDescription like :search";
+        String hql = "from ItemTbl I where I.itemDescription like :search order by I.itemId desc";
         //String hql = "from ItemTbl";
         try {
             tx = session.beginTransaction();// open connection
