@@ -22,6 +22,12 @@
     <property name="price" type="double">
       <column name="price" not-null="true" precision="10"/>
     </property>
+    <property name="itemImage" type="string">
+        <column length="100" name="image"/>
+    </property>
+    <property name="ownerId" type="int">
+        <column name="owner_id" not-null="true"/>
+   </property>
   <!--  <set fetch="select" inverse="true" lazy="true" name="orderDetailTbls" table="order_detail_tbl">
       <key>
         <column name="item_id" not-null="true"/>

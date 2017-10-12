@@ -19,6 +19,7 @@ import org.hibernate.service.ServiceRegistry;
  * @author eaton
  */
 public class UserDAO extends BaseDAO<UserTbl>{
+    private static SessionFactory factory = null;
     
     public static final short LOGING_IN = 1;
     public static final short LOGED_OUT = 0;
@@ -38,6 +39,31 @@ public class UserDAO extends BaseDAO<UserTbl>{
         }
     }
 
+    public List<UserTbl> getUserById(int selectedid){
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;//operation
+        
+        List<UserTbl> user = null;
+        String hql = "from UserTbl U where U.userId = " + String.valueOf(selectedid);
+        //String hql = "from ItemTbl";
+        try {
+            tx = session.beginTransaction();// open connection
+            Query query = session.createQuery(hql);//using the name from java
+            user = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return user;
+    }
+    
     public void updateLoginStatus(Integer userId, int status){
         new updateHelper().beginUpdate(userId, (UserTbl user) -> {
             user.setLoginStatus(status);

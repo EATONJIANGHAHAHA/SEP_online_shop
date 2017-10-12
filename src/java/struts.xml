@@ -23,7 +23,15 @@
         </action>
         <!-- add item -->
         <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
+            <!--<interceptor-ref name="basicStack">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpeg,image/gif/jpg/png</param>
+            </interceptor-ref>-->
             <result name="success">/addItem.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="selectItem" class="com.uts.sep.action.SelectItem" method="execute">
+            <result name="success">/itemPage.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
 <!--        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute"/>-->

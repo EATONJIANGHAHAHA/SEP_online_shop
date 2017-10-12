@@ -13,6 +13,7 @@ import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.ItemDAO;
 import com.uts.sep.model.Item;
 import com.uts.sep.entity.ItemTbl;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,15 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import java.util.ArrayList;
 import java.util.List;
+
+//image file stuff
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import javax.servlet.http.Part;
+import java.io.IOException;
 
 /**
  *
@@ -36,7 +46,37 @@ public class SearchAction extends ActionSupport implements SessionAware {
     private String itemname = "";
     private String itemdescription = "";
     private double itemprice = 0;
+    private String ownerid;
+    //add image
+    //private File itemimage; //dont need this anymore
+    private File myFile; 
+    private String myFileContentType;
+    private String myFileFileName;
+    private String destPath;
+
+    public String getMyFileContentType() {
+        return myFileContentType;
+    }
+
+    public void setMyFileContentType(String myFileContentType) {
+        this.myFileContentType = myFileContentType;
+    }
+
+    public String getMyFileFileName() {
+        return myFileFileName;
+    }
+
+    public void setMyFileFileName(String myFileFileName) {
+        this.myFileFileName = myFileFileName;
+    }
     
+    public File getMyFile() {
+        return myFile;
+    }
+    
+    public void setMyFile(File myFile){
+        this.myFile = myFile;
+    }
     //session variable used to communicate with the view
     private Map session;
 
@@ -79,7 +119,17 @@ public class SearchAction extends ActionSupport implements SessionAware {
     public void setItemprice(double itemprice) {
         this.itemprice = itemprice;
     }
+
+    public String getOwnerid() {
+        return ownerid;
+    }
+
+    public void setOwnerid(String ownerid) {
+        this.ownerid = ownerid;
+    }
     
+    
+    //private HttpServletRequest servletRequest;
     /*
     public List<ItemTbl> getItems(){
         return itemlist; 
@@ -103,7 +153,27 @@ public class SearchAction extends ActionSupport implements SessionAware {
     public String addItem() throws Exception {
         
         ItemDAO itemDao = new ItemDAO();
-        itemDao.addItem(itemname, itemdescription, itemprice);
+//        destPath = "/img/"; https://www.tutorialspoint.com/struts_2/struts_file_uploads.htm
+//        try{
+//     	 File destFile  = new File(destPath, myFileFileName);
+//    	 FileUtils.copyFile(myFile, destFile);
+//  
+//      }catch(IOException e){
+//         e.printStackTrace();
+//         return ERROR;
+//      }
+        //store image on the server at path at web/img/<filename> //filename format should be username_itemname_rand()?
+        //https://www.w3schools.com/php/php_file_upload.asp
+        //http://www.websparrow.org/struts/how-to-upload-image-in-database-using-struts2
+        
+        //File newfile = new File("/web/img", "newimage.jpg");
+        //servletRequest.getContextPath()
+        //FileUtils.copyFile(itemimage, newfile);
+        //Part filePart = servletRequest.getPart("itemimage");
+        //InputStream inputStream = null;
+        //inputStream = filePart.getInputStream();
+        
+        itemDao.addItem(itemname, itemdescription, itemprice, "shouldBeImgPath", Integer.valueOf(ownerid));
         itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
         
         this.session.put("itemlist", itemlist);

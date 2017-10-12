@@ -15,6 +15,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import com.uts.sep.model.Item; //dont need?
+import java.io.File;
 /**
  *
  * @author lzy
@@ -22,6 +23,30 @@ import com.uts.sep.model.Item; //dont need?
 public class ItemDAO extends BaseDAO<ItemTbl>{
 
     private static SessionFactory factory = null;
+    
+    public List<ItemTbl> getItemByID(String itemId) {
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;//operation
+        
+        List<ItemTbl> list = null;
+        String hql = "from ItemTbl I where I.itemId = " + itemId;
+        //String hql = "from ItemTbl";
+        try {
+            tx = session.beginTransaction();// open connection
+            Query query = session.createQuery(hql);//using the name from java
+            list = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
+    }
     
     public List<ItemTbl> searchItems(String itemName) 
     {
@@ -49,7 +74,7 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
         return list;
     }
     
-    public void addItem(String itemname, String itemdescription, double itemprice) 
+    public void addItem(String itemname, String itemdescription, double itemprice, String itemimage, int ownerid) 
     {
         factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
@@ -57,7 +82,7 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
  
         try {
             tx = session.beginTransaction();// open connection
-            ItemTbl newitem = new ItemTbl(itemname, itemdescription,1, 1, itemprice);
+            ItemTbl newitem = new ItemTbl(itemname, itemdescription,1, 1, itemprice, itemimage, ownerid);
             this.insertNew(newitem);
             tx.commit();
         } catch (HibernateException e) {

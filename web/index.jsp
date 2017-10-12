@@ -128,7 +128,7 @@
                             <li><a href="#">Category</a></li>
                             <li><a href="search.jsp">Search</a></li>
                             <li><a href="addItem.jsp">Add item</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="itemPage.jsp">my dev</a></li>
                             </ul>
                         </div>
                     </div>
