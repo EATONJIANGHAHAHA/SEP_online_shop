@@ -6,7 +6,7 @@
 
 <%@ include file = "header.jsp" %>
 <center>
-    cart of <s:property value="#session.user.userName"/>
+    <h1>cart of <s:property value="#session.user.userName"/></h1>
 </center>
 
         <div class="promo-area">

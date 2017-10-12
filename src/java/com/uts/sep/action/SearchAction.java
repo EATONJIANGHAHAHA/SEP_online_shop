@@ -153,27 +153,20 @@ public class SearchAction extends ActionSupport implements SessionAware {
     public String addItem() throws Exception {
         
         ItemDAO itemDao = new ItemDAO();
-//        destPath = "/img/"; https://www.tutorialspoint.com/struts_2/struts_file_uploads.htm
+        destPath = ServletActionContext.getServletContext().getRealPath("/").concat("img");// https://www.tutorialspoint.com/struts_2/struts_file_uploads.htm
 //        try{
-//     	 File destFile  = new File(destPath, myFileFileName);
-//    	 FileUtils.copyFile(myFile, destFile);
+     	File fileToCreate = new File(destPath,myFileFileName);
+        FileUtils.copyFile(myFile, fileToCreate);//copying source file to new file 
 //  
 //      }catch(IOException e){
 //         e.printStackTrace();
 //         return ERROR;
 //      }
-        //store image on the server at path at web/img/<filename> //filename format should be username_itemname_rand()?
-        //https://www.w3schools.com/php/php_file_upload.asp
-        //http://www.websparrow.org/struts/how-to-upload-image-in-database-using-struts2
+        //https://www.javatpoint.com/struts-2-file-upload-example THIS IS THE WAY
         
-        //File newfile = new File("/web/img", "newimage.jpg");
-        //servletRequest.getContextPath()
-        //FileUtils.copyFile(itemimage, newfile);
-        //Part filePart = servletRequest.getPart("itemimage");
-        //InputStream inputStream = null;
-        //inputStream = filePart.getInputStream();
         
-        itemDao.addItem(itemname, itemdescription, itemprice, "shouldBeImgPath", Integer.valueOf(ownerid));
+        
+        itemDao.addItem(itemname, itemdescription, itemprice, myFileFileName, Integer.valueOf(ownerid));
         itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
         
         this.session.put("itemlist", itemlist);

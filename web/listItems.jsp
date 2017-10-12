@@ -5,7 +5,7 @@
             %>
             
          <div class="single-product-area">
-            <div class="zigzag-bottom"></div>
+            <div class=""></div>
             <div class="container-fluid">
                 
                 <s:iterator value="#session.itemlist">
@@ -27,7 +27,9 @@
                             
                                 <div class="product-upper"> 
                                 <s:a href="%{testURL}">
-                                    <img src="img/harry_potter.jpg" class="img-thumbnail" alt="" style="float:left;border:1;"> <!-- replace with image path -->
+                                    <!--<img src="img/<s:property value="itemImage"/>" class="img-thumbnail" alt="" style="float:left;border:1;"> <!-- replace with image path -->
+                                
+                                    <img src="img/<s:property value='itemImage' />" class="img-thumbnail" alt="" style="float:left;border:1;"/> 
                                 </s:a>
                             </div>
                             

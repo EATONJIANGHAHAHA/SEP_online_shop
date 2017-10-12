@@ -1,7 +1,7 @@
 <%@ include file = "header.jsp" %>
 
         <div>
-            <img src="img/slide-1.jpg" style="width:100% ; height:80%;" >
+            <img src="img/slide-2.jpg" style="width:100% ; height:80%;" >
         </div>
 
 

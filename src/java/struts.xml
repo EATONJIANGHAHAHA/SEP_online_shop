@@ -23,10 +23,14 @@
         </action>
         <!-- add item -->
         <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
-            <!--<interceptor-ref name="basicStack">
-            <interceptor-ref name="fileUpload">
-                <param name="allowedTypes">image/jpeg,image/gif/jpg/png</param>
-            </interceptor-ref>-->
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/addItem.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
