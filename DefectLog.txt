@@ -1,0 +1,1 @@
+12-8-17 - after login then another tab is opened then user logs out in one of the tabs they dont log out of the second tab. this is a major problem.
