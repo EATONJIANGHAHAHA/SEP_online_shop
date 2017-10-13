@@ -24,29 +24,23 @@
                         <br>
                         <div class="single-shop-product">
                             
-                            
-                            
-                                <div class="product-upper"> 
+                            <div class="product-upper"> 
                                 <s:a href="%{userpageURL}">
                                     <img src="img/user.png" class="img-thumbnail" alt="" style="border:1"> <!-- replace src with image path -->
                                 </s:a>
                             </div>
                             
-                            
-                               <% if(user != null){ %> 
-                            <button type="button" class="btn btn-primary">Add to Cart</button>
+                            <% if(user != null){ %> 
+                                <button type="button" class="btn btn-primary">Add to Cart</button>
                             <% } else {%>
-                            <a href="login.jsp">
-                            <button type="button" class="btn btn-primary">You must log in to purchase</button>
-                            </a>
+                                <a href="login.jsp">
+                                    <button type="button" class="btn btn-primary">You must log in to purchase</button>
+                                </a>
                             <% } %>
                         </div>
-                        
                     </div>
-                    <div class="col-md-9">     
-                        
+                    <div class="col-md-9">
                         <%@ include file = "listItems.jsp" %>
-                        
                     </div> 
                         
                     

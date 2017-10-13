@@ -52,8 +52,6 @@
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                
-                                
                                 <% if (user == null) { %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>

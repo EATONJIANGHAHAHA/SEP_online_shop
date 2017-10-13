@@ -4,8 +4,6 @@
             <img src="img/slide-2.jpg" style="width:100% ; height:80%;" >
         </div>
 
-
-
         <div class="promo-area">
             <div class="zigzag-bottom"></div>
             <div class="container">
