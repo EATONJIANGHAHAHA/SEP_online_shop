@@ -67,7 +67,7 @@ public abstract class BaseDAO<T> {
     }
     
     public List<T> getAll(String tableNameStr) {
-        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((Session session) -> {
+        return (List<T>) new DatabaseConnectHelper().beginDatabaseConnection((session) -> {
             Query query = session.createQuery("from " + tableNameStr);
             return query.list();
         });

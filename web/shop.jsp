@@ -208,8 +208,7 @@
                             <script>
                                 function addToCartFunction(itemNumber) {
                                     var usingItemId = document.getElementById(itemNumber).id;
-                                    $(document).ready(
-                                            function(){
+                                    $(document).ready(function(){
                                         $.ajax({
                                             type:"post",
                                             url:"add_to_cart",
@@ -221,7 +220,6 @@
                                             error: function(){}
                                         });
                                         alert("Product is added to Cart.");
-                                        
                                     });
                                 }
                             </script>

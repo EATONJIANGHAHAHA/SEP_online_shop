@@ -46,12 +46,7 @@
     </head>
     <body>
         <%! UserTbl user; %>
-        <%! ItemTbl item;%>
-        <%! List<ItemTbl> items;%>
-        <%
-            ItemDAO itemDao = new ItemDAO();
-            items = itemDao.getAllAddedItems();
-        %>
+        <%! ItemDAO itemDao = new ItemDAO();%>
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -179,16 +174,32 @@
                     <div class="col-md-3 col-sm-6">                     
                         <div class="single-shop-product">
                             <%
-                                if (null != items) {
-                                    for (ItemTbl item : items) {
+                                if (null != itemDao.getItems()) {
+                                    for (ItemTbl usingItem : itemDao.getItems()) {
                             %>
                             <div class="product-upper"> 
-                                <img src="<%=item.getItemPicUrl()%>" alt="">
+                                <img src="<%=usingItem.getItemPicUrl()%>" alt="">
                             </div>
-                            <h2><a href=""><%=item.getItemName()%></a></h2>
+                            <h2><a href=""><%=usingItem.getItemName()%></a></h2>
                             <div class="product-carousel-price">
-                                <ins>$<%=item.getPrice()%></ins> <del>$299.00</del>
-                            </div> 
+                                <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
+                            </div>
+                            <input type="button"
+                                   id="<%=usingItem.getItemId()%>"
+                                   onclick="removeFromCartFunction(this.id)"
+                                   class="add_to_cart_button"
+                                   value="Remove">
+                            <script>
+                                function removeFromCartFunction(itemNumber){
+                                    var usingItemId = document.getElementById(itemNumber).id;
+                                    $(document).ready(function(){
+                                        $.ajax({
+                                            type:"post",
+                                            url:"remove_from_cart"
+                                        })
+                                    })
+                                }
+                            </script>
                             <%
                                     }
                                 }
@@ -197,37 +208,5 @@
                     </div>
                 </div>
             </div>
-
-            <div class="promo-area">
-                <div class="zigzag-bottom"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo">
-                                <i class="fa fa-refresh"></i>
-                                <p>30 Days return</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo">
-                                <i class="fa fa-truck"></i>
-                                <p>Free shipping</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo">
-                                <i class="fa fa-lock"></i>
-                                <p>Secure payments</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo">
-                                <i class="fa fa-gift"></i>
-                                <p>New products</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- End promo area -->
     </body>
 </html>
