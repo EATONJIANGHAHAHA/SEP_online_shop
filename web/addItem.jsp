@@ -46,12 +46,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -62,7 +62,7 @@
                                 <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout
                                         <%  UserTbl user = (UserTbl) session.getAttribute("user");
                                             out.print(user.getUserName()); %></a></li>
-                                        <% } %>
+                                        <% }%>
                             </ul>
                         </div>
                     </div>
@@ -91,154 +91,106 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- End header area -->
+                <%@ include file = "header.jsp" %>
 
-        <div class="site-branding-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="logo">
-                            <h1><a href="index.jsp">sep<span>BAY</span></a></h1>
-                        </div>
+                <form action="addItem" method="post" enctype="multipart/form-data" id="additemfrm">
+                    <center><h3 class="h3">Add Item</h3></center>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Item name:</label>
+
+                        <div class="col-sm-10">
+                            <input style="width:50%" type="text" name="itemname" class="form-control" placeholder="Item name...">
+                        </div>    
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Price:</label>
                     </div>
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
-                </div>
+                    <div class="col-sm-10">
+                        <input style="width:50%" type="text" name="itemprice" class="form-control" placeholder="Item price...">
+                    </div>    
             </div>
-        </div> <!-- End site branding area -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Description:</label>
+                <div class="mainmenu-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div> 
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="index.html">Home</a></li>
+                                    <li><a href="shop.jsp">Shop page</a></li>
+                                    <li><a href="details.jsp">Single product</a></li>
+                                        <%
+                                            if (null != session.getAttribute("user")) {
+                                        %>
+                                    <li><a href="cart.jsp">Cart</a></li>
+                                        <%
+                                            }
+                                        %> 
+                                    <li><a href="#">Checkout</a></li>
+                                    <li><a href="#">Category</a></li>
+                                    <li><a href="search.jsp">Search</a></li>
 
-        <div class="mainmenu-area">
-            <div class="container">
-                <div class="row">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div> 
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="details.jsp">Single product</a></li>
-                                <%
-                                    if (null != session.getAttribute("user")) {
-                                %>
-                            <li><a href="cart.jsp">Cart</a></li>
-                                <%
-                                    }
-                                %> 
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Category</a></li>
-                            <li><a href="search.jsp">Search</a></li>
+                                    <%
+                                        if (null == session.getAttribute("user")) {
 
-                            <%
-                                if (null == session.getAttribute("user")) {
-
-                                } else if (null != session.getAttribute("user")) {
-                                    UserTbl user = (UserTbl) session.getAttribute("user");
-                                    if (user.getUserType() == 1) {
-                            %>
-                            <li><a href="addItem.jsp">Add item</a></li>
-                                <%
-                                        }
-                                    }
-                                %>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>  
-                </div>
-            </div>
-        </div> <!-- End mainmenu area -->
-    
-        <!-- beginning of add item form -->
-        <div class="col-md-1">
-            <div class="user-menu">
-                <form action="addItem" method="post">
-
-                    <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
-                        <tr>
-                            <th align="right">Add: </th>
-                            <!-- itemname is a variable used by AddAction specified by struts.xml -->
-                            <td><input type="text" name="keyword" placeholder="Item name"></td>
-                            <td colspan="2" align="right"><input type="submit" label="AddItem" class="btn btn-primary"></td>
-                        </tr>
-
-                    </table>
-                </form>
-            </div>
-        </div>
-        <!-- end of add item form -->
-    
-        <!-- Beginning of search results area of the web page -->
-        <div>
-        <center>
-        <h1>List of all items</h1>
-             <table>
-                 <!-- Row to format the column headings -->
-                  <tr>
-                      <td>Name of the product</td>
-                      <td>Price of the product</td>
-                      <td># In Stock</td>
-                      <td>Product description</td>
-                      <td>Link to the product</td>
-                  </tr>
-                  <!-- Begin printing all the search results -->
-                  <!-- iterator loops through each item in the itemlist -->
-                  <!-- itemlist is obtained from ItemDAO class and accessed through the struts session object -->
-                  <s:iterator value="#session.itemlist">
-                  <tr>
-                      <td><s:property value="itemName"/></td>
-                      <td>$<s:property value="price"/></td>
-                      <td><s:property value="stock"/></td>
-                      <td><s:property value="itemDescription"/></td>
-                      <td><a href="#">Link</a></td>
-                  </tr>
-                  </s:iterator>	
-                  <!-- End of loop -->
-             </table>
-        </center>
-        </div>
-        <!-- End of the search results area of the web page -->
-
-
-        <div class="promo-area">
-            <div class="zigzag-bottom"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-refresh"></i>
-                            <p>30 Days return</p>
+                                        } else if (null != session.getAttribute("user")) {
+                                            UserTbl user = (UserTbl) session.getAttribute("user");
+                                            if (user.getUserType() == 1) {
+                                    %>
+                                    <li><a href="addItem.jsp">Add item</a></li>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>  
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-truck"></i>
-                            <p>Free shipping</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-lock"></i>
-                            <p>Secure payments</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-gift"></i>
-                            <p>New products</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- End promo area -->
-    </body>
-</html>
+                </div> <!-- End mainmenu area -->
+
+                <!-- beginning of add item form -->
+                <div class="col-md-1">
+                    <div class="user-menu">
+                        <form action="addItem" method="post">
+
+                            <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
+                                <tr>
+                                    <th align="right">Add: </th>
+                                    <!-- itemname is a variable used by AddAction specified by struts.xml -->
+                                    <td><input type="text" name="keyword" placeholder="Item name"></td>
+                                    <td colspan="2" align="right"><input type="submit" label="AddItem" class="btn btn-primary"></td>
+                                </tr>
+
+                                <div class="col-sm-10">
+
+                                    <textarea style="width:50%" name="itemdescription" form="additemfrm" ></textarea>
+                                </div>    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Select image:</label>
+
+
+                                    <div class="col-sm-10">
+                                        <input style="width:50%;height:50px;" type="file" name="myFile" class="form-control" placeholder="Select image to upload...">
+                                    </div>    
+                                </div>
+                                <input type="hidden" name="ownerid" value="<s:property value="#session.user.userId"/>" form="additemfrm">
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-2">
+                                        <input type="submit" label="Add Item" class="btn btn-primary">
+                                    </div>    
+                                </div>
+                        </form>
+                        <%@include file = "listItems.jsp" %>
+                        <%@ include file = "footer.jsp" %>
+                        </html>

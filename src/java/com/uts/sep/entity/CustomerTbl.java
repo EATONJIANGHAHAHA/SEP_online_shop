@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
+// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,8 +10,9 @@ import java.util.Date;
 public class CustomerTbl  implements java.io.Serializable {
 
 
-     private int userId;
+     private int customerId;
      private OrderTbl orderTbl;
+     private String customerName;
      private String customerAddress;
      private String email;
      private int creditCardno;
@@ -21,28 +22,30 @@ public class CustomerTbl  implements java.io.Serializable {
     }
 
 	
-    public CustomerTbl(int userId, String customerAddress, String email, int creditCardno, Date dob) {
-        this.userId = userId;
+    public CustomerTbl(int customerId, String customerName, String customerAddress, String email, int creditCardno, Date dob) {
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.email = email;
         this.creditCardno = creditCardno;
         this.dob = dob;
     }
-    public CustomerTbl(int userId, OrderTbl orderTbl, String customerAddress, String email, int creditCardno, Date dob) {
-       this.userId = userId;
+    public CustomerTbl(int customerId, OrderTbl orderTbl, String customerName, String customerAddress, String email, int creditCardno, Date dob) {
+       this.customerId = customerId;
        this.orderTbl = orderTbl;
+       this.customerName = customerName;
        this.customerAddress = customerAddress;
        this.email = email;
        this.creditCardno = creditCardno;
        this.dob = dob;
     }
    
-    public int getUserId() {
-        return this.userId;
+    public int getCustomerId() {
+        return this.customerId;
     }
     
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
     public OrderTbl getOrderTbl() {
         return this.orderTbl;
@@ -50,6 +53,13 @@ public class CustomerTbl  implements java.io.Serializable {
     
     public void setOrderTbl(OrderTbl orderTbl) {
         this.orderTbl = orderTbl;
+    }
+    public String getCustomerName() {
+        return this.customerName;
+    }
+    
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     public String getCustomerAddress() {
         return this.customerAddress;

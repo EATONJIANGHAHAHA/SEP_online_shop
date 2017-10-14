@@ -3,7 +3,6 @@
     Created on : 29-Aug-2017, 15:00:13
     Author     : lzy
 --%>
-
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -47,12 +46,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -104,11 +103,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-sm-6">
+                                            <div class="shopping-item">
+                                                <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -158,6 +157,7 @@
                 </div>
             </div>
         </div> <!-- End mainmenu area -->
+        <%@ include file = "header.jsp" %>
 
         <div>
             <form method="post">
@@ -167,6 +167,7 @@
                                             <th align="right">Old Password: </th>
                                             <td><input type="password" name="checkPassword" placeholder="Old password"/></td>
                                         </tr>-->
+                    <center><h3 class="page-header">Change password</h3></center>
                     <tr>
                         <th align="right">My name: </th>
                         <td><s:property value="#session.user.userName"/></td>
@@ -182,6 +183,18 @@
                     <th><a href="my_account_edit.jsp" class="add_to_cart_button"/>Edit</th>
                 </table>
             </form>
+        </div>
+        <div>
+            <center><h3 class="page-header">Email</h3></center>
+            <center><p>change your email</p></center>
+        </div>
+        <div>
+            <center><h3 class="page-header">PayPal account details</h3></center>
+            <center><p>transactions will be paid to this account</p></center>
+        </div>
+        <div>
+            <center><h3 class="page-header">Your items for sale</h3></center>
+            <center><p>Make changes to any item you are selling</p></center>
         </div>
 
         <div class="promo-area">

@@ -32,6 +32,7 @@ public class RegisterAction extends ActionSupport implements SessionAware {
     private String username = "";
     private String password = "";
     private String repeatedPassword = "";
+    private String email;
     private Map session;
     private String errorName;
 
@@ -46,6 +47,14 @@ public class RegisterAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map session) {
         this.session = session;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
@@ -92,7 +101,7 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             }
         }
         if (!isUserExist) {
-            UserTbl user = new UserTbl(username, password,1 ,2);
+            UserTbl user = new UserTbl(username, password, 1, email,0);
             this.session.put("user", user);
             userDao.insertNew(user);
             return SUCCESS;

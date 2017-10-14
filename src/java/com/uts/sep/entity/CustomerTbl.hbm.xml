@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 3, 2017 10:49:10 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 14, 2017 5:40:17 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.CustomerTbl" table="customer_tbl" catalog="sep" optimistic-lock="version">
-        <id name="userId" type="int">
-            <column name="user_id" />
+        <id name="customerId" type="int">
+            <column name="customer_id" />
             <generator class="assigned" />
         </id>
         <many-to-one name="orderTbl" class="com.uts.sep.entity.OrderTbl" fetch="select">
             <column name="order_id" />
         </many-to-one>
+        <property name="customerName" type="string">
+            <column name="customer_name" length="40" not-null="true" />
+        </property>
         <property name="customerAddress" type="string">
             <column name="customer_address" not-null="true" />
         </property>

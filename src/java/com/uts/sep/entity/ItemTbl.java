@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
+// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
 
 
 
@@ -15,36 +15,27 @@ public class ItemTbl  implements java.io.Serializable {
      private int stock;
      private int itemStatus;
      private double price;
-     private String itemPicUrl;
-     private String category;
-     
-     public static final int IS_ADDED = 1; 
-     /**
-      * 1 for added
-      * 0 for removed
-      */
-     private int isAdded;
+     private String image;
+     private int ownerId;
 
     public ItemTbl() {
     }
-
-	
-    public ItemTbl(String itemName, int stock, int itemStatus, double price, int isAdded) {
+    
+    public ItemTbl(String itemName, int stock, int itemStatus, double price, int ownerId) {
         this.itemName = itemName;
         this.stock = stock;
         this.itemStatus = itemStatus;
         this.price = price;
-        this.isAdded = isAdded;
+        this.ownerId = ownerId;
     }
-    public ItemTbl(String itemName, String itemDescription, int stock, int itemStatus, double price, String itemPicUrl, String category, int isAdded) {
+    public ItemTbl(String itemName, String itemDescription, int stock, int itemStatus, double price, String image, int ownerId) {
        this.itemName = itemName;
        this.itemDescription = itemDescription;
        this.stock = stock;
        this.itemStatus = itemStatus;
        this.price = price;
-       this.itemPicUrl = itemPicUrl;
-       this.category = category;
-       this.isAdded = isAdded;
+       this.image = image;
+       this.ownerId = ownerId;
     }
    
     public Integer getItemId() {
@@ -89,26 +80,19 @@ public class ItemTbl  implements java.io.Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
-    public String getItemPicUrl() {
-        return this.itemPicUrl;
+    public String getImage() {
+        return this.image;
     }
     
-    public void setItemPicUrl(String itemPicUrl) {
-        this.itemPicUrl = itemPicUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
-    public String getCategory() {
-        return this.category;
-    }
-    
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public int getIsAdded() {
-        return this.isAdded;
+    public int getOwnerId() {
+        return this.ownerId;
     }
     
-    public void setIsAdded(int isAdded) {
-        this.isAdded = isAdded;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }
 

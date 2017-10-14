@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
+// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,7 +18,7 @@ public class OrderTbl  implements java.io.Serializable {
      private Date dateCreated;
      private int customerId;
      private Double payment;
-     private Set orderDetailTbls = new HashSet(0);
+     private OrderDetailTbl orderDetailTbl;
      private Set customerTbls = new HashSet(0);
 
     public OrderTbl() {
@@ -30,13 +30,13 @@ public class OrderTbl  implements java.io.Serializable {
         this.dateCreated = dateCreated;
         this.customerId = customerId;
     }
-    public OrderTbl(ShippingTbl shippingTbl, Integer orderStatus, Date dateCreated, int customerId, Double payment, Set orderDetailTbls, Set customerTbls) {
+    public OrderTbl(ShippingTbl shippingTbl, Integer orderStatus, Date dateCreated, int customerId, Double payment, OrderDetailTbl orderDetailTbl, Set customerTbls) {
        this.shippingTbl = shippingTbl;
        this.orderStatus = orderStatus;
        this.dateCreated = dateCreated;
        this.customerId = customerId;
        this.payment = payment;
-       this.orderDetailTbls = orderDetailTbls;
+       this.orderDetailTbl = orderDetailTbl;
        this.customerTbls = customerTbls;
     }
    
@@ -82,12 +82,12 @@ public class OrderTbl  implements java.io.Serializable {
     public void setPayment(Double payment) {
         this.payment = payment;
     }
-    public Set getOrderDetailTbls() {
-        return this.orderDetailTbls;
+    public OrderDetailTbl getOrderDetailTbl() {
+        return this.orderDetailTbl;
     }
     
-    public void setOrderDetailTbls(Set orderDetailTbls) {
-        this.orderDetailTbls = orderDetailTbls;
+    public void setOrderDetailTbl(OrderDetailTbl orderDetailTbl) {
+        this.orderDetailTbl = orderDetailTbl;
     }
     public Set getCustomerTbls() {
         return this.customerTbls;

@@ -9,7 +9,7 @@
         
     <package name = "default" extends="struts-default" namespace="/">
         <action name="login" class="com.uts.sep.action.LoginAction" method="execute">
-            <result name="success">/success.jsp</result>
+            <result name="success" type="redirect">${next}</result>
             <result name="error">/fail.jsp </result>
         </action>
         <action name="register" class="com.uts.sep.action.RegisterAction" method="execute">
@@ -35,6 +35,26 @@
         </action>
         <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
             <result name="success">/details.jsp</result>
+        </action>
+        <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/addItem.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="selectItem" class="com.uts.sep.action.SelectItem" method="execute">
+            <result name="success">/itemPage.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="selectUser" class="com.uts.sep.action.SelectUser" method="execute">
+            <result name="success">/userPage.jsp</result>
+            <result name="error">/fail.jsp</result>
         </action>
     </package>
 </struts>

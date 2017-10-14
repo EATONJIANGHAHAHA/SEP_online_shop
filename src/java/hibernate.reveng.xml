@@ -41,14 +41,11 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sep"/>
-  <table-filter match-name="shipping_tbl"/>
-  <table-filter match-name="shopping_cart_tbl"/>
-  <table-filter match-name="seller_tbl"/>
-  <table-filter match-name="order_detail_tbl"/>
-  <table-filter match-name="user_tbl"/>
   <table-filter match-name="customer_tbl"/>
-  <table-filter match-name="shopping_cart_item_tbl"/>
-  <table-filter match-name="admin_tbl"/>
   <table-filter match-name="item_tbl"/>
+  <table-filter match-name="admin_tbl"/>
+  <table-filter match-name="user_tbl"/>
+  <table-filter match-name="order_detail_tbl"/>
+  <table-filter match-name="shipping_tbl"/>
   <table-filter match-name="order_tbl"/>
 </hibernate-reverse-engineering>

@@ -3,7 +3,6 @@
     Created on : 29-Aug-2017, 13:35:46
     Author     : lzy
 --%>
-
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -41,14 +40,14 @@
                         <div class="user-menu">
                             <ul>
                                 <!--<li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>-->
-<!--                                <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
-                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                                <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>-->
+                                <!--                                <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
+                                                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
+                                                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
+                                                                <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>-->
                             </ul>
                         </div>
                     </div>
-                             
+
                     <div class="col-md-4">
                         <div class="header-right">
                             <ul class="list-unstyled list-inline">
@@ -86,7 +85,7 @@
                             <h1><a href="index.html">sep<span>BAY</span></a></h1>
                         </div>                       
                     </div>
-                    
+
                     <!-- search bar form, moved to search.jsp
                     <div class="col-md-1">
                         <div class="user-menu">
@@ -105,16 +104,16 @@
                     </div>
                     -->
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-sm-6">
+                                            <div class="shopping-item">
+                                                <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
-        
-         <div class="mainmenu-area">
+
+        <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
                     <div class="navbar-header">
@@ -159,12 +158,13 @@
                 </div>
             </div>
         </div> <!-- End mainmenu area -->
+        <%@ include file = "header.jsp" %>
         <div>
             <br><br>
             <center><h1>Login In</h1></center>
             <br><br>
             <form action="login" method="post">
-                
+
                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
                     <tr>
                         <th align="right">User Name: </th>
@@ -182,8 +182,8 @@
                     </tr> 
                 </table>
             </form>
-            
-            </div>
+
+        </div>
 
         <div class="promo-area">
             <div class="zigzag-bottom"></div>

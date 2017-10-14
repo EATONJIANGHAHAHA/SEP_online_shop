@@ -1,9 +1,4 @@
-<%-- 
-    Document   : login
-    Created on : 29-Aug-2017, 13:35:46
-    Author     : lzy
---%>
-
+<%@ include file = "header.jsp" %>
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -131,8 +126,8 @@
                                 if (null == session.getAttribute("user")) {
 
                                 } else if (null != session.getAttribute("user")) {
-                                    UserTbl user = (UserTbl) session.getAttribute("user");
-                                    if (user.getUserType() == 1) {
+                                    UserTbl usinguser = (UserTbl) session.getAttribute("user");
+                                    if (usinguser.getUserType() == 1) {
                             %>
                             <li><a href="addItem.jsp">Add item</a></li>
                                 <%
@@ -172,7 +167,7 @@
                 <label class="col-sm-2 control-label">Email:</label>
 
                 <div class="col-sm-10">
-                    <input style="width:50%" type="text" class="form-control" placeholder="Email...">
+                    <input style="width:50%" type="text" name="email" class="form-control" placeholder="Email...">
                 </div>    
             </div>
             <div class="form-group">

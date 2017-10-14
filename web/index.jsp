@@ -48,12 +48,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -105,11 +105,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-sm-6">
+                                            <div class="shopping-item">
+                                                <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -125,7 +125,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div> 
-                    
+
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.html">Home</a></li>
@@ -157,7 +157,7 @@
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
-                            
+
                 </div>
             </div>
         </div>  
@@ -177,28 +177,44 @@
                     <div class="single-promo">
                         <i class="fa fa-refresh"></i>
                         <p>30 Days return</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-promo">
-                        <i class="fa fa-truck"></i>
-                        <p>Free shipping</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-promo">
-                        <i class="fa fa-lock"></i>
-                        <p>Secure payments</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-promo">
-                        <i class="fa fa-gift"></i>
-                        <p>New products</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End promo area -->
-</body>
-</html>
+
+                        <%@ include file = "header.jsp" %>
+
+                        <div>
+                            <img src="img/slide-2.jpg" style="width:100% ; height:80%;" >
+                        </div>
+
+                        <div class="promo-area">
+                            <div class="zigzag-bottom"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="single-promo">
+                                            <i class="fa fa-refresh"></i>
+                                            <p>30 Days return</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="single-promo">
+                                        <i class="fa fa-truck"></i>
+                                        <p>Free shipping</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="single-promo">
+                                        <i class="fa fa-lock"></i>
+                                        <p>Secure payments</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="single-promo">
+                                        <i class="fa fa-gift"></i>
+                                        <p>New products</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End promo area -->
+                    </body>
+                    </html>

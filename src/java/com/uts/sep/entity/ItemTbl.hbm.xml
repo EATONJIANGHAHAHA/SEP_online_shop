@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 3, 2017 10:49:10 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 14, 2017 5:40:17 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.ItemTbl" table="item_tbl" catalog="sep" optimistic-lock="version">
         <id name="itemId" type="java.lang.Integer">
@@ -23,14 +23,11 @@
         <property name="price" type="double">
             <column name="price" precision="10" not-null="true" />
         </property>
-        <property name="itemPicUrl" type="string">
-            <column name="item_pic_url" />
+        <property name="image" type="string">
+            <column name="image" length="100" />
         </property>
-        <property name="category" type="string">
-            <column name="category" />
-        </property>
-        <property name="isAdded" type="int">
-            <column name="is_added" not-null="true" />
+        <property name="ownerId" type="int">
+            <column name="owner_id" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

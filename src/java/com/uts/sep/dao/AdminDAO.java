@@ -20,9 +20,9 @@ public class AdminDAO extends BaseDAO<AdminTbl>{
 //        update(usingAdmin);
 //    }
     
-    public void updateAuthorityLevel(Integer userId, int authorityLevel){
-        AdminTbl usingAdmin = findById(userId);
-        usingAdmin.setAuthorityLevel(authorityLevel);
-        update(usingAdmin);
-    }
+//    public void updateAuthorityLevel(Integer userId, int authorityLevel){
+//        AdminTbl usingAdmin = findById(userId);
+//        usingAdmin.setAuthorityLevel(authorityLevel);
+//        update(usingAdmin);
+//    }
 }

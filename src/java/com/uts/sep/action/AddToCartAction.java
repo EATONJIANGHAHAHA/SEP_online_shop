@@ -7,9 +7,7 @@ package com.uts.sep.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.uts.sep.dao.ItemDAO;
-import com.uts.sep.dao.ShoppingCartDAO;
 import com.uts.sep.entity.ItemTbl;
-import com.uts.sep.entity.ShoppingCartTbl;
 import java.util.Map;
 import java.util.Set;
 import org.apache.struts2.interceptor.SessionAware;
@@ -25,8 +23,6 @@ public class AddToCartAction extends ActionSupport implements SessionAware {
     public static final String UNKNOWN_ERROR = "unknown error";
 
     private Map session;
-    private ShoppingCartTbl shoppingCart;
-    private ShoppingCartDAO shoppingCartDao = new ShoppingCartDAO();
     private ItemDAO itemDao = new ItemDAO();
     private ItemTbl item;
     private String itemId = "";
@@ -47,14 +43,6 @@ public class AddToCartAction extends ActionSupport implements SessionAware {
         this.item = item;
     }
 
-    public ShoppingCartTbl getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCartTbl shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
     @Override
     public void setSession(Map session) {
         this.session = session;
@@ -71,16 +59,11 @@ public class AddToCartAction extends ActionSupport implements SessionAware {
             return ERROR;
         }
         addToCart();
-        this.session.put(SHOPPING_CART, shoppingCart);
         return SUCCESS;
 
     }
 
     private void addToCart() {
-        //Set<ItemTbl> items = (Set<ItemTbl>) shoppingCart.getShoppingCartItemTbls();
-        item.setIsAdded(1);
-        //items.add(item);
-        //shoppingCart.setShoppingCartItemTbls(items);
         updateDatabase();
     }
 

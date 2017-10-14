@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 3, 2017 10:49:10 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 14, 2017 5:40:17 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.OrderDetailTbl" table="order_detail_tbl" catalog="sep" optimistic-lock="version">
-        <composite-id name="id" class="com.uts.sep.entity.OrderDetailTblId">
-            <key-property name="orderId" type="int">
-                <column name="order_id" />
-            </key-property>
-            <key-property name="itemId" type="int">
-                <column name="item_id" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="orderTbl" class="com.uts.sep.entity.OrderTbl" update="false" insert="false" fetch="select">
-            <column name="order_id" not-null="true" />
-        </many-to-one>
+        <id name="orderId" type="int">
+            <column name="order_id" />
+            <generator class="foreign">
+                <param name="property">orderTbl</param>
+            </generator>
+        </id>
+        <one-to-one name="orderTbl" class="com.uts.sep.entity.OrderTbl" constrained="true"></one-to-one>
+        <property name="itemId" type="int">
+            <column name="item_id" not-null="true" />
+        </property>
         <property name="quantity" type="int">
             <column name="quantity" not-null="true" />
         </property>

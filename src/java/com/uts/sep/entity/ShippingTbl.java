@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 3, 2017 10:49:09 PM by Hibernate Tools 4.3.1
+// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

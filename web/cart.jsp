@@ -3,10 +3,8 @@
     Created on : 29-Aug-2017, 15:00:13
     Author     : lzy
 --%>
-
 <%@page import="com.uts.sep.dao.ItemDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.uts.sep.entity.ShoppingCartTbl"%>
 <%@page import="com.uts.sep.action.AddToCartAction"%>
 <%@page import="com.uts.sep.dao.ShoppingCartDAO"%>
 <%@page import="com.uts.sep.entity.ItemTbl"%>
@@ -54,12 +52,12 @@
                         <div class="user-menu">
                             <ul>
                                 <%
-                                    if(session.getAttribute("user") != null) {
+                                    if (session.getAttribute("user") != null) {
                                 %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                <%
-                                    }
-                                %>
+                                    <%
+                                        }
+                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
@@ -110,12 +108,6 @@
                             <h1><a href="index.jsp">sep<span>BAY</span></a></h1>
                         </div>
                     </div>
-
-<!--                    <div class="col-sm-6">
-                        <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                        </div>
-                    </div>-->
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -167,46 +159,53 @@
             </div>
         </div> <!-- End mainmenu area -->
 
-        <div class="single-product-area">
-            <div class="zigzag-bottom"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">                     
-                        <div class="single-shop-product">
-                            <%
-                                if (null != itemDao.getItems()) {
-                                    for (ItemTbl usingItem : itemDao.getItems()) {
-                            %>
-                            <div class="product-upper"> 
-                                <img src="<%=usingItem.getItemPicUrl()%>" alt="">
-                            </div>
-                            <h2><a href=""><%=usingItem.getItemName()%></a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
-                            </div>
-                            <input type="button"
-                                   id="<%=usingItem.getItemId()%>"
-                                   onclick="removeFromCartFunction(this.id)"
-                                   class="add_to_cart_button"
-                                   value="Remove">
-                            <script>
-                                function removeFromCartFunction(itemNumber){
-                                    var usingItemId = document.getElementById(itemNumber).id;
-                                    $(document).ready(function(){
-                                        $.ajax({
-                                            type:"post",
-                                            url:"remove_from_cart"
-                                        })
-                                    })
-                                }
-                            </script>
-                            <%
-                                    }
-                                }
-                            %>
+        <!--        <div class="single-product-area">-->
+        <%@ include file = "header.jsp" %>
+    <center>
+        <h1>cart of <s:property value="#session.user.userName"/></h1>
+    </center>
+
+    <div class="promo-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">                     
+                    <div class="single-shop-product">
+                        <%
+                            if (null != itemDao.getItems()) {
+                                for (ItemTbl usingItem : itemDao.getItems()) {
+                        %>
+                        <div class="product-upper"> 
+                            <img src="<%=usingItem.getImage()%>" alt="">
                         </div>
+                        <h2><a href=""><%=usingItem.getItemName()%></a></h2>
+                        <div class="product-carousel-price">
+                            <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
+                        </div>
+                        <input type="button"
+                               id="<%=usingItem.getItemId()%>"
+                               onclick="removeFromCartFunction(this.id)"
+                               class="add_to_cart_button"
+                               value="Remove">
+                        <script>
+                            function removeFromCartFunction(itemNumber) {
+                                var usingItemId = document.getElementById(itemNumber).id;
+                                $(document).ready(function () {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "remove_from_cart"
+                                    })
+                                })
+                            }
+                        </script>
+                        <%
+                                }
+                            }
+                        %>
                     </div>
                 </div>
             </div>
-    </body>
+        </div>
+    </div>
+</body>
 </html>
