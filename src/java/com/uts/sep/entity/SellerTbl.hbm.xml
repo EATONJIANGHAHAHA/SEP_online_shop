@@ -3,13 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.uts.sep.entity.AdminTbl" table="admin_tbl" catalog="sep" optimistic-lock="version">
-        <id name="userId" type="java.lang.Integer">
+    <class name="com.uts.sep.entity.SellerTbl" table="seller_tbl" catalog="sep" optimistic-lock="version">
+        <id name="userId" type="int">
             <column name="user_id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
-        <property name="authorityLevel" type="int">
-            <column name="authority_level" not-null="true" />
+        <property name="sellerCredit" type="int">
+            <column name="seller_credit" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

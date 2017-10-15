@@ -5,26 +5,40 @@
  */
 package com.uts.sep.action;
 
+import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.ItemDAO;
+import com.uts.sep.model.Item;
 import com.uts.sep.entity.ItemTbl;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import java.util.ArrayList;
+import java.util.List;
+
+//image file stuff
 import org.apache.commons.io.FileUtils;
 import java.io.File;
-import java.util.ArrayList;
-import org.apache.struts2.ServletActionContext;
+import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import javax.servlet.http.Part;
+import java.io.IOException;
 
 /**
  *
  * @author lzy
  */
 public class SearchAction extends ActionSupport implements SessionAware {
-    private ItemDAO itemDAO = new ItemDAO();
-    private Map session;
+
+    //variables used for session variables used in search.jsp
     private String keyword = "";
     private List<ItemTbl> itemlist = new ArrayList<ItemTbl>();
     
@@ -64,7 +78,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
         this.myFile = myFile;
     }
     //session variable used to communicate with the view
-    
+    private Map session;
 
     @Override
     public void setSession(Map session) {
@@ -114,27 +128,49 @@ public class SearchAction extends ActionSupport implements SessionAware {
         this.ownerid = ownerid;
     }
     
+    
+    //private HttpServletRequest servletRequest;
+    /*
+    public List<ItemTbl> getItems(){
+        return itemlist; 
+    }
+    */
+    //@Override
     public String searchItems() throws Exception {
+
+        //this.session.put("keyword", keyword);
+        //itemname = (String)this.session.get("keyword");
+        
         ItemDAO itemDao = new ItemDAO();
         itemlist = itemDao.searchItems(keyword);
+        
         this.session.put("itemlist", itemlist);
+        
         return SUCCESS;
+
     }
     
     public String addItem() throws Exception {
+        
         ItemDAO itemDao = new ItemDAO();
-        destPath = ServletActionContext.getServletContext().getRealPath("/").concat("img");
-        // https://www.tutorialspoint.com/struts_2/struts_file_uploads.htm
-
+        destPath = ServletActionContext.getServletContext().getRealPath("/").concat("img");// https://www.tutorialspoint.com/struts_2/struts_file_uploads.htm
+//        try{
      	File fileToCreate = new File(destPath,myFileFileName);
         FileUtils.copyFile(myFile, fileToCreate);//copying source file to new file 
-
+//  
+//      }catch(IOException e){
+//         e.printStackTrace();
+//         return ERROR;
+//      }
         //https://www.javatpoint.com/struts-2-file-upload-example THIS IS THE WAY
+        
+        
+        
         itemDao.addItem(itemname, itemdescription, itemprice, myFileFileName, Integer.valueOf(ownerid));
         itemlist = itemDao.getAll(BaseDAO.ITEM_TBL);
+        
         this.session.put("itemlist", itemlist);
-        itemDAO.setItems(itemDAO.searchModels(BaseDAO.SEARCH_BY_ITEM_DESCRIPTION,keyword));
-        this.session.put("itemlist", itemDAO.getItems());
+        
         return SUCCESS;
     }
 }

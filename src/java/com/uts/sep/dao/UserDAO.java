@@ -5,9 +5,14 @@
  */
 package com.uts.sep.dao;
 
+import com.uts.sep.entity.CustomerTbl;
 import com.uts.sep.entity.UserTbl;
+import org.hibernate.Session;
 import java.util.*;
-import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  *
@@ -18,9 +23,6 @@ public class UserDAO extends BaseDAO<UserTbl>{
     
     public static final short LOGING_IN = 1;
     public static final short LOGED_OUT = 0;
-
-    List<UserTbl> users = getAll(USER_TBL);
-
     
     interface Updater {
         
@@ -35,6 +37,31 @@ public class UserDAO extends BaseDAO<UserTbl>{
             updater.onUpdate(usingUser);
             update(usingUser);
         }
+    }
+
+    public List<UserTbl> getUserById(int selectedid){
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;//operation
+        
+        List<UserTbl> user = null;
+        String hql = "from UserTbl U where U.userId = " + String.valueOf(selectedid);
+        //String hql = "from ItemTbl";
+        try {
+            tx = session.beginTransaction();// open connection
+            Query query = session.createQuery(hql);//using the name from java
+            user = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return user;
     }
     
     public void updateLoginStatus(Integer userId, int status){
@@ -64,30 +91,12 @@ public class UserDAO extends BaseDAO<UserTbl>{
     }
     
     public UserTbl findByLoginStatus(int loginStatus){
-        for(UserTbl user: users){
+        List<UserTbl> lists = getAll(USER_TBL);
+        for(UserTbl user: lists){
             if(user.getLoginStatus() == loginStatus){
                 return user;
             }
         }
         return null;
-    }
-    
-    public UserTbl findByUserType(int userType){
-        for(UserTbl user: users){
-            if(user.getUserType() == userType){
-                return user;
-            }
-        }
-        return null;
-    }
-    
-    public List<UserTbl> getUsersById(int id){
-        List<UserTbl> usingList = new ArrayList<UserTbl>();
-        for(UserTbl user: users){
-            if(user.getUserId()== id){
-                usingList.add(user);
-            }
-        }
-        return usingList;
     }
 }

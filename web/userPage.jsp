@@ -5,7 +5,6 @@
 --%>
 
 <%@ include file = "header.jsp" %>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <h1><s:property value="#session.itemowner[0].userName"/>'s user page</h1>
 <img src="img/user.png" class="img-thumbnail" alt="" style="border:1">
 <h2>Email: <a href="#"><s:property value="#session.itemowner[0].email"/></a></h2>

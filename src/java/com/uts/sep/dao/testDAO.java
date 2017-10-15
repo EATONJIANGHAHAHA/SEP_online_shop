@@ -17,7 +17,9 @@ import java.util.*;
 public class testDAO {
 
     public static void main(String[] args) {
-    
+        //CustomerDAO dao = new CustomerDAO();
+        //CustomerTbl customer = dao.findById(1);
+        //System.out.println(customer.getCustomerName());
     }
 
 }

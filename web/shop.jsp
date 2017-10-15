@@ -1,4 +1,3 @@
-<%@page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>  
 <%@page import="com.uts.sep.entity.UserTbl"%>
 <%@page import="com.uts.sep.dao.BaseDAO"%>
 <%@page import="com.uts.sep.dao.ItemDAO"%>
@@ -16,6 +15,7 @@
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+
         <!-- Bootstrap -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
@@ -27,9 +27,6 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="css/responsive.css">
 
-        <!--jquery-->
-        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
-
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -39,32 +36,25 @@
     </head>
     <body>
         <%! ItemDAO itemDAO = new ItemDAO(); %>
-        <%! UserTbl user;%>
-        <%! ItemTbl item;%>
-        <%! int looper = 0;%>
+        <%! List<ItemTbl> itemList = itemDAO.getAll(BaseDAO.ITEM_TBL);%>
+        <%! UserTbl user; %>
         <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <%
-                                    if (session.getAttribute("user") != null) {
-                                %>
                                 <li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>
-                                    <%
-                                        }
-                                    %>
                                 <li><a href="register.jsp"><i class="fa fa-user"></i> Registration</a></li>
                                 <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
+                                <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
                                     <% if (session.getAttribute("user") == null) { %>
                                 <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                                     <% } else {
+                                            user = (UserTbl) session.getAttribute("user");
                                     %>
-                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout
-                                        <%  UserTbl user = (UserTbl) session.getAttribute("user");
-                                            out.print(user.getUserName()); %></a></li>
+                                <li><a href="logout.jsp"><i class="fa fa-user"></i> Logout 
+                                        <% out.print(user.getUserName()); %></a></li>
                                         <% } %>
                             </ul>
                         </div>
@@ -106,11 +96,11 @@
                         </div>
                     </div>
 
-                    <!--                    <div class="col-sm-6">
-                                            <div class="shopping-item">
-                                                <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                                            </div>
-                                        </div>-->
+                    <div class="col-sm-6">
+                        <div class="shopping-item">
+                            <a href="cart.jsp">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -128,32 +118,13 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="details.jsp">Single product</a></li>
-                                <%
-                                    if (null != session.getAttribute("user")) {
-                                %>
+                            <li><a href="index.jsp">Home</a></li>
+                            <li class="active"><a href="shop.jsp">Shop page</a></li>
+                            <li><a href="single-product.html">Single product</a></li>
                             <li><a href="cart.jsp">Cart</a></li>
-                                <%
-                                    }
-                                %> 
-                            <li><a href="#">Checkout</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="search.jsp">Search</a></li>
-
-                            <%
-                                if (null == session.getAttribute("user")) {
-
-                                } else if (null != session.getAttribute("user")) {
-                                    user = (UserTbl) session.getAttribute("user");
-                                    if (user.getUserType() == 1) {
-                            %>
-                            <li><a href="addItem.jsp">Add item</a></li>
-                                <%
-                                        }
-                                    }
-                                %>
+                            <li><a href="#">Others</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>  
@@ -178,57 +149,70 @@
             <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">                     
+                    <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
-                            <%
-                                for (ItemTbl usingItem : itemDAO.getItems()) {
-                            %>
-                            <div class="product-upper"> 
-                                <img src="<%=usingItem.getItemPicUrl()%>" alt="">
+                            <div class="product-upper">
+                                <img src="img/harry_potter.jpg" alt="">
                             </div>
-                            <h2><a href=""><%=usingItem.getItemName()%></a></h2>
+                            <h2><a href="">Harry Potter Box Set</a></h2>
                             <div class="product-carousel-price">
-                                <ins>$<%=usingItem.getPrice()%></ins> <del>$299.00</del>
-                            </div> 
+                                <ins>$99.00</ins> <del>$299.00</del>
+                            </div>  
+
                             <div class="product-option-shop">
-                                <%
-                                    if (null != user) {
-                                %>
-                                <input type="button" 
-                                       id="<%=usingItem.getItemId()%>" 
-                                       onclick="addToCartFunction(this.id)"
-                                       class="add_to_cart_button"
-                                       value="Add To Cart">
-                                <%
-                                    }
-                                %>
-                                <a href="details.jsp">Details</a>
-                            </div>
-                            
-                            <script>
-                                function addToCartFunction(itemNumber) {
-                                    var usingItemId = document.getElementById(itemNumber).id;
-                                    $(document).ready(function(){
-                                        $.ajax({
-                                            type:"post",
-                                            url:"add_to_cart",
-                                            datatype:"text",
-                                            data:{
-                                                itemId:usingItemId
-                                            },
-                                            success:function(){},
-                                            error: function(){}
-                                        });
-                                        alert("Product is added to Cart.");
-                                    });
-                                }
-                            </script>
-                            <%
-                                }
-                            %>
+                                <a class="add_to_cart_button" action="add_to_cart" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" >Add to cart</a>
+                            </div>                       
                         </div>
                     </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                <img src="img/iphone_7.jpg" alt="">
+                            </div>
+                            <h2><a href="">Iphone 7 </a></h2>
+                            <div class="product-carousel-price">
+                                <ins>$899.00</ins> <del>$999.00</del>
+                            </div>  
+
+                            <div class="product-option-shop">
+                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" >Add to cart</a>
+                            </div>                       
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                <img src="img/playstation_4_pro.png" alt="">
+                            </div>
+                            <h2><a href="">Play Station 4 Pro</a></h2>
+                            <div class="product-carousel-price">
+                                <ins>$399.00</ins> <del>$499.00</del>
+                            </div>  
+
+                            <div class="product-option-shop">
+                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" >Add to cart</a>
+                            </div>                       
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                <img src="img/macbook_pro.png" alt="">
+                            </div>
+                            <h2><a href="">Macbook Pro</a></h2>
+                            <div class="product-carousel-price">
+                                <ins>$1999.00</ins> <del>$2999.00</del>
+                            </div>  
+
+                            <div class="product-option-shop">
+                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" >Add to cart</a>
+                            </div>                       
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
+        </div>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 14, 2017 5:40:17 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 25, 2017 10:57:33 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.uts.sep.entity.OrderTbl" table="order_tbl" catalog="sep" optimistic-lock="version">
         <id name="orderId" type="java.lang.Integer">
@@ -23,7 +23,12 @@
         <property name="payment" type="java.lang.Double">
             <column name="payment" precision="10" scale="0" />
         </property>
-        <one-to-one name="orderDetailTbl" class="com.uts.sep.entity.OrderDetailTbl"></one-to-one>
+        <set name="orderDetailTbls" table="order_detail_tbl" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="order_id" not-null="true" />
+            </key>
+            <one-to-many class="com.uts.sep.entity.OrderDetailTbl" />
+        </set>
         <set name="customerTbls" table="customer_tbl" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="order_id" />

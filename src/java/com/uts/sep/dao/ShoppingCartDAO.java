@@ -5,12 +5,12 @@
  */
 package com.uts.sep.dao;
 
-import com.uts.sep.entity.OrderDetailTbl;
+import com.uts.sep.entity.ShoppingCartTbl;
 
 /**
  *
  * @author eaton
  */
-public class OrderDetailDAO extends BaseDAO<OrderDetailTbl>{
+public class ShoppingCartDAO extends BaseDAO<ShoppingCartTbl>{
     
 }

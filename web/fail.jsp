@@ -4,8 +4,6 @@
     Author     : lzy
 --%>
 
-<%@page import="com.uts.sep.entity.UserTbl"%>
-<%@page import="com.uts.sep.action.AddToCartAction"%>
 <%@page import="com.uts.sep.action.LoginAction"%>
 <%@page import="com.uts.sep.action.ModifyUserDetailAction"%>
 <%@page import="com.uts.sep.action.RegisterAction"%>
@@ -92,11 +90,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
+                    <div class="col-sm-6">
                         <div class="shopping-item">
                             <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -114,32 +112,13 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="details.jsp">Single product</a></li>
-                                <%
-                                    if (null != session.getAttribute("user")) {
-                                %>
-                            <li><a href="cart.jsp">Cart</a></li>
-                                <%
-                                    }
-                                %> 
-                            <li><a href="#">Checkout</a></li>
+                            <li class="active"><a href="index.jsp">Home</a></li>
+                            <li><a href="shop.html">Shop page</a></li>
+                            <li><a href="single-product.html">Single product</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="search.jsp">Search</a></li>
-
-                            <%
-                                if (null == session.getAttribute("user")) {
-
-                                } else if (null != session.getAttribute("user")) {
-                                    UserTbl user = (UserTbl) session.getAttribute("user");
-                                    if (user.getUserType() == 1) {
-                            %>
-                            <li><a href="addItem.jsp">Add item</a></li>
-                                <%
-                                        }
-                                    }
-                                %>
+                            <li><a href="#">Others</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>  
@@ -153,33 +132,17 @@
             errorName = (String) session.getAttribute("error");
             if (errorName.equals(RegisterAction.USER_ALREADY_EXIST_ERROR)) { %>
     <center><h1>Registration Failed, User Already Exist.</h1></center>
-        <%
-        } else if (errorName.equals(RegisterAction.FORM_NOT_COMPLETE_ERROR)) {
-        %>
+            <%  } else if (errorName.equals(RegisterAction.FORM_NOT_COMPLETE_ERROR)) { %>
     <center><h1>Registration Failed, Please Complete Mandatory Fileds.</h1></center>
-        <%
-        } else if (errorName.equals(RegisterAction.PASSWORD_NOT_REPEATED_ERROR)) {
-        %>
+            <%  } else if (errorName.equals(RegisterAction.PASSWORD_NOT_REPEATED_ERROR)) { %>
     <center><h1>Registration Failed, Please Check Password.</h1></center>
-        <%
-        } else if (errorName.equals(ModifyUserDetailAction.NOT_LOGIN_IN_ERROR)) {
-        %>
+            <%  } else if (errorName.equals(ModifyUserDetailAction.NOT_LOGIN_IN_ERROR)) { %>
     <center><h1>Failed, Please Login first.</h1></center>
-        <%
-        } else if (errorName.equals(ModifyUserDetailAction.PASSWORD_NOT_MATCH_ERROR)) {
-        %>
+            <%  } else if (errorName.equals(ModifyUserDetailAction.PASSWORD_NOT_MATCH_ERROR)) { %>
     <center><h1>Failed, the password you entered is not correct.</h1></center>
-        <%
-        } else if (errorName.equals(LoginAction.USER_NOT_EXIST_ERROR)) {
-        %>
+            <%  } else if (errorName.equals(LoginAction.USER_NOT_EXIST_ERROR)) { %>
     <center><h1>Failed, User does not exist. Please Register before using.</h1></center>
-        <%
-        } else if (errorName.equals(AddToCartAction.UNKNOWN_ERROR)) {
-        %>
-    <center><h1>Failed.</h1></center>
-        <%
-            }
-        %>
+            <%  } %>
     <center><p>The page will be re-directed in 3 seconds. Please wait a moment...</p></center>
     <br><br>
 

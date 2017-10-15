@@ -1,8 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
-
-import java.util.List;
-
+// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
 
 
 
@@ -16,18 +13,24 @@ public class UserTbl  implements java.io.Serializable {
      private String userName;
      private String userPassword;
      private int loginStatus;
-     private String userEmail;
-     private int userType;
+     private String email;
 
     public UserTbl() {
     }
 
-    public UserTbl(String userName, String userPassword, int loginStatus, String userEmail, int userType) {
+    public UserTbl(String userName, String userPassword, int loginStatus, String email) {
        this.userName = userName;
        this.userPassword = userPassword;
        this.loginStatus = loginStatus;
-       this.userEmail = userEmail;
-       this.userType = userType;
+       this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
    
     public Integer getUserId() {
@@ -51,27 +54,26 @@ public class UserTbl  implements java.io.Serializable {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+    
+    /**
+     * 0 for logged out, 1 for login in. 
+     * @return 
+     */
     public int getLoginStatus() {
         return this.loginStatus;
     }
     
+    /**
+     * 0 for logged out, 1 for login in. 
+     * @param loginStatus 
+     */
     public void setLoginStatus(int loginStatus) {
         this.loginStatus = loginStatus;
     }
-    public String getUserEmail() {
-        return this.userEmail;
-    }
-    
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-    public int getUserType() {
-        return this.userType;
-    }
-    
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
+
+
+
+
 }
 
 

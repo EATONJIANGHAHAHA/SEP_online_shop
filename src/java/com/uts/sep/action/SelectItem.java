@@ -51,7 +51,7 @@ public class SelectItem extends ActionSupport implements SessionAware{
         UserDAO userDao = new UserDAO();
         
         itemlist = itemDao.getItemByID(test);
-        itemowner = userDao.getUsersById(itemlist.get(0).getOwnerId()); //itemlist[0].ownerId
+        itemowner = userDao.getUserById(itemlist.get(0).getOwnerId()); //itemlist[0].ownerId
         
         this.session.put("itemlist", itemlist);
         this.session.put("itemowner", itemowner);

@@ -6,10 +6,12 @@
 package com.uts.sep.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.uts.sep.dao.BaseDAO;
 import com.uts.sep.dao.UserDAO;
 import com.uts.sep.entity.UserTbl;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
+import java.util.List;
 
 /**
  *
@@ -83,14 +85,13 @@ public class ModifyUserDetailAction extends ActionSupport implements SessionAwar
     @Override
     public String execute() throws Exception {
         UserDAO dao = new UserDAO();
-        user = dao.findByLoginStatus(1);
-        if (null == user) {
+        UserTbl usingUser = dao.findByLoginStatus(1);
+        if (null == usingUser) {
             this.session.put(ERROR, NOT_LOGIN_IN_ERROR);
             return ERROR;
         } else if (dao.isPasswordCorrect(user.getUserId(), checkPassword)) {
-            user.setUserName(newName);
-            user.setUserPassword(newPassword);
-            dao.update(user);
+            dao.updateUserName(usingUser.getUserId(), newName);
+            dao.updatePassword(usingUser.getUserId(), newPassword);
             this.session.put(MODIFY_USER_DETAIL_TABLE, SUCCESS);
             return SUCCESS;
         } else if (!dao.isPasswordCorrect(user.getUserId(), checkPassword)) {

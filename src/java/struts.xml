@@ -22,20 +22,6 @@
             <result name="error">/fail.jsp</result>
         </action>
         <!-- add item -->
-        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute">
-            <result name="success">/</result>
-            <result name="error">/fail.jsp</result>
-        </action>
-        <action name="modify_user" class="com.uts.sep.action.StartEditUser" method="execute">
-            <result name="success">/my_account_edit.jsp</result>
-            <result name="error">/fail.jsp</result>
-        </action>
-        <action name="view_detail" class="com.uts.sep.action.ViewDetailAction" method="execute">
-            <result name="success">/details.jsp</result>
-        </action>
-        <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
-            <result name="success">/details.jsp</result>
-        </action>
         <action name="addItem" class="com.uts.sep.action.SearchAction" method="addItem">
             <interceptor-ref name="fileUpload">  
                 <param name="maximumSize">2097152</param>  
@@ -56,5 +42,6 @@
             <result name="success">/userPage.jsp</result>
             <result name="error">/fail.jsp</result>
         </action>
+<!--        <action name="add_to_cart" class="com.uts.sep.action.AddToCartAction" method="execute"/>-->
     </package>
 </struts>

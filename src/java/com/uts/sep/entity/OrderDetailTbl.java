@@ -1,5 +1,5 @@
 package com.uts.sep.entity;
-// Generated Oct 14, 2017 5:40:16 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2017 10:57:32 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,9 +9,9 @@ package com.uts.sep.entity;
 public class OrderDetailTbl  implements java.io.Serializable {
 
 
-     private int orderId;
+     private OrderDetailTblId id;
+     private ItemTbl itemTbl;
      private OrderTbl orderTbl;
-     private int itemId;
      private int quantity;
      private String orderDetailName;
      private double unitCost;
@@ -20,21 +20,29 @@ public class OrderDetailTbl  implements java.io.Serializable {
     public OrderDetailTbl() {
     }
 
-    public OrderDetailTbl(OrderTbl orderTbl, int itemId, int quantity, String orderDetailName, double unitCost, double subtotal) {
+    public OrderDetailTbl(OrderDetailTblId id, ItemTbl itemTbl, OrderTbl orderTbl, int quantity, String orderDetailName, double unitCost, double subtotal) {
+       this.id = id;
+       this.itemTbl = itemTbl;
        this.orderTbl = orderTbl;
-       this.itemId = itemId;
        this.quantity = quantity;
        this.orderDetailName = orderDetailName;
        this.unitCost = unitCost;
        this.subtotal = subtotal;
     }
    
-    public int getOrderId() {
-        return this.orderId;
+    public OrderDetailTblId getId() {
+        return this.id;
     }
     
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(OrderDetailTblId id) {
+        this.id = id;
+    }
+    public ItemTbl getItemTbl() {
+        return this.itemTbl;
+    }
+    
+    public void setItemTbl(ItemTbl itemTbl) {
+        this.itemTbl = itemTbl;
     }
     public OrderTbl getOrderTbl() {
         return this.orderTbl;
@@ -42,13 +50,6 @@ public class OrderDetailTbl  implements java.io.Serializable {
     
     public void setOrderTbl(OrderTbl orderTbl) {
         this.orderTbl = orderTbl;
-    }
-    public int getItemId() {
-        return this.itemId;
-    }
-    
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
     }
     public int getQuantity() {
         return this.quantity;

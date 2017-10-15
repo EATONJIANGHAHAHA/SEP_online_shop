@@ -43,10 +43,10 @@
                     <div class="col-md-8">
                         <div class="user-menu">
                             <ul>
-                                <!--<li><a href="my_account.jsp"><i class="fa fa-user"></i> My Account</a></li>-->
-<!--                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
+                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                                <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>-->
+                                <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -89,11 +89,11 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-sm-6">
+                    <div class="col-sm-6">
                         <div class="shopping-item">
                             <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div> <!-- End site branding area -->
@@ -111,11 +111,13 @@
                     </div> 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="shop.jsp">Shop page</a></li>
-                            <li><a href="details.jsp">Single product</a></li>
+                            <li class="active"><a href="index.jsp">Home</a></li>
+                            <li><a href="shop.html">Shop page</a></li>
+                            <li><a href="single-product.html">Single product</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="#">Category</a></li>
-                            <li><a href="search.jsp">Search</a></li>
+                            <li><a href="#">Others</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>  
@@ -131,10 +133,9 @@
                     if (null == user) { %>
             <center><p>No User is login in.</p></center>
                 <%  } else {
-                        user.setLoginStatus(UserDAO.LOGED_OUT);
-                        userDAO.update(user);
                         session.removeAttribute("user");
-                    }%>
+                        user.setLoginStatus(UserDAO.LOGED_OUT);
+                    }   %>
             <center><p>The page will be re-directed in 5 seconds. Please wait a moment...</p></center>
             <br><br>
 

@@ -6,38 +6,23 @@
 package com.uts.sep.dao;
 
 import com.uts.sep.entity.ItemTbl;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import java.util.*;
 import org.hibernate.Transaction;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistry;
+import com.uts.sep.model.Item; //dont need?
+import java.io.File;
 /**
  *
  * @author lzy
  */
 public class ItemDAO extends BaseDAO<ItemTbl>{
-    
-    List<ItemTbl> items = getAll(ITEM_TBL);
-    SessionFactory factory = new Configuration().configure().buildSessionFactory();;
 
-    public List<ItemTbl> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemTbl> items) {
-        this.items = items;
-    }
-    public void addItem(String itemName){
-        ItemTbl newitem = new ItemTbl(itemName, 20, 1, 50, 0);
-        items.add(newitem);
-        insertNew(newitem);
-    }
-    
-    public void removeItem(Integer id){
-        ItemTbl item = findById(id);
-        items.remove(item);
-    }
+    private static SessionFactory factory = null;
     
     public List<ItemTbl> getItemByOwner(String ownerId) {
         factory = new Configuration().configure().buildSessionFactory();
@@ -128,6 +113,53 @@ public class ItemDAO extends BaseDAO<ItemTbl>{
             if (tx != null) {
                 tx.rollback();
             }
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
+        
     }
+    //private static SessionFactory factory;
+    
+    //method to get all the items
+//    public List<ItemTbl> getAllItems() {
+//        factory = new Configuration().configure().buildSessionFactory();
+//        Session session = factory.openSession();
+//        Transaction tx = null;
+//        List<ItemTbl> list = null;
+//        try {
+//            tx = session.beginTransaction();
+//            list = session.createQuery("FROM ItemTbl").list();
+//            tx.commit();
+//        } catch (HibernateException e) {
+//            if (tx != null) {
+//                tx.rollback();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//        return list;
+//    }
+//
+//    //method to upadte stock
+//    public void updateStock(Integer itemId, int stock) {
+//        factory = new Configuration().configure().buildSessionFactory();
+//        Session session = factory.openSession();
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            ItemTbl item = (ItemTbl) session.get(ItemTbl.class, itemId);
+//            item.setStock(stock);
+//            session.update(item);
+//            tx.commit();
+//        } catch (HibernateException e) {
+//            if (tx != null) {
+//                tx.rollback();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//    }
 }
