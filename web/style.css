@@ -1021,3 +1021,8 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 #products .item .number-in-stock.few { color: #E0A14F; }
 #products .item .number-in-stock.none { color: #C45E5E; }
+
+/*simple checkout*/
+.submit-button {
+  margin-top: 10px;
+}
