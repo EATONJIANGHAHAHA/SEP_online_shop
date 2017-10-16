@@ -8,7 +8,7 @@
                 <div class="col-sm-6 col-md-3 item">
                     <div class="thumbnail">
                         <s:a href="%{testURL}">
-                            <img src="img/<s:property value='itemImage' />" class="img-responsive list-group-image" alt="image" width="200" height="200"/> 
+                            <img src="img/<s:property value='itemImage' />" class="img-responsive list-group-image" alt="image" width="150" height="150"/> 
                         </s:a>
                         <div class="caption">
                             <h4 class="group list-group-item-heading">
