@@ -22,8 +22,8 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="css/owl.carousel.css">
-        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="style.css">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -125,8 +125,8 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.jsp">Home</a></li>
-                            <!--<li><a href="shop.jsp">Shop page</a></li>-->
-                            <!--<li><a href="single-product.html">Single product</a></li>-->
+                            <li><a href="itemItems.jsp">Buy</a></li>
+                            <li><a href="addItem.jsp">Sell</a></li>
                             <!--<li><a href="cart.jsp">Cart</a></li>-->
                             <!--<li><a href="checkout.html">Checkout</a></li>-->
                             <!--<li><a href="#">Category</a></li>-->
@@ -134,18 +134,18 @@
                             <% if (user != null) { %>
                             <li><a href="addItem.jsp">Add item</a></li>
                             <% }%>
-                            <li>
-                                <form action="search" method="post"> <!-- what does method="get" do? -->
+<!--                            <li>
+                                <form action="search" method="post">  what does method="get" do? 
                                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
                                     <tr>
-                                        <!-- keyword is a variable used by SearchAction specified by struts.xml -->
+                                         keyword is a variable used by SearchAction specified by struts.xml 
                                         <td><input type="text" name="keyword" placeholder="Search"></td>
                                         <td colspan="2" align="right"><input type="submit" label="Search" class="btn btn-primary" text="Search"></td>
                                     </tr>
 
                                 </table>
                                 </form>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>  
                 </div>

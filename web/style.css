@@ -1026,3 +1026,19 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .submit-button {
   margin-top: 10px;
 }
+
+
+/*index*/
+.bg-img{
+    height: 100vh !important;
+}
+.bg-img {
+    background-image: url(img/slide-2.jpg) !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100% !important;
+    content: "";
+}
+
+form.search-form {
+    padding: 5%;
+}

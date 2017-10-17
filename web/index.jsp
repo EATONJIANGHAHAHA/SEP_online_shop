@@ -1,39 +1,18 @@
 <%@ include file = "header.jsp" %>
 
-        <div>
-            <img src="img/slide-2.jpg" style="width:100% ; height:80%;" >
-        </div>
+<div class="bg-img">
+<!--               <img src="img/slide-2.jpg" style="width:100% ; height:80%;" >-->
+    <form action="search" method="post" class="search-form">  <!--what does method="get" do?--> 
+        <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
+            <tr>
+<!--                 keyword is a variable used by SearchAction specified by struts.xml -->
+                <td><input type="text" name="keyword" placeholder="Search"></td>
+                <td colspan="2" align="right"><input type="submit" label="Search" class="btn btn-primary" text="Search"></td>
+            </tr>
+        </table>
+    </form>
+</div>
 
-        <div class="promo-area">
-            <div class="zigzag-bottom"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-refresh"></i>
-                            <p>30 Days return</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-truck"></i>
-                            <p>Free shipping</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-lock"></i>
-                            <p>Secure payments</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-promo">
-                            <i class="fa fa-gift"></i>
-                            <p>New products</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- End promo area -->
-    </body>
-</html>
+
+
+<%@ include file = "footer.jsp" %> <!-- End promo area -->

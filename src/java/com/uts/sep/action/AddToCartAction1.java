@@ -13,7 +13,7 @@ import org.apache.struts2.interceptor.SessionAware;
  *
  * @author eaton
  */
-public class AddToCartAction extends ActionSupport implements SessionAware{
+public class AddToCartAction1 extends ActionSupport implements SessionAware{
     
     private Map session;
 

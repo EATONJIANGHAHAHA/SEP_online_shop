@@ -10,7 +10,7 @@
                         <s:a href="%{testURL}">
                             <img src="img/<s:property value='itemImage' />" class="img-responsive list-group-image" alt="image" width="150" height="150"/> 
                         </s:a>
-                        <div class="caption">
+                        <form class="caption" method="POST" action="cart.java">
                             <h4 class="group list-group-item-heading">
                                 <s:url action="selectItem" var="testURL"> <!-- (for index format user login button)use a form instead, method="post" does not work-->
                                     <s:param name="selectedId" value="itemId" />
@@ -27,10 +27,16 @@
                                     <div class="number-in-stock" >
                                         <s:property value="stock"/> in stock
                                     </div>
-                                    <button class="btn btn-success" onclick="" role="button">Add to cart</button>
+
+                                    <% if (request.getParameterNames() != null) {
+                                    %>
+                                    <%= request.getParameter("cartBtn")%>
+
+                                    <% } %>
+                                    <input type="button" class="btn btn-success" id="cartBtn" name="cartBtn" value="Add to Cart" role="button" onclick="window.location.href = 'cart.jsp'; return false;" />
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </s:iterator>
@@ -41,7 +47,7 @@
         session.setAttribute("itemlist", null);
 
     %>
-    </div>
+</div>
 
 <!-- Beginning of OLD search results area of the web page -->
 <div>
