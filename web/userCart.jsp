@@ -16,8 +16,10 @@
         <%@ include file = "listItems.jsp" %>
         <s:url action="checkout" var="checkoutURL">
             <s:param name="selectedUserId" value="#session.user.userId"/>
+            <s:param name="purchaseList" value="#session.itemlist"/>
         </s:url>
         <s:a href="%{checkoutURL}">Checkout items</s:a>
+        
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 
   <!-- Identify your business so that you can collect the payments. -->
