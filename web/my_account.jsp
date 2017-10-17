@@ -26,18 +26,11 @@
         </div>
         <div>
             <center><h3 class="page-header">Email</h3></center>
-            <center><p>change your email</p></center>
+            <center><p><s:property value="#session.user.email"/></p></center>
+            <p style="text-align: center">This email address will also be used as your PayPal account for payments made to you.</p>
         </div>
-        <div>
-            <center><h3 class="page-header">PayPal account details</h3></center>
-            <center><p>transactions will be paid to this account</p></center>
-        </div>
-        <div>
-            <center><h3 class="page-header">Your items for sale</h3></center>
-            <center><p>Make changes to any item you are selling</p></center>
-        </div>
-
-        <div class="promo-area">
+        
+                <div class="promo-area">
             <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
