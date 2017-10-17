@@ -60,6 +60,7 @@ public class SelectUserCart extends ActionSupport implements SessionAware{
         ShoppingCartDAO cartDAO = new ShoppingCartDAO();
         List<ShoppingCartTbl> cartlist = cartDAO.getAll("ShoppingCartTbl");
         boolean itemExists = true;
+        
         if(selectedItemId != 0){
             //add entry into shopping_cart_tbl
             //ShoppingCartTbl cartItem = new ShoppingCartTbl(selectedItemId, selectedUserId);
@@ -76,6 +77,7 @@ public class SelectUserCart extends ActionSupport implements SessionAware{
                 }
                 if (itemExists == false) {
                     cartDAO.addCartItem(selectedItemId, selectedUserId);
+                    //this.session.put("isItemAdded", "1");
                 }
             }
 
@@ -91,12 +93,13 @@ public class SelectUserCart extends ActionSupport implements SessionAware{
             
         }
         else {
-            this.session.put("isItemAdded", 0);
+            //this.session.put("isItemAdded", "0");
         }
         List<ShoppingCartTbl> displaylist = cartDAO.getAll("ShoppingCartTbl");
         for(ShoppingCartTbl c : displaylist) {
             if(c.getUserId() == selectedUserId) {
                 itemlist.add(itemDao.findById(c.getItemId()));
+                //this.session.put("isItemAdded", "3");
             }
         }
         

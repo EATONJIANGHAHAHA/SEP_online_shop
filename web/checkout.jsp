@@ -1,24 +1,11 @@
 <%-- 
-    Document   : userCart
-    Created on : Oct 17, 2017, 9:34:56 AM
+    Document   : checkout
+    Created on : Oct 17, 2017, 4:35:31 PM
     Author     : Edric
 --%>
 
 <%@ include file = "header.jsp" %>
-    <body>
-        <h1><s:property value="#session.itemowner[0].userName"/>'s cart</h1>
-    <center>
-        <% //itemTbl i = null;
-            //i = session.getAttribute("itemlist");
-            //if(i.size() == 0) {%>
-            <!--<p>cart is empty</p>-->
-        <%//}%>
-        <%@ include file = "listItems.jsp" %>
-        <s:url action="checkout" var="checkoutURL">
-            <s:param name="selectedUserId" value="#session.user.userId"/>
-        </s:url>
-        <s:a href="%{checkoutURL}">Checkout items</s:a>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 
   <!-- Identify your business so that you can collect the payments. -->
   <input type="hidden" name="business" value="herschelgomez@xyzzyu.com">
@@ -39,6 +26,4 @@
   src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 
 </form>
-    </center>
-    </body>
 <%@ include file = "footer.jsp" %>
