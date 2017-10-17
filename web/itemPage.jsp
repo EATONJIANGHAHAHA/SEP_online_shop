@@ -31,8 +31,16 @@
                             </div>
                             
                             <% if(user != null){ %> 
-                                <button type="button" class="btn btn-primary">Add to Cart</button>
+                                <s:url action="selectUserCart" var="usercartURL">
+                                    <s:param name="selectedUserId" value="#session.user.userId"/>
+                                    <s:param name="selectedItemId" value="#session.itemlist[0].itemId"/>
+                                </s:url>
+                                <s:a href="%{usercartURL}">
+                                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                                </s:a>
+                                
                             <% } else {%>
+                            
                                 <a href="login.jsp">
                                     <button type="button" class="btn btn-primary">You must log in to purchase</button>
                                 </a>
