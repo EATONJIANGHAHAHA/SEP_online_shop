@@ -14,7 +14,7 @@
 
                 <div class="col-sm-10">
                     <input style="width:50%" type="text" name="itemprice" class="form-control" placeholder="Item price...">
-                </div>    
+                </div>    =]
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Description:</label>

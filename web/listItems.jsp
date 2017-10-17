@@ -10,7 +10,7 @@
                         <s:a href="%{testURL}">
                             <img src="img/<s:property value='itemImage' />" class="img-responsive list-group-image" alt="image" width="150" height="150"/> 
                         </s:a>
-                        <form class="caption" method="POST" action="cart.java">
+                        <form class="caption" method="POST" action="selectUserCart">
                             <h4 class="group list-group-item-heading">
                                 <s:url action="selectItem" var="testURL"> <!-- (for index format user login button)use a form instead, method="post" does not work-->
                                     <s:param name="selectedId" value="itemId" />
@@ -33,7 +33,7 @@
                                     <%= request.getParameter("cartBtn")%>
 
                                     <% } %>
-                                    <input type="button" class="btn btn-success" id="cartBtn" name="cartBtn" value="Add to Cart" role="button" onclick="window.location.href = 'cart.jsp'; return false;" />
+                                    <input type="submit" class="btn btn-success" id="cartBtn" name="cartBtn" value="Add to Cart" role="button" />
                                 </div>
                             </div>
                         </form>
