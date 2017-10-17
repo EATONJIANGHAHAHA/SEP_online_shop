@@ -90,12 +90,16 @@ public class SelectUserCart extends ActionSupport implements SessionAware{
     //        
             
         }
+        else {
+            this.session.put("isItemAdded", 0);
+        }
         List<ShoppingCartTbl> displaylist = cartDAO.getAll("ShoppingCartTbl");
         for(ShoppingCartTbl c : displaylist) {
             if(c.getUserId() == selectedUserId) {
                 itemlist.add(itemDao.findById(c.getItemId()));
             }
         }
+        
         itemowner = userDao.getUserById(selectedUserId);
         
         this.session.put("itemowner", itemowner);

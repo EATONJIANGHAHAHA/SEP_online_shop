@@ -13,6 +13,8 @@ import com.uts.sep.dao.UserDAO;
 import com.uts.sep.dao.ShoppingCartDAO;
 import com.uts.sep.entity.UserTbl;
 import com.uts.sep.entity.ItemTbl;
+import com.uts.sep.entity.ShoppingCartTbl;
+import java.util.List;
 
 /**
  *
@@ -39,9 +41,17 @@ public class CheckoutAction extends ActionSupport implements SessionAware{
     //actions and methods
     @Override
     public String execute() throws Exception {
+        ShoppingCartDAO cartDAO = new ShoppingCartDAO();
+        List<ShoppingCartTbl> cartlist = cartDAO.getAll("ShoppingCartTbl");
         
-
-        //
+        //delete items from cart with user id
+        for(ShoppingCartTbl c : cartlist) {
+            if(c.getUserId() == selectedUserId) {
+                cartDAO.checkoutCartItems(selectedUserId);
+            }
+        }
+        
+        //delete item from itemTbl with item id
         
     
         return SUCCESS;

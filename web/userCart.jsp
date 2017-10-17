@@ -10,7 +10,7 @@
     <center>
         <%@ include file = "listItems.jsp" %>
         <s:url action="checkout" var="checkoutURL">
-            <s:param name="checkoutURL" value="#session.user.userId"/>
+            <s:param name="selectedUserId" value="#session.user.userId"/>
         </s:url>
         <s:a href="%{checkoutURL}">Checkout items</s:a>
     </center>
