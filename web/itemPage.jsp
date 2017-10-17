@@ -25,30 +25,43 @@
                         <div class="single-shop-product">
 
                             <div class="product-upper"> 
+
                             <s:a href="%{userpageURL}">
                                 <img src="img/user.png" class="img-thumbnail" alt="" style="border:1"> <!-- replace src with image path -->
                             </s:a>
                         </div>
 
                         <% if(user != null){ %> 
-                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                        <s:url action="selectUserCart" var="usercartURL">
+                            <s:param name="selectedUserId" value="#session.user.userId"/>
+                            <s:param name="selectedItemId" value="#session.itemlist[0].itemId"/>
+                        </s:url>
+                        <s:a href="%{usercartURL}">
+                            <button type="button" class="btn btn-primary">Add to Cart</button>
+                        </s:a>
+
                         <% } else {%>
+
                         <a href="login.jsp">
                             <button type="button" class="btn btn-primary">You must log in to purchase</button>
                         </a>
                         <% } %>
+
                     </div>
+
+
                 </div>
-                <div class="col-md-9">
-                    <%@ include file = "listItems.jsp" %>
-                </div> 
-
-
             </div>
+            <div class="col-md-9">
+                <%@ include file = "listItems.jsp" %>
+            </div> 
 
-            <br>
+
         </div>
+
+        <br>
     </div>
+</div>
 
 </center>
 <%@ include file = "footer.jsp" %>

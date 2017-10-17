@@ -103,7 +103,10 @@
                     <div class="col-sm-6">
                         <div class="shopping-item">
                             <% if (user != null){ %>
-                            <a href="cart.jsp">My Cart <i class="fa fa-shopping-cart"></i> </a>
+                                <s:url action="selectUserCart" var="usercartURL">
+                                    <s:param name="selectedUserId" value="#session.user.userId"/>
+                                </s:url>
+                                <s:a href="%{usercartURL}">My Cart<i class="fa fa-shopping-cart"></i></s:a>
                             <% }%>
                         </div>
                     </div>
