@@ -1,16 +1,42 @@
-<%-- 
-    Document   : checkout
-    Created on : 15/10/2017, 11:58:18 PM
-    Author     : Patty
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file = "header.jsp" %>
+
 <div class="container">
     <div class='row'>
-        <div class='col-md-4'></div>
+        <div class='col-md-4'></div>     
         <div class='col-md-4'>
-          <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
+            <img src="./img/paypal.png" alt="paypal" style="margin-left:50px"/>  
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <!-- Identify your business so that you can collect the payments. -->
+                <input type="hidden" name="business" value="herschelgomez@xyzzyu.com">
+
+                <!-- Specify a Buy Now button. -->
+                <input type="hidden" name="cmd" value="_xclick">
+
+                <!-- Specify details about the item that buyers will purchase. -->
+                <input type="hidden" name="item_name" value="Hot Sauce-12oz. Bottle">
+                <input type="hidden" name="amount" value="5.95">
+                <input type="hidden" name="currency_code" value="USD">
+
+                <div class='col-md-12 form-group'>
+                    <button class="form-control btn btn-primary submit-button" type="submit">Proceed with PayPal »</button>
+                </div>
+                <!-- Display the payment button. -->
+                <!--  <input type="image" name="submit" border="0"
+                  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png"
+                  alt="Buy Now">-->
+                <!--  <img alt="" border="0" width="1" height="1"
+                  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >-->
+
+            </form>
+        </div>
+        <div class='col-md-4'></div>
+    </div>
+</div>
+
+<%@ include file = "footer.jsp" %>
+
+
+<!--          <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
           <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="âœ“" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
             <div class='form-row'>
               <div class='col-xs-12 form-group required'>
@@ -48,7 +74,7 @@
             </div>
             <div class='form-row'>
               <div class='col-md-12 form-group'>
-                <button class='form-control btn btn-primary submit-button' type='submit'>Pay Â»</button>
+                <button class='form-control btn btn-primary submit-button' type='submit'>Pay By PayPal »</button>
               </div>
             </div>
             <div class='form-row'>
@@ -58,9 +84,4 @@
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-        <div class='col-md-4'></div>
-    </div>
-</div>
-<%@ include file = "footer.jsp" %>
+          </form>-->

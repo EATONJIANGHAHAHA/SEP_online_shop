@@ -28,12 +28,13 @@
                                         <s:property value="stock"/> in stock
                                     </div>
 
-                                    <% if (request.getParameterNames() != null) {
-                                    %>
-                                    <%= request.getParameter("cartBtn")%>
-
-                                    <% } %>
-                                    <input type="submit" class="btn btn-success" id="cartBtn" name="cartBtn" value="Add to Cart" role="button" />
+                                    <s:url action="selectUserCart" var="usercartURL">
+                                        <s:param name="selectedUserId" value="#session.user.userId"/>
+                                        <s:param name="selectedItemId" value="#session.itemlist[0].itemId"/>
+                                    </s:url>
+                                    <s:a href="%{usercartURL}">
+                                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                                    </s:a>
                                 </div>
                             </div>
                         </form>

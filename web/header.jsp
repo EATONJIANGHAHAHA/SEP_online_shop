@@ -128,15 +128,13 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.jsp">Home</a></li>
-                            <li><a href="itemItems.jsp">Buy</a></li>
+                            <li><a href="search">Buy</a></li>
+                            <% if (user != null) { %>
                             <li><a href="addItem.jsp">Sell</a></li>
+                            <% }%>
                             <!--<li><a href="cart.jsp">Cart</a></li>-->
                             <!--<li><a href="checkout.html">Checkout</a></li>-->
                             <!--<li><a href="#">Category</a></li>-->
-                            <!--<li><a href="#">Others</a></li>-->
-                            <% if (user != null) { %>
-                            <li><a href="addItem.jsp">Add item</a></li>
-                            <% }%>
 <!--                            <li>
                                 <form action="search" method="post">  what does method="get" do? 
                                 <table align ="center" style="border-collapse:separate; border-spacing:0px 10px;">
