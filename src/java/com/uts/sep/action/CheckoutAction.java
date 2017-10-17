@@ -33,6 +33,7 @@ import javax.mail.internet.MimeMessage;
 public class CheckoutAction extends ActionSupport implements SessionAware{
     private Map session;
     private int selectedUserId;
+    private int removeitemid;
     //email variables
     //private List<UserTbl> checkoutowner = new ArrayList<UserTbl>();
     
@@ -41,6 +42,14 @@ public class CheckoutAction extends ActionSupport implements SessionAware{
     public void setSession(Map session) {
         this.session = session;
         
+    }
+
+    public int getRemoveitemid() {
+        return removeitemid;
+    }
+
+    public void setRemoveitemid(int removeitemid) {
+        this.removeitemid = removeitemid;
     }
 
     public int getSelectedUserId() {
@@ -52,6 +61,7 @@ public class CheckoutAction extends ActionSupport implements SessionAware{
     }
     
     //actions and methods
+    
     @Override
     public String execute() throws Exception {
         ShoppingCartDAO cartDAO = new ShoppingCartDAO();
@@ -126,6 +136,25 @@ public class CheckoutAction extends ActionSupport implements SessionAware{
         //checkoutEmailAction.SendEmail(selectedUserId, emaillist);
         
     
+        return SUCCESS;
+    }
+    
+    public String remove() {
+        ShoppingCartDAO cartDAO1 = new ShoppingCartDAO();
+        
+        List<ShoppingCartTbl> cartlist = cartDAO1.getAll("ShoppingCartTbl");
+       
+        
+        
+        //delete items from cart with user id
+        for(ShoppingCartTbl c : cartlist) {
+            if(c.getItemId() == removeitemid) {
+                
+                //remove item from cart table
+                cartDAO1.deleteCartItem(removeitemid);
+            }
+        }
+        
         return SUCCESS;
     }
     

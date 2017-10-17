@@ -5,6 +5,8 @@
 --%>
 
 <%@ include file = "header.jsp" %>
+
+
 <center>
     <h1>cart of <s:property value="#session.user.userName"/></h1>
 </center>
@@ -35,27 +37,47 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Price"><ins>$<s:property value="price"/></ins></td>
+                        <td data-th="Price" id="price"><ins>$<s:property value="price"/></ins></td>
                         <td data-th="Quantity">
-                            <input type="number" class="form-control text-center" value="1">
+                            <input type="number" name="qty" class="form-control text-center" id="qty_input" value="1">
                         </td>
-                        <td data-th="Subtotal" class="text-center">1.99</td>
+                        <td data-th="Subtotal" class="text-center">$<s:property value="price"/></td>
+<!--<script>
+$('input[name=\'qty\']').on('change keyup click', function(){
+    var price = $('#price').text().substr(1);
+    var qty = $('#qty_input').val();
+    
+})
+</script>-->
                         <td class="actions" data-th="">
                             <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+                            <s:url action="removecartitem" var="removefromcartURL">
+                                <s:param name="selectedUserId" value="#session.user.userId"/>
+                                <s:param name="removeitemid" value="itemId"/>
+                            </s:url>
+                            <s:a href="%{removefromcartURL}">
+                                <i class="fa fa-trash-o"><input class="btn btn-danger btn-sm" type="button"/></i>
+                            </s:a>
                         </td>
                     </tr>
                 </s:iterator>
             </tbody>
             <tfoot>
                 <tr class="visible-xs">
-                    <td class="text-center"><strong>Total 1.99</strong></td>
+                    <td class="text-center"><strong>$</strong></td>
                 </tr>
                 <tr>
-                    <td><s:a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</s:a></td>
+                    <td><s:a href="search" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</s:a></td>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-                        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                        <td class="hidden-xs text-center"><strong>Total $</strong></td>
+                        <td>
+<!--                            <a href="checkout.jsp" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a>-->
+                        <s:url action="checkout" var="checkoutURL">
+                            <s:param name="selectedUserId" value="#session.user.userId"/>
+                            <s:param name="removeitemid" value="itemId"/>
+                        </s:url>
+                        <s:a href="%{checkoutURL}">Checkout <i class="fa fa-angle-right"></i></s:a>
+                        </td>                       
                     </tr>
                 </tfoot>
             </table>

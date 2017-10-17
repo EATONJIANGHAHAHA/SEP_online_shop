@@ -22,6 +22,31 @@ import org.hibernate.cfg.Configuration;
 public class ShoppingCartDAO extends BaseDAO<ShoppingCartTbl>{
     private static SessionFactory factory = null;
     
+      public void deleteCartItem(int removeitemid) 
+    {
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;//operation
+ 
+        //List<ItemTbl> list = null;
+        String hql = "delete ShoppingCartTbl S where S.itemId = " + Integer.toString(removeitemid);
+        try {
+            tx = session.beginTransaction();// open connection
+            Query query = session.createQuery(hql);//using the name from java
+            //list = query.list();
+            int result = query.executeUpdate();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+    }
+      
       public void checkoutCartItems(int userId) 
     {
         factory = new Configuration().configure().buildSessionFactory();
